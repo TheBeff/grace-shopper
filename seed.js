@@ -18,8 +18,8 @@ name in the environment files.
 */
 
 var chalk = require('chalk');
-var db = require('./server/db');
-var User = db.model('user');
+var db = require('./server/db').db;
+var User = require('./server/db').models.User;
 var Promise = require('sequelize').Promise;
 
 var seedUsers = function () {

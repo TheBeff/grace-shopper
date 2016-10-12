@@ -1,5 +1,9 @@
 module.exports = {
+<<<<<<< HEAD
   DATABASE_URL: 'postgres://localhost:5432/abc',
+=======
+  DATABASE_URL: 'postgres://localhost:5432/grace_shopper',
+>>>>>>> backend
   SESSION_SECRET: 'Optimus Prime is my real dad',
   TWITTER: {
     consumerKey: 'INSERT_TWITTER_CONSUMER_KEY_HERE',
