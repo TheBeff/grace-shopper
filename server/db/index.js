@@ -9,7 +9,7 @@ const LineItem = require('./models/lineItem');
 module.exports = {
   db,
   models: {
-    User, 
+    User,
     Order,
     Product,
     Review,
