@@ -1,5 +1,28 @@
+<div class="well">
+  <form name="new-product">
+	  <div class="form-group">
+	    <input class="form-control" ng-model="title" placeholder="product title" required/>
+	    <input class="form-control" ng-model="description" type="text" placeholder="product description"/>
+	    <input class="form-control" ng-model="category" placeholder="product category" required/>
+	    <input class="form-control" ng-model="price" placeholder="product price"/>
+	    <input class="form-control" ng-model="inventory" placeholder="product inventory quantity"/>
+	    <input class="form-control" ng-model="photo" placeholder="product photo url"/>
+	  </div>
+	  <button class="btn btn-primary" ng-click="create()" ng-disabled="new-product.$invalid">Create Product</button>
+  </form>
+</div>
+
 <ul class="list-group">
-  <li class="list-group-item" ng-repeat="product in products">{{product.name}}
+  <li class="list-group-item col-sm-4" ng-repeat="product in products">
+  	<h3>{{product.title}}</h3>
+  	<img class="img-responsive" ng-src="{{product.photos}}"/>
+  	<p>{{product.description}}</p>
+  	<span ng-hide="!product.price"><strong>Price:</strong> {{product.price}}</span>
+  	<p ng-hide="!product.inventory_qty || product.inventory_qty === 0"><strong>In stock:</strong> {{product.inventory_qty}}</p>
+    <p ng-show="!product.inventory_qty || product.inventory_qty === 0" class="text-danger">Sold Out</p>
+    <button class="btn btn-primary" ng-click="addToCart(product)">Add to Cart</button>
+    <button class="btn btn-danger"  ng-click="destroy(product)">Delete</button>
+    <br clear="all">
   </li>
 </ul>
 
