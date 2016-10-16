@@ -3,16 +3,16 @@ var expect = require('chai').expect;
 
 var Sequelize = require('sequelize');
 
-var db = require('../../../server/db');
+var db = require('../../../server/db').db;
 
-var User = db.model('user');
+var User = require('../../../server/db').models.User;
 
 describe('User model', function () {
 
     beforeEach('Sync DB', function () {
        return db.sync({ force: true });
     });
-
+    
     describe('password encryption', function () {
 
         describe('generateSalt method', function () {

@@ -11,26 +11,33 @@ router.get('/', function(req, res, next) {
 		res.send(products);
 	})
 	.catch(next);
-	// console.log("here");
+});
+
+router.get('/:id', function(req, res, next) {
+	Product.findById(req.params.id)
+	.then(function(product) {
+		res.send(product);
+	})
+	.catch(next);
 });
 
 router.post('/', function(req, res, next) {
 	Product.create({
 		title: req.body.title,
 		description: req.body.description,
-		price:req.body.price,
+		price: req.body.price,
 		inventory_qty: req.body.inventory_qty,
 		photos: req.body.photos,
 		category: req.body.category
 	})
 	.then(function(product) {
-		return res.send(product);
+		res.send(product);
 	})
 	.catch(next);
 });
 
 router.delete('/:id', function(req, res, next) {
-	Product.destroy({where: {
+	Product.destroy({ where: {
 		id: req.params.id
 	}})
 	.then(function() {
