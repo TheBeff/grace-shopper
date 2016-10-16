@@ -20,6 +20,7 @@ name in the environment files.
 var chalk = require('chalk');
 var db = require('./server/db').db;
 var User = require('./server/db').models.User;
+var Product = require('./server/db').models.Product;
 var Promise = require('sequelize').Promise;
 
 var seedUsers = function () {
@@ -43,9 +44,16 @@ var seedUsers = function () {
 
 };
 
+
+
 db.sync({ force: true })
     .then(function () {
         return seedUsers();
+    })
+    .then(function () {
+        return Product.create({
+            category: "food"
+        });
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));
