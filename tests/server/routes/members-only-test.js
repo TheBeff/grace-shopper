@@ -3,7 +3,9 @@ var expect = require('chai').expect;
 
 var Sequelize = require('sequelize');
 
-var db = require('../../../server/db');
+var db = require('../../../server/db').db;
+
+var User = require('../../../server/db').models.User;
 
 var supertest = require('supertest');
 
@@ -17,7 +19,7 @@ describe('Members Route', function () {
 
     beforeEach('Create app', function () {
         app = require('../../../server/app')(db);
-        User = db.model('user');
+        User = require('../../../server/db').models.User;
     });
 
 	describe('Unauthenticated request', function () {

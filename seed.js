@@ -21,6 +21,7 @@ var chalk = require('chalk');
 var db = require('./server/db').db;
 var User = require('./server/db').models.User;
 var Product = require('./server/db').models.Product;
+var Order = require('./server/db').models.Order;
 var Promise = require('sequelize').Promise;
 
 var seedUsers = function () {
@@ -53,6 +54,11 @@ db.sync({ force: true })
     .then(function () {
         return Product.create({
             category: "food"
+        });
+    })
+    .then(function () {
+        return Order.create({
+            status: "order"
         });
     })
     .then(function () {
