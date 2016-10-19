@@ -5,19 +5,15 @@ module.exports = router;
 
 router.get('/', function(req, res, next){
 	if(req.userId){
-		Order.findOne({
-			where: {
-				status: 'cart'
-			}
-		})
+		Order.getCart(req.userId)
 		.then(function(cart){
 			res.send(cart);
 		})
 		.catch(next);
 	}
-	else{
-		Order.create({
+	// else{
+	// 	Order.create({
 
-		})
-	}
+	// 	})
+	// }
 });

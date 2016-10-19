@@ -5,6 +5,8 @@ const Order = require('../../../db').models.Order;
 
 module.exports = router;
 
+router.use('/:id/lineItems', require('./lineitems'));
+
 router.get('/', function(req, res, next) {
 	Order.findAll()
 	.then(function(orders) {
