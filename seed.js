@@ -24,48 +24,68 @@ var Product = require('./server/db').models.Product;
 var Order = require('./server/db').models.Order;
 var Promise = require('sequelize').Promise;
 
-var seedUsers = function () {
+var seedUsers = function() {
 
-    var users = [
-        {
-            email: 'testing@fsa.com',
-            password: 'password'
-        },
-        {
-            email: 'obama@gmail.com',
-            password: 'potus'
-        }
-    ];
+    var users = [{
+        email: 'testing@fsa.com',
+        password: 'password'
+    }, {
+        email: 'obama@gmail.com',
+        password: 'potus'
+    }];
 
-    var creatingUsers = users.map(function (userObj) {
+    var products = [{
+        title: 'Death Star',
+        description: 'Used to annihilate planets',
+        price: '100000000',
+        inventory_qty: '1',
+        photos: 'http://vignette3.wikia.nocookie.net/starwars/images/7/72/DeathStar1-SWE.png/revision/latest?cb=20150121020639',
+        category: 'Weapons',
+    }, {
+        title: 'Laser Beams',
+        description: 'Pew pew pew',
+        price: '50',
+        inventory_qty: '10',
+        photos: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Military_laser_experiment.jpg',
+        category: 'Weapons'
+    }];
+
+    var orders = [{
+        status: 'cart'
+    }, {
+        status: 'order'
+    }];
+
+    var creatingUsers = Promise.map(users, (userObj) => {
         return User.create(userObj);
     });
 
-    return Promise.all(creatingUsers);
+    var createProducts = Promise.map(products, (productObj) => {
+        return Product.create(productObj);
+    });
+
+    var createOrders = Promise.map(orders, (ordersObj) => {
+        return Order.create(ordersObj);
+    });
+
+    return Promise.all([creatingUsers, createProducts, createOrders])
+        .then(([user, product, order]) => {
+            return user[0].setOrders(order[0]);
+        });
 
 };
 
-
-
-db.sync({ force: true })
-    .then(function () {
+db.sync({
+        force: true
+    })
+    .then(() => {
         return seedUsers();
     })
-    .then(function () {
-        return Product.create({
-            category: "food"
-        });
-    })
-    .then(function () {
-        return Order.create({
-            status: "order"
-        });
-    })
-    .then(function () {
+    .then(() => {
         console.log(chalk.green('Seed successful!'));
         process.exit(0);
     })
-    .catch(function (err) {
+    .catch((err) => {
         console.error(err);
         process.exit(1);
     });

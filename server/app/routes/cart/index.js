@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const Order = require('../../../db').models.Order;
+
 module.exports = router;
 
 router.get('/', function(req, res, next){
-	if (req.userId) {
-		Order.getCart(req.userId)
+	if (req.user.id) {
+		Order.getCart(req.user.id)
 		.then(function(cart){
 			res.send(cart);
 		})
