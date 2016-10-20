@@ -14,8 +14,15 @@ router.get('/', function(req, res, next){
 
 	// else will handle if there is no logged in user
 	// need to create a cart
+	// attach to the session
+	
 	// else{
 	// 	Order.create({
+	// 		status: 'cart'
 	// 	})
-	// }
+	// 	.then(function(cart){
+	// 		req.cart = cart;
+	// 		res.send(cart);
+	// 	})
+	// 	.catch(next);
 });
