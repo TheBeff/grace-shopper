@@ -1,10 +1,10 @@
 'use strict';
 const db = require('./_db');
 const User = require('./models/user');
+const LineItem = require('./models/lineItem');
 const Order = require('./models/order');
 const Product = require('./models/product');
 const Review = require('./models/review');
-const LineItem = require('./models/lineItem');
 
 module.exports = {
   db,
@@ -27,6 +27,7 @@ Review.belongsTo(Product);
 Review.belongsTo(User);
 LineItem.belongsTo(Product);
 LineItem.belongsTo(Order);
+Order.hasMany(LineItem);
 User.hasMany(Review);
 User.hasMany(Order);
 

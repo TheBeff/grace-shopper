@@ -17,16 +17,17 @@ name in the environment files.
 
 */
 
-var chalk = require('chalk');
-var db = require('./server/db').db;
-var User = require('./server/db').models.User;
-var Product = require('./server/db').models.Product;
-var Order = require('./server/db').models.Order;
-var Promise = require('sequelize').Promise;
+const chalk = require('chalk');
+const db = require('./server/db').db;
+const User = require('./server/db').models.User;
+const Product = require('./server/db').models.Product;
+const Order = require('./server/db').models.Order;
+const LineItem = require('./server/db').models.LineItem;
+const Promise = require('sequelize').Promise;
 
-var seedUsers = function() {
+const seedUsers = function() {
 
-    var users = [{
+    const users = [{
         email: 'testing@fsa.com',
         password: 'password'
     }, {
@@ -34,7 +35,7 @@ var seedUsers = function() {
         password: 'potus'
     }];
 
-    var products = [{
+    const products = [{
         title: 'Death Star',
         description: 'Used to annihilate planets',
         price: '100000000',
@@ -50,26 +51,34 @@ var seedUsers = function() {
         category: 'Weapons'
     }];
 
-    var orders = [{
+    const orders = [{
         status: 'cart'
     }, {
         status: 'order'
     }];
 
-    var creatingUsers = Promise.map(users, (userObj) => {
-        return User.create(userObj);
-    });
+    const lineItems = [{
+        quantity: 1,
+        price: 999999999
+    }, {
+        quantity: 2,
+        price: 500
+    }]
 
-    var createProducts = Promise.map(products, (productObj) => {
-        return Product.create(productObj);
-    });
+    const creatingUsers = Promise.map(users, userObj => User.create(userObj));
 
-    var createOrders = Promise.map(orders, (ordersObj) => {
-        return Order.create(ordersObj);
-    });
+    const createProducts = Promise.map(products, productObj => Product.create(productObj));
 
-    return Promise.all([creatingUsers, createProducts, createOrders])
-        .then(([user, product, order]) => {
+    const createOrders = Promise.map(orders, ordersObj => Order.create(ordersObj));
+
+    const createLineItem = Promise.map(lineItems, lineItemObj => LineItem.create(lineItemObj))
+
+    return Promise.all([creatingUsers, createProducts, createOrders, createLineItem])
+        .then(([user, product, order, lineItem]) => {
+            lineItem[0].setProduct(product[0]);
+            lineItem[1].setProduct(product[1]);
+            lineItem[0].setOrder(order[0]);
+            lineItem[1].setOrder(order[0]);
             return user[0].setOrders(order[0]);
         });
 
