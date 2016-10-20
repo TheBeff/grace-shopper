@@ -1,23 +1,20 @@
 const router = require('express').Router();
 const Order = require('../../../db').models.Order;
-const User = require('../../../db').models.User;
 module.exports = router;
 
 router.get('/', function(req, res, next){
-	if(req.userId){
-		Order.findOne({
-			where: {
-				status: 'cart'
-			}
-		})
+	if (req.userId) {
+		Order.getCart(req.userId)
 		.then(function(cart){
 			res.send(cart);
 		})
 		.catch(next);
 	}
-	else{
-		Order.create({
 
-		})
-	}
+	// else will handle if there is no logged in user
+	// need to create a cart
+	// else{
+	// 	Order.create({
+	// 	})
+	// }
 });
