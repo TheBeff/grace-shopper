@@ -63,7 +63,7 @@ const seedUsers = function() {
     }, {
         quantity: 2,
         price: 500
-    }]
+    }];
 
     const creatingUsers = Promise.map(users, userObj => User.create(userObj));
 
@@ -71,7 +71,7 @@ const seedUsers = function() {
 
     const createOrders = Promise.map(orders, ordersObj => Order.create(ordersObj));
 
-    const createLineItem = Promise.map(lineItems, lineItemObj => LineItem.create(lineItemObj))
+    const createLineItem = Promise.map(lineItems, lineItemObj => LineItem.create(lineItemObj));
 
     return Promise.all([creatingUsers, createProducts, createOrders, createLineItem])
         .then(([user, product, order, lineItem]) => {
