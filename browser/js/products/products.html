@@ -20,7 +20,7 @@
   	<span ng-hide="!product.price"><strong>Price:</strong> {{product.price}}</span>
   	<p ng-hide="!product.inventory_qty || product.inventory_qty === 0"><strong>In stock:</strong> {{product.inventory_qty}}</p>
     <p ng-show="!product.inventory_qty || product.inventory_qty === 0" class="text-danger">Sold Out</p>
-    <button class="btn btn-primary" ng-click="addToCart(product)">Add to Cart</button>
+    <button class="btn btn-primary" ng-click="addToCart(product, cart.id)">Add to Cart</button>
     <button class="btn btn-danger"  ng-click="destroy(product)">Delete</button>
     <br clear="all">
   </li>
