@@ -1,14 +1,45 @@
-<div class="container text-center">
-  <div class="col-md-5 col-sm-12">
+<div class="container">
+  
+  <!-- <div class="col-md-5 col-sm-12"> -->
+  <div>
   	<h1>Your cart</h1>
+    <br clear='all'>
   </div>
-  <div class="col-md-7 col-sm-12 text-left">
-    <div class="well">
+
+  <!-- <div class="col-md-7 col-sm-12 text-left"> -->
+    <div style='margin-bottom: 10px'>
+      <div class='col-lg-4 text-left'><h4>Item</h4></div>
+      <div class='col-lg-4'><h4>Price</h4></div>
+      <div class='col-lg-4 text-right'><h4>Quanity</h4></div>
+    </div>
+    <br clear='all'>
+
+    <div class='container'>
       <ul class="list-group">
-        <li class="list-group-item" ng-repeat="item in cart">
-        	<span>Qty: </span>{{item.quantity}}
+        <!-- <li class="list-group-item" ng-repeat="item in cart.lineItems"> -->
+        <li class="list-group-item">
+        	<lineItem>
+
+            <photo class='col-lg-1'>
+              <img src='{{item.imgUrl}}'>
+            </photo>
+
+            <itemDescrip class='col-lg-2'>
+            Item Description
+            </itemDescrip>
+
+            <itemPrice class='col-lg-4'>
+            3.50
+            </itemPrice>
+
+            <itemQuantity class='col-lg-4 text-right'>
+            5
+            </itemQuantity>
+
+          </lineItem>
+          <br clear='all'>
         </li>
       </ul>
     </div>
-  </div>
+  <!-- </div> -->
 </div>
