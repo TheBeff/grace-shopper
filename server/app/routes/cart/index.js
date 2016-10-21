@@ -8,7 +8,6 @@ module.exports = router;
 
 router.get('/', function(req, res, next) {
     if (req.user) {
-        //should maybe use an User.getCart instance method here? robust models thin routes?
         Order.findAll({
                 where: {
                     id: req.user.id,
@@ -19,22 +18,27 @@ router.get('/', function(req, res, next) {
                 }]
             })
             .then((order) => {
-                // console.log('user order');
-                // console.log(order);
+                console.log('user order');
+                console.log(order);
                 res.send(order);
             })
             .catch(next);
     }
-    else {
+    else if (!req.session.cart) {
         Order.create({
             status: 'cart'
         })
         .then(function(cart){
             req.session.cart = cart;
-            console.log('no user order');
+            console.log('no user new cart');
             console.log(req.session.cart);
             res.send(cart);
         })
         .catch(next);
+    }
+    else {
+        console.log('already a no user cart');
+        console.log(req.session.cart);
+        res.send(req.session.cart);
     }
 });
