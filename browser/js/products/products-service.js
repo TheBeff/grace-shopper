@@ -25,5 +25,9 @@ app.factory('ProductsService', function($http){
 		  })
 	};
 
+	ProductsService.addToCart = function(product, cartId){
+		return $http.post('/api/orders/' + cartId + '/lineItems');
+	};
+
 	return ProductsService;
 });

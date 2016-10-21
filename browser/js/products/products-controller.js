@@ -1,4 +1,4 @@
-app.controller('ProductsCtrl', function($scope, $log, ProductsService){
+app.controller('ProductsCtrl', function($scope, $log, ProductsService, CartService){
 	
 	ProductsService.findAll()
 	  .then(function(products){
@@ -30,6 +30,20 @@ app.controller('ProductsCtrl', function($scope, $log, ProductsService){
 		ProductsService.destroy(product)
 		  .then(function(){
 		  	console.log("product deleted");
+		  })
+		  .catch($log.error);
+	};
+
+	CartService.getCart()
+	  .then(function(cart){
+	  	$scope.cart = cart;
+	  })
+	  .catch($log.error);
+
+	$scope.addToCart = function(product, cartId){
+		ProductsService.addToCart(product, cartId)
+		  .then(function(){
+		  	console.log("product added to cart");
 		  })
 		  .catch($log.error);
 	};
