@@ -34,18 +34,24 @@ app.controller('ProductsCtrl', function($scope, $log, ProductsService, CartServi
 		  .catch($log.error);
 	};
 
+	$scope.inventoryArray = ProductsService.inventoryArray;
+
 	CartService.getCart()
 	  .then(function(cart){
 	  	$scope.cart = cart;
 	  })
 	  .catch($log.error);
 
-	$scope.addToCart = function(product, cartId){
-		ProductsService.addToCart(product, cartId)
-		  .then(function(){
-		  	console.log("product added to cart");
-		  })
-		  .catch($log.error);
+	$scope.addToCart = function(product, quantity, cartId){
+		if($scope.cart){
+			ProductsService.addToCart(product, quantity, cartId)
+			  .then(function(){
+			  	console.log("product added to cart");
+			  })
+			  .catch($log.error);
+		} else {
+			ProductsService.addToCart(product, quantity, cartId);
+		}
 	};
 
 });
