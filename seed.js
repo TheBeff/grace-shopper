@@ -17,55 +17,84 @@ name in the environment files.
 
 */
 
-var chalk = require('chalk');
-var db = require('./server/db').db;
-var User = require('./server/db').models.User;
-var Product = require('./server/db').models.Product;
-var Order = require('./server/db').models.Order;
-var Promise = require('sequelize').Promise;
+const chalk = require('chalk');
+const db = require('./server/db').db;
+const User = require('./server/db').models.User;
+const Product = require('./server/db').models.Product;
+const Order = require('./server/db').models.Order;
+const LineItem = require('./server/db').models.LineItem;
+const Promise = require('sequelize').Promise;
 
-var seedUsers = function () {
+const seedUsers = function() {
 
-    var users = [
-        {
-            email: 'testing@fsa.com',
-            password: 'password'
-        },
-        {
-            email: 'obama@gmail.com',
-            password: 'potus'
-        }
-    ];
+    const users = [{
+        email: 'testing@fsa.com',
+        password: 'password'
+    }, {
+        email: 'obama@gmail.com',
+        password: 'potus'
+    }];
 
-    var creatingUsers = users.map(function (userObj) {
-        return User.create(userObj);
-    });
+    const products = [{
+        title: 'Death Star',
+        description: 'Used to annihilate planets',
+        price: '100000000',
+        inventory_qty: '1',
+        photos: 'http://vignette3.wikia.nocookie.net/starwars/images/7/72/DeathStar1-SWE.png/revision/latest?cb=20150121020639',
+        category: 'Weapons',
+    }, {
+        title: 'Laser Beams',
+        description: 'Pew pew pew',
+        price: '50',
+        inventory_qty: '10',
+        photos: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Military_laser_experiment.jpg',
+        category: 'Weapons'
+    }];
 
-    return Promise.all(creatingUsers);
+    const orders = [{
+        status: 'cart'
+    }, {
+        status: 'order'
+    }];
+
+    const lineItems = [{
+        quantity: 1,
+        price: 999999999
+    }, {
+        quantity: 2,
+        price: 500
+    }];
+
+    const creatingUsers = Promise.map(users, userObj => User.create(userObj));
+
+    const createProducts = Promise.map(products, productObj => Product.create(productObj));
+
+    const createOrders = Promise.map(orders, ordersObj => Order.create(ordersObj));
+
+    const createLineItem = Promise.map(lineItems, lineItemObj => LineItem.create(lineItemObj));
+
+    return Promise.all([creatingUsers, createProducts, createOrders, createLineItem])
+        .then(([user, product, order, lineItem]) => {
+            lineItem[0].setProduct(product[0]);
+            lineItem[1].setProduct(product[1]);
+            lineItem[0].setOrder(order[0]);
+            lineItem[1].setOrder(order[0]);
+            return user[0].setOrders(order[0]);
+        });
 
 };
 
-
-
-db.sync({ force: true })
-    .then(function () {
+db.sync({
+        force: true
+    })
+    .then(() => {
         return seedUsers();
     })
-    .then(function () {
-        return Product.create({
-            category: "food"
-        });
-    })
-    .then(function () {
-        return Order.create({
-            status: "order"
-        });
-    })
-    .then(function () {
+    .then(() => {
         console.log(chalk.green('Seed successful!'));
         process.exit(0);
     })
-    .catch(function (err) {
+    .catch((err) => {
         console.error(err);
         process.exit(1);
     });
