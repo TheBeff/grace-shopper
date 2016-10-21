@@ -2,6 +2,7 @@ app.factory('ProductsService', function($http){
 
 	var ProductsService = {};
 	var _products = [];
+	let cart = [];
 
 	ProductsService.findAll = function(){
 		return $http.get('/api/products')
@@ -47,7 +48,6 @@ app.factory('ProductsService', function($http){
 	    		productId: product.id
 	    	};
 
-	    	let cart = [];
 	    	cart.push(itemInfo);
 	    	let strCart = JSON.stringify(cart);
 	    	sessionStorage.setItem("cart", strCart);
