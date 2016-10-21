@@ -2,7 +2,6 @@ const router = require('express').Router();
 const Order = require('../../../db').models.Order;
 const LineItem = require('../../../db').models.LineItem;
 
-console.dir(LineItem)
 module.exports = router;
 
 router.get('/', function(req, res, next) {
