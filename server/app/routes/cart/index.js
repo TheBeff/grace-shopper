@@ -24,21 +24,7 @@ router.get('/', function(req, res, next) {
             })
             .catch(next);
     }
-    else if (!req.session.cart) {
-        Order.create({
-            status: 'cart'
-        })
-        .then(function(cart){
-            req.session.cart = cart;
-            console.log('no user new cart');
-            console.log(req.session.cart);
-            res.send(cart);
-        })
-        .catch(next);
-    }
     else {
-        console.log('already a no user cart');
-        console.log(req.session.cart);
-        res.send(req.session.cart);
+        console.log('no stored cart');
     }
 });
