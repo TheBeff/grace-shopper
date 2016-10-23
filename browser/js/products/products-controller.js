@@ -42,9 +42,9 @@ app.controller('ProductsCtrl', function($scope, $log, ProductsService, CartServi
 	  })
 	  .catch($log.error);
 
-	$scope.addToCart = function(product, quantity, cartId){
+	$scope.addToCart = function(product, quantity, cart){
 		if($scope.cart){
-			ProductsService.addToCart(product, quantity, cartId)
+			ProductsService.addToCart(product, quantity, cart)
 			  .then(function(result){
 			  	// console.log(result);
 			  })
