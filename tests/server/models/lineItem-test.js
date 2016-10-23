@@ -16,5 +16,5 @@ describe('LineItem model', function () {
 
     it('should exist', function(){
     	expect(LineItem).to.exist;
-    })
+    });
 });

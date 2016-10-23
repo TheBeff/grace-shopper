@@ -8,21 +8,21 @@ app.factory('CartService', function($http){
 		  .then(function(cart){
 		  	angular.copy(cart.data, _cart);
 		  	return _cart;
-		  })
+		  });
 	};
 
-	// CartService.deleteCart = function(cart){
-	// 	return $http.delete('/api/orders/' + cart.id)
-	// 	  .then(function(){
-	// 	  	_cart = {};
-	// 	  })
-	// };
+	CartService.deleteCart = function(cart){
+		return $http.delete('/api/orders/' + cart.id)
+		  .then(function(){
+		  	_cart = {};
+		  });
+	};
 
 	CartService.changeQuantity = function(params, quantity){
 		return $http.put('/api/orders/' + params.cart + '/lineItems/' + params.item, quantity)
 		  .then(function(){
 		  	console.log("quantity updated");
-		  })
+		  });
 	};
 
 	CartService.deleteItem = function(params){
