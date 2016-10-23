@@ -18,8 +18,8 @@ app.factory('CartService', function($http){
 		  });
 	};
 
-	CartService.changeQuantity = function(params, quantity){
-		return $http.put('/api/orders/' + params.cart + '/lineItems/' + params.item, quantity)
+	CartService.changeQuantity = function(cart, lineitem, quantity){
+		return $http.put('/api/orders/' + cart.id + '/lineItems/' + lineitem.id, {quantity})
 		  .then(function(){
 		  	console.log("quantity updated");
 		  });
