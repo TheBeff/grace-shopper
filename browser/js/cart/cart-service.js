@@ -25,8 +25,12 @@ app.factory('CartService', function($http){
 		  });
 	};
 
-	CartService.deleteItem = function(params){
-		return $http.delete('/api/orders/' + params.cart + '/lineItems/' + params.item);
+	CartService.deleteItem = function(cart, lineitem){
+		$http.delete('/api/orders/' + cart.id + '/lineItems/' + lineitem.id)
+		.then(function(){
+			var idx = _cart.lineItems.indexOf(lineitem);
+			_cart.lineItems.splice(idx, 1);
+		});
 	};
 
 	CartService.order = function(cart){
