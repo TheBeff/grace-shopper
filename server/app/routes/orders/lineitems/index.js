@@ -29,7 +29,8 @@ router.delete('/:id', function(req, res, next){
 		}
 	})
 	.then(function(){
-		console.log('deleted');
+		console.log('deleted line item' + req.params.id);
+		res.sendStatus(200);
 	})
 	.catch(next);
 });
