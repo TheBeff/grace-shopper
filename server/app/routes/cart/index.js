@@ -22,8 +22,8 @@ router.get('/', function(req, res, next) {
               }]
             })
             .then((order) => {
-                console.log('user order');
-                console.log(order);
+                // console.log('user order');
+                // console.log(order);
                 res.send(order);
             })
             .catch(next);
