@@ -38,14 +38,37 @@ app.factory('ProductsService', function($http){
 		return inventoryArray;
 	};
 
-	ProductsService.addToCart = function(product, quantity, cartId){
-		if(cartId){
-		  return $http.post('/api/orders/' + cartId + '/lineItems', {
-		  	price: product.price, 
-		  	quantity, 
-		  	orderId: cartId, 
-		  	productId: product.id
-		  });
+	ProductsService.checkForItemInCart = function(product, currentCart){
+		let idArray = currentCart.lineItems.map(function(lineItem){
+			return lineItem.productId;
+		});
+
+		let index = idArray.indexOf(product.id);
+
+		if(index >= 0){
+			return currentCart.lineItems[index];
+		} else {
+			return false;
+		}
+	};
+
+	ProductsService.addToCart = function(product, quantity, currentCart){
+		
+		let info = {
+			price: product.price, 
+			quantity, 
+			orderId: currentCart.id, 
+			productId: product.id	
+		};
+
+		let itemUrl = "/api/orders/" + currentCart.id + "/lineItems";
+
+		let matchedLineItem = ProductsService.checkForItemInCart(product, currentCart);
+
+		if(matchedLineItem){
+		  return $http.put(itemUrl + '/' + matchedLineItem.id, info);
+		} else if(currentCart){
+		    return $http.post(itemUrl, info);
 	    } else {
 	    	let itemInfo = {
 	    		quantity,
