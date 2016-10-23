@@ -7,10 +7,9 @@ app.controller("CartCtrl", function($scope, $log, CartService, ProductsService){
 	  })
 	  .catch($log.error);
 
-	$scope.deleteCart = function(cart){
-		$scope.cart = {};
+	$scope.clearCart = function(cart){
 		$scope.lineItems = [];
-		return CartService.deleteCart(cart);
+		return CartService.clearCart(cart);
 	};
 
 	$scope.inventoryArray = ProductsService.inventoryArray;

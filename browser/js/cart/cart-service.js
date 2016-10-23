@@ -11,11 +11,11 @@ app.factory('CartService', function($http){
 		  });
 	};
 
-	CartService.deleteCart = function(cart){
-		return $http.delete('/api/orders/' + cart.id)
-		  .then(function(){
-		  	_cart = {};
-		  });
+	CartService.clearCart = function(cart){
+		cart.lineItems.forEach(function(lineItem){
+			return $http.delete('/api/orders/' + cart.id + '/lineitems/' + lineItem.id);
+		});
+		_cart.lineItems = [];
 	};
 
 	CartService.changeQuantity = function(cart, lineitem, quantity){
