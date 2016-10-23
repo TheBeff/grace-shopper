@@ -13,10 +13,4 @@ app.controller("CartCtrl", function($scope, $log, CartService){
 		return CartService.deleteCart(cart);
 	};
 
-	// CartService.deleteCart()
-	//   .then(function(){
-	//   	$scope.lineItems = [];
-	//   })
-	//   .catch($log.error);
-	  
 });
