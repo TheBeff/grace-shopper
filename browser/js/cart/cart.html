@@ -6,40 +6,20 @@
     <br clear='all'>
   </div>
 
-  <!-- <div class="col-md-7 col-sm-12 text-left"> -->
-    <div style='margin-bottom: 10px'>
-      <div class='col-lg-4 text-left'><h4>Item</h4></div>
-      <div class='col-lg-4'><h4>Price</h4></div>
-      <div class='col-lg-4 text-right'><h4>Quanity</h4></div>
-    </div>
-    <br clear='all'>
-
-    <div class='container'>
-      <ul class="list-group">
-        <!-- <li class="list-group-item" ng-repeat="item in cart.lineItems"> -->
-        <li class="list-group-item">
-        	<lineItem>
-
-            <photo class='col-lg-1'>
-              <img src='{{item.imgUrl}}'>
-            </photo>
-
-            <itemDescrip class='col-lg-2'>
-            Item Description
-            </itemDescrip>
-
-            <itemPrice class='col-lg-4'>
-            3.50
-            </itemPrice>
-
-            <itemQuantity class='col-lg-4 text-right'>
-            5
-            </itemQuantity>
-
-          </lineItem>
-          <br clear='all'>
-        </li>
-      </ul>
-    </div>
-  <!-- </div> -->
+  <div class='container'>
+    <table class="table">
+      <thead>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in lineItems">
+          <td>{{item.product.title}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.price}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
