@@ -18,9 +18,8 @@
         <tr ng-repeat="item in lineItems">
           <td>{{item.product.title}}</td>
           <td>
-            {{item.quantity}}
-            <select ng-options="value for value in inventoryArray(item.product) " ng-model="quantity"><option value=''>0</option></select>
-            <button ng-click="changeQuantity(cart, item, quantity)" class='btn btn-primary'>Update</button>
+            <select ng-options="value for value in inventoryArray(item.product) " ng-model="item.quantity"><option value=''>0</option></select>
+            <button ng-click="changeQuantity(cart, item, item.quantity)" class='btn btn-primary'>Update</button>
           </td>
           <td>{{item.price}}</td>
         </tr>
