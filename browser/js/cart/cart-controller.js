@@ -7,9 +7,15 @@ app.controller("CartCtrl", function($scope, $log, CartService){
 	  })
 	  .catch($log.error);
 
+	$scope.deleteCart = function(cart){
+		$scope.cart = {};
+		$scope.lineItems = [];
+		return CartService.deleteCart(cart);
+	};
+
 	// CartService.deleteCart()
 	//   .then(function(){
-	//   	$scope.items = [];
+	//   	$scope.lineItems = [];
 	//   })
 	//   .catch($log.error);
 	  

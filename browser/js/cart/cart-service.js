@@ -11,12 +11,12 @@ app.factory('CartService', function($http){
 		  })
 	};
 
-	// CartService.deleteCart = function(cart){
-	// 	return $http.delete('/api/orders/' + cart.id)
-	// 	  .then(function(){
-	// 	  	_cart = {};
-	// 	  })
-	// };
+	CartService.deleteCart = function(cart){
+		return $http.delete('/api/orders/' + cart.id)
+		  .then(function(){
+		  	_cart = {};
+		  })
+	};
 
 	CartService.changeQuantity = function(params, quantity){
 		return $http.put('/api/orders/' + params.cart + '/lineItems/' + params.item, quantity)

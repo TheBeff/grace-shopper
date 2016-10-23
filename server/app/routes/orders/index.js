@@ -38,6 +38,7 @@ router.delete('/:id', function(req, res, next) {
 		id: req.params.id
 	}})
 	.then(function() {
+		console.log('deleted order with ID ' + req.params.id);
 		res.sendStatus(200);
 	})
 	.catch(next);
