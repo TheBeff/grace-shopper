@@ -66,6 +66,7 @@ app.factory('ProductsService', function($http){
 		let matchedLineItem = ProductsService.checkForItemInCart(product, currentCart);
 
 		if(matchedLineItem){
+		  info.quantity += matchedLineItem.quantity;	
 		  return $http.put(itemUrl + '/' + matchedLineItem.id, info);
 		} else if(currentCart){
 		    return $http.post(itemUrl, info);
