@@ -1,4 +1,4 @@
-app.controller("CartCtrl", function($scope, $log, CartService){
+app.controller("CartCtrl", function($scope, $log, CartService, ProductsService){
 
 	CartService.getCart()
 	  .then(function(cart){
@@ -12,5 +12,9 @@ app.controller("CartCtrl", function($scope, $log, CartService){
 		$scope.lineItems = [];
 		return CartService.deleteCart(cart);
 	};
+
+	$scope.inventoryArray = ProductsService.inventoryArray;
+
+	$scope.changeQuantity = CartService.changeQuantity;	
 
 });

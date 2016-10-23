@@ -37,5 +37,14 @@ router.delete('/:id', function(req, res, next){
 //if the lineup post has the same product, it updates the lineitem
 
 router.put('/:id', function(req, res, next){
-	//write the update route;
+	LineItem.update({
+		quantity: req.body.quantity
+	},{
+		where: {id: req.params.id}
+	})
+	.then(function(){
+		console.log('lineitem ' + req.params.id + ' updated');
+		res.sendStatus(200);
+	})
+	.catch(next);
 });
