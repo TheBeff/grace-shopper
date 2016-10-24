@@ -40,7 +40,7 @@ router.delete('/:id', function(req, res, next){
 router.put('/:id', function(req, res, next){
 	LineItem.update({
 		quantity: req.body.quantity
-	},{
+	}, {
 		where: {id: req.params.id}
 	})
 	.then(function(){

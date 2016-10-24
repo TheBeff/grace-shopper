@@ -5,10 +5,10 @@ app.factory('CartService', function($http){
 
 	CartService.getCart = function(){
 		return $http.get('/api/cart')
-		  .then(function(cart){
-		  	angular.copy(cart.data, _cart);
-		  	return _cart;
-		  });
+			.then(function(cart){
+				angular.copy(cart.data, _cart);
+				return _cart;
+			});
 	};
 
 	CartService.clearCart = function(cart){
@@ -20,9 +20,9 @@ app.factory('CartService', function($http){
 
 	CartService.changeQuantity = function(cart, lineitem, quantity){
 		return $http.put('/api/orders/' + cart.id + '/lineItems/' + lineitem.id, {quantity})
-		  .then(function(){
-		  	console.log("quantity updated");
-		  });
+			.then(function(){
+				console.log('quantity updated');
+			});
 	};
 
 	CartService.deleteItem = function(cart, lineitem){
@@ -37,5 +37,5 @@ app.factory('CartService', function($http){
 		return $http.put('/api/orders/' + cart.id);
 	};
 
-	return CartService; 
+	return CartService;
 });
