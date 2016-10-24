@@ -6,9 +6,10 @@
         <p ng-show="Email === credentials.email && credentials.email" style="color: red">User Already Exists!</p>
         <label for="signup-password">Password</label>
         <input type="password" ng-model="credentials.password" class="form-control" id="signup-password" placeholder="Choose a Password" required>
-        <!-- ***need to come up with a way to confirm passwords match. possibly use a directive: https://blog.brunoscopelliti.com/angularjs-directive-to-check-that-passwords-match/
+
         <label for="signup-password">Confirm Password</label>
-        <input type="password" ng-model="credentials.confirm" class="form-control" id="signup-password-2" placeholder="Re-Enter Password" required> -->
+        <input type="password" ng-model="credentials.confirm" class="form-control" id="signup-password-2" placeholder="Re-Enter Password" compare-to="credentials.password" required>
+        <div>{{credentials.confirm.$error}}</div>
     </div>
     <button type="submit" class="btn btn-primary">Sign Up</button>
 </form>
