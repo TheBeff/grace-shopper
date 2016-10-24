@@ -8,7 +8,8 @@
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
         </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Log In or Sign Up</button>
+        <button ng-show="!user" ui-sref="login" class="btn login-button">Log In</button>
+        <button ng-show="!user" ui-sref="signup" class="btn signup-button">Sign Up</button>
         <div ng-show="user" class="welcome">
             <span>Welcome, {{ user.email }}!</span>
             <a ng-click="logout()">Logout</a>

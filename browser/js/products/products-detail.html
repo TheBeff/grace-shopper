@@ -1,28 +1,29 @@
 <div class='container'>
-  <h1>{{product.title}}</h1>
-  
-  <img class="img-responsive" ng-src="{{product.photos}}"/>
-  
-  <p>{{product.description}}</p>
-  
-  <span ng-hide="!product.price"><strong>Price:</strong> {{product.price}}</span>
-  
-  <p ng-hide="!product.inventory_qty || product.inventory_qty === 0"><strong>In stock:</strong> {{product.inventory_qty}}</p>
-  
-  <p ng-show="!product.inventory_qty || product.inventory_qty === 0" class="text-danger">Sold Out</p>
+    <h1>{{product.title}}</h1>
 
-  <select ng-options="value for value in inventoryArray" ng-model="quantity"></select>
+    <img class="img-responsive" ng-src="{{product.photos}}" />
 
-  <button class="btn btn-primary" ng-disabled="!quantity" ng-click="addToCart(product, quantity, cart)">Add to Cart</button>
-  
-  <button class="btn btn-danger"  ng-click="destroy(product)">Delete</button>
-  <br clear="all">
+    <p>{{product.description}}</p>
 
-  <!-- need an ng-show for authenticated users -->
-  <form>
-    <h3>Leave a Review:</h3>
-    <input type="text" name="review" value="Leave a review...">
-    <!-- add bootstrap 5 start rating plug in here -->
-  </form>
+    <span ng-hide="!product.price"><strong>Price:</strong> {{product.price}}</span>
+
+    <p ng-hide="!product.inventory_qty || product.inventory_qty === 0"><strong>In stock:</strong> {{product.inventory_qty}}</p>
+
+    <p ng-show="!product.inventory_qty || product.inventory_qty === 0" class="text-danger">Sold Out</p>
+
+
+    <select class="form-control" ng-options="value for value in inventoryArray" ng-model="quantity"></select>
+
+    <button class="btn btn-primary" ng-disabled="!quantity" ng-click="addToCart(product, quantity, cart)">Add to Cart</button>
+
+    <button class="btn btn-danger" ng-click="destroy(product)">Delete</button>
+    <br clear="all">
+
+    <!-- need an ng-show for authenticated users -->
+    <form>
+        <h3>Leave a Review:</h3>
+        <input type="text" name="review" value="Leave a review...">
+        <!-- add bootstrap 5 start rating plug in here -->
+    </form>
 
 </div>
