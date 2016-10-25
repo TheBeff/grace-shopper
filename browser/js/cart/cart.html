@@ -1,26 +1,41 @@
 <div class="container">
-  
-  <!-- <div class="col-md-5 col-sm-12"> -->
-  <div>
-  	<h1>Your cart</h1>
-    <button class='btn btn-danger pull-right' ng-click='deleteCart(cart)'>Clear Cart</button>
-    <br clear='all'>
+  <div ng-show="cart.lineItems.length">
+    <div>
+    	<h1>Your cart</h1>
+      <button class='btn btn-danger pull-right' ng-click='clearCart(cart)'>Clear Cart</button>
+      <br clear='all'>
+    </div>
+
+    <div class='container'>
+      <table class="table">
+        <thead>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in lineItems">
+            <td>{{item.product.title}}</td>
+            <td>
+              <select ng-options="value for value in inventoryArray(item.product) " ng-model="item.quantity"><option value=''>0</option></select>
+              <button ng-click="changeQuantity(cart, item, item.quantity)" class='btn btn-primary'>Update</button>
+            </td>
+            <td>{{item.price}}</td>
+            <td>
+              <button ng-click="deleteItem(cart, item)" class='btn btn-danger pull-right'>Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <button class='btn btn-warning'>Prodcee to Check Out</button>
+    </div>
   </div>
 
-  <div class='container'>
-    <table class="table">
-      <thead>
-        <th>Item</th>
-        <th>Quantity</th>
-        <th>Price</th>
-      </thead>
-      <tbody>
-        <tr ng-repeat="item in lineItems">
-          <td>{{item.product.title}}</td>
-          <td>{{item.quantity}}</td>
-          <td>{{item.price}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div ng-show='!cart.lineItems.length'>
+    <h1>Your Cart is Empty</h1>
   </div>
+
 </div>
