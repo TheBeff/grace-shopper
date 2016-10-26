@@ -5,6 +5,17 @@ const Order = require('../../../db').models.Order;
 
 module.exports = router;
 
+// const ensureAuthenticated = function (req, res, next) {
+//     let err;
+//     if (req.isAuthenticated()) {
+//         next();
+//     } else {
+//         err = new Error('You must be logged in.');
+//         err.status = 401;
+//         next(err);
+//     }
+// };
+
 router.use('/:id/lineItems', require('./lineitems'));
 
 router.get('/', function(req, res, next) {

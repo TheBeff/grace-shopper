@@ -65,12 +65,15 @@ app.factory('ProductsService', function($http){
 	};
 
 	ProductsService.addToCart = function(product, quantity, currentCart){
+		
 		let info = {
 			price: product.price,
 			quantity,
 			orderId: currentCart.id,
 			productId: product.id
 		};
+
+		cart = currentCart;
 
 		let itemUrl = '/api/orders/' + currentCart.id + '/lineItems';
 
