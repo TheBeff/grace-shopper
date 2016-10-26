@@ -72,6 +72,8 @@ app.factory('ProductsService', function($http){
 			productId: product.id
 		};
 
+		cart = currentCart;
+
 		let itemUrl = '/api/orders/' + currentCart.id + '/lineItems';
 
 		let matchedLineItem = ProductsService.checkForItemInCart(product, currentCart);

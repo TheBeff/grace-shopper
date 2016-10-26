@@ -43,7 +43,8 @@ router.put('/:id', function(req, res, next){
 	}, {
 		where: {id: req.params.id}
 	})
-	.then(function(){
+	.then(function(result){
+		console.log(result);
 		console.log('lineitem ' + req.params.id + ' updated');
 		res.sendStatus(200);
 	})

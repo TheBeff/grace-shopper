@@ -45,10 +45,22 @@ app.controller('ProductsCtrl', function($scope, $log, ProductsService, CartServi
 	$scope.addToCart = function(product, quantity, cart){
 		if ($scope.cart) {
 			ProductsService.addToCart(product, quantity, cart)
-			  .then(function(){})
+			  .then(function(){
+			  	return CartService.getCart()
+			  })
+			  .then(function(cart){
+  				$scope.cart = cart;
+			  })
 			  .catch($log.error);
 		} else {
-			ProductsService.addToCart(product, quantity, cart);
+			ProductsService.addToCart(product, quantity, cart)
+			  .then(function(){
+			  	return CartService.getCart()
+			  })
+			  .then(function(cart){
+  				$scope.cart = cart;
+			  })
+			  .catch($log.error);
 		}
 	};
 
