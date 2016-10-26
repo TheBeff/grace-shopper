@@ -53,6 +53,7 @@ app.controller('ProductsCtrl', function($scope, $log, ProductsService, CartServi
 			  })
 			  .catch($log.error);
 		} else {
+			
 			ProductsService.addToCart(product, quantity, cart)
 			  .then(function(){
 			  	return CartService.getCart()

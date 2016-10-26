@@ -65,6 +65,7 @@ app.factory('ProductsService', function($http){
 	};
 
 	ProductsService.addToCart = function(product, quantity, currentCart){
+		
 		let info = {
 			price: product.price,
 			quantity,
