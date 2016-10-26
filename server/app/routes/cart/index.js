@@ -10,39 +10,10 @@ module.exports = router;
 
 router.get('/', function(req, res, next) {
     if (req.user) {
-        Order.findOne({
-                where: {
-                    id: req.user.id,
-                    status: 'cart'
-                },
-                include: [{
-                  model: LineItem,
-                  include: [{
-                    model: Product
-                }]
-              }]
-            })
-            .then((order) => {
-                if(!order){
-                    User.findById(req.user.id)
-                    .then(function(user){
-                        var theUser = user;
-                        Order.create({
-                            status: 'cart'
-                        })
-                        .then(function(cart){
-                            theUser.setOrders(cart);
-                            console.log('creating new cart');
-                            console.log(cart);
-                            res.send(cart);
-                        })
-                        .catch(next);
-                    })
-                }
-                else {
-                    console.log('user has a cart');
-                    res.send(order);
-                }
+        Order.getCartForUser(req.user)
+            .then(function(cart){
+                console.log(cart);
+                res.send(cart);
             })
             .catch(next);
     }

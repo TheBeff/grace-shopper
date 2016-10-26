@@ -19,7 +19,7 @@ const Order = db.define('order', {
 				if (cart) {
 					return cart;
 				}
-				return that.create({userId: user.id});
+				return that.create({ userId: user.id });
 			});
 		}
 	}
