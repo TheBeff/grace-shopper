@@ -1,10 +1,16 @@
-app.controller('ProductsCtrl', function($scope, $log, ProductsService, CartService){
+app.controller('ProductsCtrl', function($scope, $log, Session, ProductsService, CartService){
 
 	ProductsService.findAll()
 		.then(function(products){
 			$scope.products = products;
 		})
 		.catch($log.error);
+
+	$scope.isAdmin = function(){
+		if (Session.user){
+			return Session.user.isAdmin;
+		} return false;
+	};
 
 	$scope.create = function(){
 		ProductsService.create({
