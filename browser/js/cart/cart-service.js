@@ -1,4 +1,4 @@
-app.factory('CartService', function($http){
+app.factory('CartService', function($http, $state){
 
 	var CartService = {};
 	var _cart = [];
@@ -34,7 +34,8 @@ app.factory('CartService', function($http){
 	};
 
 	CartService.order = function(cart){
-		return $http.put('/api/orders/' + cart.id);
+		return $http.put('/api/orders/' + cart.id)
+		.then($state.go('checkout'));
 	};
 
 	return CartService;
