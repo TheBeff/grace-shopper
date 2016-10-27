@@ -1,3 +1,5 @@
+"use strict";
+
 app.factory('CartService', function(Session, $http, $window, $q, $state){
 
 	var CartService = {};
@@ -176,10 +178,10 @@ app.factory('CartService', function(Session, $http, $window, $q, $state){
 			});
 	};
 
-	CartService.goToCheckOut = function(cart){
-		return $http.put('/api/orders/' + cart.id)
-		.then($state.go('checkout'));
-  	};
+	// CartService.goToCheckOut = function(cart){
+	// 	return $http.put('/api/orders/' + cart.id)
+	// 	.then($state.go('checkout'));
+ //  	};
 
 	return CartService;
 });

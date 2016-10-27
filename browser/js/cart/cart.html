@@ -29,9 +29,9 @@
       </table>
     </div>
 
-    <div>
-      <button class='btn btn-primary' ng-click="goToCheckOut(cart)">Proceed to Check Out</button>
-    </div>
+    <a ui-sref="checkout">
+      <button class='btn btn-primary'>Proceed to Check Out</button>
+    </a>
   </div>
 
   <div ng-show='!cart.lineItems.length'>
