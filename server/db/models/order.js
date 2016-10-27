@@ -1,4 +1,6 @@
 const db = require('../_db');
+const LineItem = require('./lineitem');
+const Product = require('./product');
 
 const Order = db.define('order', {
 	status: {
@@ -13,7 +15,11 @@ const Order = db.define('order', {
 		getCartForUser: function(user){
 			var that = this;
 			return this.findOne({
-				where: { userId: user.id, status: 'cart' }
+				where: { userId: user.id, status: 'cart' },
+				include: [{
+					model: LineItem, 
+					include: [Product]
+				}]
 			})
 			.then(function(cart){
 				if (cart) {
