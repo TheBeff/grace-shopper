@@ -6,16 +6,21 @@ const User = require('../../../db').models.User;
 module.exports = router;
 
 router.post('/', (req, res, next) => {
-    User.findOne({
-      where: {
-        email: req.body.email
-      }
-    })
-    .then(user => {
-      if (user) return res.send(user);
-      User.create({
-        email: req.body.email,
-        password: req.body.password
-      })
-    })
+    return User.findOrCreate({
+            where: {
+                email: req.body.email
+            }
+        })
+        .then(([user, created]) => {
+            if (!created) return res.send(user);
+
+            return req.logIn(user, function(loginErr) {
+                if (loginErr) return next(loginErr);
+                // We respond with a response object that has user with _id and email.
+                return res.send({
+                    user: user.sanitize()
+                });
+            });
+        })
+        .catch(next);
 });

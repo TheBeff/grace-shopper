@@ -6,11 +6,12 @@ app.config(function($stateProvider){
   });
 });
 
-app.controller('SignupCtrl', function($scope, SignupFactory){
+app.controller('SignupCtrl', function($state, $scope, SignupFactory){
 
   $scope.signUp = function() {
     SignupFactory.signUp($scope.credentials)
       .then(function(email){
+        if (!email) $state.go('home');
         $scope.Email = email;
       });
   }

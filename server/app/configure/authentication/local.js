@@ -49,7 +49,7 @@ module.exports = function (app, db) {
                     user: user.sanitize()
                 });
             });
-
+            console.log(user);
         };
 
         passport.authenticate('local', authCb)(req, res, next);
