@@ -18,4 +18,6 @@ app.controller('CartCtrl', function($scope, $log, CartService, ProductsService){
 
 	$scope.deleteItem = CartService.deleteItem;
 
+	$scope.goToCheckout = CartService.order;
+
 });
