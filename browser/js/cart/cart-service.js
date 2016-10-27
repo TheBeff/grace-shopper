@@ -1,4 +1,4 @@
-app.factory('CartService', function(Session, $http, $window, $q){
+app.factory('CartService', function(Session, $http, $window, $q, $state){
 
 	var CartService = {};
 	var _cart = {};
@@ -175,6 +175,11 @@ app.factory('CartService', function(Session, $http, $window, $q){
 				}
 			});
 	};
+
+	CartService.goToCheckOut = function(cart){
+		return $http.put('/api/orders/' + cart.id)
+		.then($state.go('checkout'));
+  	};
 
 	return CartService;
 });
