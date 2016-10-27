@@ -51,17 +51,20 @@ app.factory('ProductsService', function($http){
 	};
 
 	ProductsService.checkForItemInCart = function(product, currentCart){
-		let idArray = currentCart.lineItems.map(function(lineItem){
-			return lineItem.productId;
-		});
+		if(currentCart.lineItems){
+			let idArray = currentCart.lineItems.map(function(lineItem){
+				return lineItem.productId;
+			});
 
-		let index = idArray.indexOf(product.id);
+			let index = idArray.indexOf(product.id);
 
-		if (index >= 0) {
-			return currentCart.lineItems[index];
-		} else {
-			return false;
+			if (index >= 0) {
+				return currentCart.lineItems[index];
+			} else {
+				return false;
+			}
 		}
+		else return false;
 	};
 
 	ProductsService.addToCart = function(product, quantity, currentCart){
