@@ -1,10 +1,16 @@
-app.controller('ProductsCtrl', function($scope, $log, ProductsService, CartService){
+app.controller('ProductsCtrl', function($scope, $log, Session, ProductsService, CartService){
 
 	ProductsService.findAll()
 		.then(function(products){
 			$scope.products = products;
 		})
 		.catch($log.error);
+
+	$scope.isAdmin = function(){
+		if (Session.user){
+			return Session.user.isAdmin;
+		} return false;
+	};
 
 	$scope.create = function(){
 		ProductsService.create({
@@ -43,26 +49,14 @@ app.controller('ProductsCtrl', function($scope, $log, ProductsService, CartServi
 		.catch($log.error);
 
 	$scope.addToCart = function(product, quantity, cart){
-		if ($scope.cart) {
-			ProductsService.addToCart(product, quantity, cart)
-			  .then(function(){
-			  	return CartService.getCart()
-			  })
-			  .then(function(cart){
-  				$scope.cart = cart;
-			  })
-			  .catch($log.error);
-		} else {
-			
-			ProductsService.addToCart(product, quantity, cart)
-			  .then(function(){
-			  	return CartService.getCart()
-			  })
-			  .then(function(cart){
-  				$scope.cart = cart;
-			  })
-			  .catch($log.error);
-		}
+		CartService.createLineItem(product, quantity, cart)
+		.then(function(){
+			return CartService.getCart();
+		})
+		.then(function(cart){
+			$scope.cart = cart;
+		})
+		.catch($log.error);
 	};
 
 });

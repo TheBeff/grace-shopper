@@ -1,4 +1,4 @@
-<div class="well">
+<div class="well" ng-show='isAdmin()'>
     <form name="new-product">
         <div class="form-group">
             <input class="form-control" ng-model="title" placeholder="product title" required/>
@@ -27,7 +27,7 @@
             <select class="form-control" style="width: 25%; display: inline" ng-options="value for value in inventoryArray(product)" ng-model="quantity"></select>
             <notification ng-show="clicked"></notification>
             <button class="btn btn-primary" ng-disabled="!quantity" ng-click="addToCart(product, quantity, cart); clicked=true">Add to Cart</button>
-            <button class="btn btn-danger" ng-click="destroy(product)">Delete</button>
+            <button ng-show='isAdmin()' class="btn btn-danger" ng-click="destroy(product)">Delete</button>
         </div>
         <br clear="all">
     </li>

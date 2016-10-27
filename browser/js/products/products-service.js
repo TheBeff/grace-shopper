@@ -1,4 +1,4 @@
-app.factory('ProductsService', function($http){
+app.factory('ProductsService', function(Session, $http){
 
 	var ProductsService = {};
 	var _products = [];
@@ -48,54 +48,6 @@ app.factory('ProductsService', function($http){
 			inventoryArray.push(i);
 		}
 		return inventoryArray;
-	};
-
-	ProductsService.checkForItemInCart = function(product, currentCart){
-		let idArray = currentCart.lineItems.map(function(lineItem){
-			return lineItem.productId;
-		});
-
-		let index = idArray.indexOf(product.id);
-
-		if (index >= 0) {
-			return currentCart.lineItems[index];
-		} else {
-			return false;
-		}
-	};
-
-	ProductsService.addToCart = function(product, quantity, currentCart){
-		
-		let info = {
-			price: product.price,
-			quantity,
-			orderId: currentCart.id,
-			productId: product.id
-		};
-
-		cart = currentCart;
-
-		let itemUrl = '/api/orders/' + currentCart.id + '/lineItems';
-
-		let matchedLineItem = ProductsService.checkForItemInCart(product, currentCart);
-
-		if (matchedLineItem) {
-		  info.quantity += matchedLineItem.quantity;
-		  return $http.put(itemUrl + '/' + matchedLineItem.id, info);
-		} else if (currentCart) {
-		    return $http.post(itemUrl, info);
-	    } else {
-			let itemInfo = {
-				quantity,
-				price: product.price,
-				productId: product.id
-			};
-
-			cart.push(itemInfo);
-			let strCart = JSON.stringify(cart);
-			sessionStorage.setItem('cart', strCart);
-			return JSON.parse(sessionStorage.getItem('cart'));
-	    }
 	};
 
 	return ProductsService;

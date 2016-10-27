@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
     if (req.user) {
         Order.getCartForUser(req.user)
             .then(function(cart){
+                console.log(cart);
                 res.send(cart);
             })
             .catch(next);

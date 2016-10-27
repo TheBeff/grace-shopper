@@ -22,7 +22,7 @@
             </td>
             <td>{{item.price}}</td>
             <td>
-              <button ng-click="deleteItem(cart, item)" class='btn btn-danger pull-right'>Delete</button>
+              <button ng-click="deleteLineItem(cart, item)" class='btn btn-danger pull-right'>Delete</button>
             </td>
           </tr>
         </tbody>
@@ -30,7 +30,7 @@
     </div>
 
     <div>
-      <button class='btn btn-warning'>Prodcee to Check Out</button>
+      <button class='btn btn-primary' ng-click="goToCheckOut(cart)">Proceed to Check Out</button>
     </div>
   </div>
 
