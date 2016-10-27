@@ -9,7 +9,7 @@ var User = require('../../../server/db').models.User;
 
 var supertest = require('supertest');
 
-describe('Members Route', function () {
+describe.only('Cart Route', function () {
 
     var app, User;
 
@@ -31,7 +31,8 @@ describe('Members Route', function () {
 		});
 
 		it('should get a 401 response', function (done) {
-			guestAgent.get('/api/account/secret-stash')
+			guestAgent.post('/api/orders')
+				.send({ status: 'cart'})
 				.expect(401)
 				.end(done);
 		});
@@ -56,10 +57,14 @@ describe('Members Route', function () {
 			loggedInAgent.post('/login').send(userInfo).end(done);
 		});
 
-		it('should get with 200 response and with an array as the body', function (done) {
-			loggedInAgent.get('/api/account/secret-stash').expect(200).end(function (err, response) {
+		it('should get with 200 response and the cart', function (done) {
+			loggedInAgent.get('/api/cart')
+				.expect(200)
+				.end(function (err, response) {
 				if (err) return done(err);
-				expect(response.body).to.be.an('array');
+				var cart = response.body;
+				expect(cart.id).to.be.ok;
+				expect(cart.userId).to.be.ok;
 				done();
 			});
 		});
