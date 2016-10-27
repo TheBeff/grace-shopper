@@ -7,15 +7,16 @@ app.config(function($stateProvider) {
 });
 
 app.controller('SignupCtrl', function($state, $scope, SignupFactory) {
-
+    $scope.Email = SignupFactory.email;
+    
     $scope.signUp = function() {
         SignupFactory.signUp($scope.credentials)
             .then(function(email) {
-                if (email) {
-                    $scope.Email = email;
-                } else {
-                  $state.go('home');
-                }
+                // if (email) {
+                //     $scope.Email = email;
+                // } else {
+                //   $state.go('home');
+                // }
             });
     }
 });
