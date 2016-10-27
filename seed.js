@@ -49,12 +49,21 @@ const seedUsers = function() {
         inventory_qty: '10',
         photos: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Military_laser_experiment.jpg',
         category: 'Weapons'
+    }, {
+        title: 'Lightsaber',
+        description: 'Only 4 Jedis',
+        price: '1000',
+        inventory_qty: '4',
+        photos: 'https://upload.wikimedia.org/wikipedia/commons/1/14/Lightsaber%2C_silver_hilt%2C_blue_blade.png',
+        category: 'Weapons'
     }];
 
     const orders = [{
         status: 'cart'
     }, {
-        status: 'order'
+        status: 'order',
+    }, {
+        status: 'order',
     }];
 
     const lineItems = [{
@@ -63,6 +72,12 @@ const seedUsers = function() {
     }, {
         quantity: 2,
         price: 500
+    }, {
+        quantity: 3,
+        price: 45
+    }, {
+        quantity: 1,
+        price: 20
     }];
 
     const creatingUsers = Promise.map(users, userObj => User.create(userObj));
@@ -77,9 +92,15 @@ const seedUsers = function() {
         .then(([user, product, order, lineItem]) => {
             lineItem[0].setProduct(product[0]);
             lineItem[1].setProduct(product[1]);
+            lineItem[2].setProduct(product[1]);
+            lineItem[3].setProduct(product[2]);
             lineItem[0].setOrder(order[0]);
             lineItem[1].setOrder(order[0]);
-            return user[0].setOrders(order[0]);
+            lineItem[2].setOrder(order[1]);
+            lineItem[3].setOrder(order[2]);
+            user[0].setOrders(order[0]);
+            user[0].setOrders(order[1]);
+            return user[0].setOrders(order[2]);
         });
 
 };
