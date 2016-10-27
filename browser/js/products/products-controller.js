@@ -43,26 +43,14 @@ app.controller('ProductsCtrl', function($scope, $log, ProductsService, CartServi
 		.catch($log.error);
 
 	$scope.addToCart = function(product, quantity, cart){
-		if ($scope.cart) {
-			ProductsService.addToCart(product, quantity, cart)
-			  .then(function(){
-			  	return CartService.getCart()
-			  })
-			  .then(function(cart){
-  				$scope.cart = cart;
-			  })
-			  .catch($log.error);
-		} else {
-			
-			ProductsService.addToCart(product, quantity, cart)
-			  .then(function(){
-			  	return CartService.getCart()
-			  })
-			  .then(function(cart){
-  				$scope.cart = cart;
-			  })
-			  .catch($log.error);
-		}
+		CartService.createLineItem(product, quantity, cart)
+		.then(function(){
+			return CartService.getCart();
+		})
+		.then(function(cart){
+			$scope.cart = cart;
+		})
+		.catch($log.error);
 	};
 
 });
