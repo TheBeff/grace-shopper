@@ -5,6 +5,7 @@ const LineItem = require('./models/lineItem');
 const Order = require('./models/order');
 const Product = require('./models/product');
 const Review = require('./models/review');
+const Address = require('./models/address');
 
 module.exports = {
   db,
@@ -13,7 +14,8 @@ module.exports = {
     Order,
     Product,
     Review,
-    LineItem
+    LineItem,
+    Address
   }
 };
 
@@ -30,4 +32,6 @@ LineItem.belongsTo(Order);
 Order.hasMany(LineItem);
 User.hasMany(Review);
 User.hasMany(Order);
+Address.belongsTo(User);
+User.hasMany(Address);
 

@@ -23,6 +23,7 @@ const User = require('./server/db').models.User;
 const Product = require('./server/db').models.Product;
 const Order = require('./server/db').models.Order;
 const LineItem = require('./server/db').models.LineItem;
+const Address = require('./server/db').models.Address;
 const Promise = require('sequelize').Promise;
 
 const seedUsers = function() {
