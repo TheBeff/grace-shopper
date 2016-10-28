@@ -5,6 +5,17 @@ const Product = require('../../../db').models.Product;
 
 module.exports = router;
 
+var isAdmin = function(req, res, next){
+	let err;
+	if (req.user.isAdmin){
+		next();
+	} else {
+        err = new Error('You must be an Admin.');
+        err.status = 401;
+        next(err);
+    }
+};
+
 router.get('/', function(req, res, next) {
 	Product.findAll()
 	.then(function(products) {
@@ -21,7 +32,7 @@ router.get('/:id', function(req, res, next) {
 	.catch(next);
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', isAdmin, function(req, res, next) {
 	Product.create({
 		title: req.body.title,
 		description: req.body.description,
@@ -36,7 +47,7 @@ router.post('/', function(req, res, next) {
 	.catch(next);
 });
 
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', isAdmin, function(req, res, next) {
 	Product.destroy({ where: {
 		id: req.params.id
 	}})
@@ -46,7 +57,7 @@ router.delete('/:id', function(req, res, next) {
 	.catch(next);
 });
 
-router.put('/:id', function(req, res, next) {
+router.put('/:id', isAdmin, function(req, res, next) {
 	Product.update({
 		title: req.body.title,
 		description: req.body.description,
