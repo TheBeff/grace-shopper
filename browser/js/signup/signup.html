@@ -3,7 +3,7 @@
     <div class="form-group">
         <label for="userEmail">Email Address</label>
         <input type="text" class="form-control" id="userEmail" placeholder="Enter your email" ng-model="credentials.email" required>
-        <p ng-show="Email === credentials.email && credentials.email" style="color: red">User Already Exists!</p>
+        <p ng-show="existsEmail && credentials.email" style="color: red">User Already Exists!</p>
         <label for="signup-password">Password</label>
         <input name="password" type="password" ng-model="credentials.password" class="form-control" id="signup-password" placeholder="Choose a Password" required>
 

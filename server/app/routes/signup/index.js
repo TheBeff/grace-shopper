@@ -7,31 +7,23 @@ const Promise = require('bluebird');
 module.exports = router;
 
 router.post('/', (req, res, next) => {
-    const promisifyLogIn = Promise.promisifyAll(req.logIn);
 
-    return User.findOrCreate({
+    return User.findOne({
             where: {
-                email: req.body.email
+                email: req.body.email,
             }
         })
-        .then(([user, created]) => {
-            if (!created) return res.send(user);
+        .then(user => {
 
+          if (user) res.send('exists');
 
-            // return promisifyLogIn(user)
-            //   .then(function(something) {
-            //     return res.send({
-            //         user: user.sanitize()
-            //     });
-            //   });
-            return req.logIn(user, function(loginErr) {
-                if (loginErr) return next(loginErr);
-                // We respond with a response object that has user with _id and email.
-                // return res.send({
-                //     user: user.sanitize()
-                // });
-                return res.redirect('/products');
-            });
+          return User.create({
+            email: req.body.email,
+            password: req.body.password
+          })
+        })
+        .then(createdUser => {
+          res.send(createdUser);
         })
         .catch(next);
 });

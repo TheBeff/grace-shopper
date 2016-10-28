@@ -6,31 +6,32 @@ app.config(function($stateProvider) {
     });
 });
 
-app.controller('SignupCtrl', function($state, $scope, SignupFactory) {
+app.controller('SignupCtrl', function($state, $scope, SignupFactory, AuthService) {
     $scope.Email = SignupFactory.email;
-    
+
     $scope.signUp = function() {
+        $scope.existsEmail = false;
         SignupFactory.signUp($scope.credentials)
-            .then(function(email) {
-                // if (email) {
-                //     $scope.Email = email;
-                // } else {
-                //   $state.go('home');
-                // }
+            .then(function(data) {
+                if (data === 'exists') {
+                    $scope.existsEmail = true
+                    return;
+                }
+                AuthService.login($scope.credentials);
+                $state.go('home');
             });
     }
 });
 
-app.factory('SignupFactory', function($http) {
+app.factory('SignupFactory', function(AuthService, $http) {
     let signUpObj = {};
 
     signUpObj.email = null;
 
     signUpObj.signUp = function(credentials) {
         return $http.post('/api/signup', credentials)
-            .then(function(user) {
-                signUpObj.email = user.data.email;
-                return signUpObj.email;
+            .then(function(result) {
+                return result.data;
             })
     }
 
