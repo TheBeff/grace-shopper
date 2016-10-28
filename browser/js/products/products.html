@@ -1,34 +1,48 @@
-<div class="well" ng-show='isAdmin()'>
-    <form name="new-product">
-        <div class="form-group">
-            <input class="form-control" ng-model="title" placeholder="product title" required/>
-            <input class="form-control" ng-model="description" type="text" placeholder="product description" />
-            <input class="form-control" ng-model="category" placeholder="product category" required/>
-            <input class="form-control" ng-model="price" placeholder="product price" />
-            <input class="form-control" ng-model="inventory" placeholder="product inventory quantity" />
-            <input class="form-control" ng-model="photo" placeholder="product photo url" />
+<div class="container">
+  <div class="well" ng-show='isAdmin()'>
+      <form name="new-product">
+          <div class="form-group">
+              <input class="form-control" ng-model="title" placeholder="product title" required/>
+              <input class="form-control" ng-model="description" type="text" placeholder="product description" />
+              <input class="form-control" ng-model="category" placeholder="product category" required/>
+              <input class="form-control" ng-model="price" placeholder="product price" />
+              <input class="form-control" ng-model="inventory" placeholder="product inventory quantity" />
+              <input class="form-control" ng-model="photo" placeholder="product photo url" />
+          </div>
+          <button class="btn btn-primary" ng-click="create()" ng-disabled="new-product.$invalid">Create Product</button>
+      </form>
+  </div>
+
+  <ul class="list-group">
+
+      <div class="row">
+        <div class="form-group has-feedback">
+          <input class="form-control" name="search" placeholder="Search for weapons, armor, fruits, and more" style="padding: 10px 20px 9px 18px; text-align: center">
+          <i class="glyphicon glyphicon-search form-control-feedback"></i>
         </div>
-        <button class="btn btn-primary" ng-click="create()" ng-disabled="new-product.$invalid">Create Product</button>
-    </form>
+      </div>
+      <br clear="all">
+
+      <div class="row">
+        <li class="list-group-item col-sm-4" ng-repeat="product in products">
+            <h3><a ui-sref='detail({id:product.id})'>{{product.title}}</a></h3>
+            <img class="img-responsive" ng-src="{{product.photos}}" />
+            <p>{{product.description}}</p>
+            <span ng-hide="!product.price"><strong>Price:</strong> {{product.price}}</span>
+            <p ng-hide="!product.inventory_qty || product.inventory_qty === 0"><strong>In stock:</strong> {{product.inventory_qty}}</p>
+            <p ng-show="!product.inventory_qty || product.inventory_qty === 0" class="text-danger">Sold Out</p>
+            <br clear="all">
+
+            <div class="form-group">
+                <p style="display: inline">Qty: </p>
+                <select class="form-control" style="width: 25%; display: inline" ng-options="value for value in inventoryArray(product)" ng-model="quantity"></select>
+                <notification ng-show="clicked"></notification>
+                <button class="btn btn-primary" ng-disabled="!quantity" ng-click="addToCart(product, quantity, cart); clicked=true">Add to Cart</button>
+                <button ng-show='isAdmin()' class="btn btn-danger" ng-click="destroy(product)">Delete</button>
+            </div>
+            <br clear="all">
+        </li>
+      </div>
+  </ul>
+  
 </div>
-
-<ul class="list-group">
-    <li class="list-group-item col-sm-4" ng-repeat="product in products">
-        <h3><a ui-sref='detail({id:product.id})'>{{product.title}}</a></h3>
-        <img class="img-responsive" ng-src="{{product.photos}}" />
-        <p>{{product.description}}</p>
-        <span ng-hide="!product.price"><strong>Price:</strong> {{product.price}}</span>
-        <p ng-hide="!product.inventory_qty || product.inventory_qty === 0"><strong>In stock:</strong> {{product.inventory_qty}}</p>
-        <p ng-show="!product.inventory_qty || product.inventory_qty === 0" class="text-danger">Sold Out</p>
-        <br clear="all">
-
-        <div class="form-group">
-            <p style="display: inline">Qty: </p>
-            <select class="form-control" style="width: 25%; display: inline" ng-options="value for value in inventoryArray(product)" ng-model="quantity"></select>
-            <notification ng-show="clicked"></notification>
-            <button class="btn btn-primary" ng-disabled="!quantity" ng-click="addToCart(product, quantity, cart); clicked=true">Add to Cart</button>
-            <button ng-show='isAdmin()' class="btn btn-danger" ng-click="destroy(product)">Delete</button>
-        </div>
-        <br clear="all">
-    </li>
-</ul>

@@ -3,6 +3,10 @@ app.config(function($stateProvider) {
         url: '/signup',
         templateUrl: '/js/signup/signup.html',
         controller: 'SignupCtrl'
+    })
+    .state('confirm', {
+      url: '/signup/confirmation',
+      templateUrl: '/js/signup/signupConfirm.html'
     });
 });
 
@@ -18,7 +22,7 @@ app.controller('SignupCtrl', function($state, $scope, SignupFactory, AuthService
                     return;
                 }
                 AuthService.login($scope.credentials);
-                $state.go('home');
+                $state.go('confirm');
             });
     }
 });
