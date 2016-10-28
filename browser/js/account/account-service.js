@@ -23,5 +23,12 @@ app.factory('AccountService', function($http){
 		  })
 	};
 
+	AccountService.getBilling = function(){
+		return $http.get('/api/address/billing')
+		  .then(function(response){
+		  	return response.data;
+		  })
+	};
+
 	return AccountService;
 });

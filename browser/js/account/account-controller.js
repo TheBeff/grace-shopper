@@ -17,5 +17,11 @@ app.controller("AccountCtrl", function($scope, $log, AccountService){
         $scope.shipping = response;
     })
     .catch($log.error);
+
+    AccountService.getBilling()
+      .then(function(response){
+          $scope.billing = response;
+      })
+      .catch($log.error);
 });
 
