@@ -23,6 +23,7 @@ const User = require('./server/db').models.User;
 const Product = require('./server/db').models.Product;
 const Order = require('./server/db').models.Order;
 const LineItem = require('./server/db').models.LineItem;
+const Address = require('./server/db').models.Address;
 const Promise = require('sequelize').Promise;
 
 const seedUsers = function() {
@@ -81,6 +82,23 @@ const seedUsers = function() {
         price: 20
     }];
 
+    const addresses = [{
+        name: "Jeff Petriello",
+        address1: "138 Broadway",
+        address2: "Apt 2D",
+        city: "Brooklyn",
+        state: "NY",
+        zip: 11211,
+        type: "shipping"
+    }, {
+        name: "Santa Claus",
+        address1: "325 S. Santa Claus Lane",
+        city: "North Pole",
+        state: "AK",
+        zip: 99705,
+        type: "billing"
+    }];
+
     const creatingUsers = Promise.map(users, userObj => User.create(userObj));
 
     const createProducts = Promise.map(products, productObj => Product.create(productObj));
@@ -89,8 +107,10 @@ const seedUsers = function() {
 
     const createLineItem = Promise.map(lineItems, lineItemObj => LineItem.create(lineItemObj));
 
-    return Promise.all([creatingUsers, createProducts, createOrders, createLineItem])
-        .then(([user, product, order, lineItem]) => {
+    const createAddress = Promise.map(addresses, addressesObj => Address.create(addressesObj));
+
+    return Promise.all([creatingUsers, createProducts, createOrders, createLineItem, createAddress])
+        .then(([user, product, order, lineItem, address]) => {
             lineItem[0].setProduct(product[0]);
             lineItem[1].setProduct(product[1]);
             lineItem[2].setProduct(product[1]);
@@ -99,6 +119,8 @@ const seedUsers = function() {
             lineItem[1].setOrder(order[0]);
             lineItem[2].setOrder(order[1]);
             lineItem[3].setOrder(order[2]);
+            address[0].setUser(user[0]);
+            address[1].setUser(user[0]);
             user[0].setOrders(order[0]);
             user[0].setOrders(order[1]);
             return user[0].setOrders(order[2]);

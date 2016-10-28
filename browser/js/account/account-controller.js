@@ -1,8 +1,8 @@
 app.controller("AccountCtrl", function($scope, $log, AccountService){
 
   AccountService.getUser()
-    .then(function(user){
-    	$scope.user = user;
+    .then(function(response){
+    	$scope.user = response.user;
     })
     .catch($log.error);
 	 
@@ -10,6 +10,18 @@ app.controller("AccountCtrl", function($scope, $log, AccountService){
     .then(function(orders){
     	$scope.orders = orders;
     })
-    .catch($log.error);  
+    .catch($log.error);
 
+  AccountService.getShipping()
+    .then(function(response){
+        $scope.shipping = response;
+    })
+    .catch($log.error);
+
+    AccountService.getBilling()
+      .then(function(response){
+          $scope.billing = response;
+      })
+      .catch($log.error);
 });
+

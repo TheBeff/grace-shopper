@@ -4,15 +4,29 @@ app.factory('AccountService', function($http){
 
 	AccountService.getUser = function(){
 		return $http.get('/session')
-		  .then(function(user){
-		  	return user.data;
+		  .then(function(response){
+		  	return response.data;
 		  })
 	};
 
 	AccountService.getOrders = function(){
 		return $http.get('/api/account/orders')
-		  .then(function(orders){
-		  	return orders.data;
+		  .then(function(response){
+		  	return response.data;
+		  })
+	};
+
+	AccountService.getShipping = function(){
+		return $http.get('/api/address/shipping')
+		  .then(function(response){
+		  	return response.data;
+		  })
+	};
+
+	AccountService.getBilling = function(){
+		return $http.get('/api/address/billing')
+		  .then(function(response){
+		  	return response.data;
 		  })
 	};
 

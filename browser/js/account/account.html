@@ -1,20 +1,40 @@
 <div class="container">
-  <h1>Welcomt to Your Account Page</h1>
+  <h1>Welcome to Your Account Page</h1>
   <h2>Your Orders</h2>
-    <table class="table" ng-repeat="order in orders">
-    	<caption>Order #{{order.id}}</caption>
-    	<thead>
-    		<th>Item</th>
-    		<th>Quantity</th>
-    		<th>Total</th>
-    	</thead>
-    	<tbody>
-    		<tr ng-repeat="item in order.lineItems">
-    			<td>{{item.product.title}}</td>
-    			<td>{{item.quantity}}</td>
-    			<td>{{item.price*item.quantity}}</td>
-    		</tr>
-    	</tbody>
-    </table>
+  <table class="table" ng-repeat="order in orders">
+	<caption>Order #{{order.id}}</caption>
+	<thead>
+		<th>Item</th>
+		<th>Quantity</th>
+		<th>Total</th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in order.lineItems">
+			<td>{{item.product.title}}</td>
+			<td>{{item.quantity}}</td>
+			<td>{{item.price*item.quantity}}</td>
+		</tr>
+	</tbody>
+  </table>
   <h2>Your Profile</h2>
+  <div>
+	  <h3>Your Email Address</h3>
+	  <p>{{user.email}}</p>
+  </div>
+  <div class="col-md-6">
+	  <h3>Your Shipping Address</h3>
+	  <div ng-hide="!shipping">
+		  <p>{{shipping.name}}</p>
+		  <p>{{shipping.address1}}</p>
+		  <p>{{shipping.address2}}</p>
+		  <span>{{shipping.city}}, {{shipping.state}} {{shipping.zip}}</span>
+	  </div>
+  </div>
+  <div class="col-md-6">
+	  <h3>Your Billing Address</h3>
+	  <p>{{billing.name}}</p>
+	  <p>{{billing.address1}}</p>
+	  <p>{{billing.address2}}</p>
+	  <span>{{billing.city}}, {{billing.state}} {{billing.zip}}</span>
+  </div>
 </div>
