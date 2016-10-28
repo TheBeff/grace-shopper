@@ -8,18 +8,7 @@ const Product = require('../../../db').models.Product;
 module.exports = router;
 const _ = require('lodash');
 
-const ensureAuthenticated = function (req, res, next) {
-    let err;
-    if (req.isAuthenticated()) {
-        next();
-    } else {
-        err = new Error('You must be logged in.');
-        err.status = 401;
-        next(err);
-    }
-};
-
-router.get('/orders', ensureAuthenticated, function (req, res, next) {
+router.get('/orders', function (req, res, next) {
     Order.findAll({
         where: {
             status: 'order',

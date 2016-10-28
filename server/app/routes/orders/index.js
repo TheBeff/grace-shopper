@@ -5,18 +5,7 @@ const Order = require('../../../db').models.Order;
 
 module.exports = router;
 
-const ensureAuthenticated = function (req, res, next) {
-    let err;
-    if (req.isAuthenticated()) {
-        next();
-    } else {
-        err = new Error('You must be logged in.');
-        err.status = 401;
-        next(err);
-    }
-};
-
-router.use('/:id/lineItems', ensureAuthenticated, require('./lineitems'));
+router.use('/:id/lineItems', require('./lineitems'));
 
 router.get('/', function(req, res, next) {
 	Order.findAll()
@@ -26,7 +15,7 @@ router.get('/', function(req, res, next) {
 	.catch(next);
 });
 
-router.get('/:id', ensureAuthenticated, function(req, res, next) {
+router.get('/:id', function(req, res, next) {
 	Order.findById(req.params.id)
 	.then(function(order) {
 		res.send(order);
@@ -34,7 +23,7 @@ router.get('/:id', ensureAuthenticated, function(req, res, next) {
 	.catch(next);
 });
 
-router.post('/', ensureAuthenticated, function(req, res, next) {
+router.post('/', function(req, res, next) {
 	Order.create({
 		status: req.body.status
 	})
@@ -44,7 +33,7 @@ router.post('/', ensureAuthenticated, function(req, res, next) {
 	.catch(next);
 });
 
-router.delete('/:id', ensureAuthenticated, function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
 	Order.destroy({ where: {
 		id: req.params.id
 	}})
@@ -55,7 +44,7 @@ router.delete('/:id', ensureAuthenticated, function(req, res, next) {
 	.catch(next);
 });
 
-router.put('/:id', ensureAuthenticated, function(req, res, next) {
+router.put('/:id', function(req, res, next) {
 	Order.update({
 		status: req.body.status
 	}, {
