@@ -3,10 +3,22 @@ var router = require('express').Router(); // eslint-disable-line new-cap
 
 module.exports = router;
 
-router.use('/account', require('./account'));
+const ensureAuthenticated = function (req, res, next) {
+    let err;
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        err = new Error('You must be logged in.');
+        err.status = 401;
+        next(err);
+    }
+};
+
+
+router.use('/account', ensureAuthenticated, require('./account'));
 router.use('/products', require('./products'));
-router.use('/orders', require('./orders'));
-router.use('/cart', require('./cart'));
+router.use('/orders', ensureAuthenticated, require('./orders'));
+router.use('/cart', ensureAuthenticated, require('./cart'));
 router.use('/signup', require('./signup'));
 
 // Make sure this is after all of

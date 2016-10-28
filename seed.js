@@ -29,7 +29,8 @@ const seedUsers = function() {
 
     const users = [{
         email: 'testing@fsa.com',
-        password: 'password'
+        password: 'password',
+        isAdmin: true
     }, {
         email: 'obama@gmail.com',
         password: 'potus'
