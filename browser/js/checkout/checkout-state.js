@@ -6,4 +6,9 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/checkout/checkout.html',
         controller: 'CheckoutCtrl'
     });
+
+    $stateProvider.state('confirmation', {
+        url: '/confirmation',
+        templateUrl: 'js/checkout/confirmation.html'
+    });
 });

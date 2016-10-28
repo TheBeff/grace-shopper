@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" type="text/css" href="../../scss/checkout/main.css">
 <head>
   <title></title>
 </head>
@@ -23,7 +24,6 @@
               </tbody>
             </table>
         </div>
-    </div>
 
         <form action="#"
           name="cardForm"
@@ -50,18 +50,48 @@
 
         </form>
 
-      <p>Now, where to send it?</p>
-       <div class="addr">
-        <input type="text" placeholder="Address Line 1" required/>
-        <input type="text" placeholder="Address Line 2" />
-        <input type="text" placeholder="Town" required/>
-        <input type="text" placeholder="Postcode" required/>
-        <input type="text" placeholder="Country" required/>
-       </div>
+        <h3>Now, where to send it?</h3>
+        <form name="shippingForm" class="ship-form">
+          <label>First Name:</label>
+          <input type="text" name="userFirstName" ng-model="firstName" required />
+          <div ng-messages="shippingForm.userFirstName.$error">
+            <div ng-message="required">This field is required</div>
+          </div>
+
+          <label>Last Name:</label>
+          <input type="text" name="userLastName" ng-model="lastName" required />
+          <div ng-messages="shippingForm.userLastName.$error">
+            <div ng-message="required">This field is required</div>
+          </div>
+
+          <label>Email Address:</label>
+          <input type="email" name="userEmail" ng-model="email" required />
+          <div ng-messages="shippingForm.userEmail.$error">
+            <div ng-message="required">This field is required</div>
+            <div ng-message="email">Your email address is invalid</div>
+          </div>
+
+          <label>Phone Number:</label>
+          <input type="email" name="userPhoneNumber" ng-model="phoneNumber" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required/>
+          <div ng-messages="shippingForm.userPhoneNumber.$error">
+            <div ng-message="required">This field is required</div>
+            <div ng-message="pattern">Must be a valid 10 digit phone number</div>
+          </div>
+          <br>
+          {{ shippingForm.$valid }}
+          <!-- <label>User Message:</label>
+          <textarea type="text" name="userMessage" class="form-control" rows="4" ng-model="message" ng-minlength="10" ng-maxlength="100" required></textarea>
+          <div ng-messages="shippingForm.userMessage.$error">
+            <div ng-message="required">This field is required</div>
+            <div ng-message="minlength">Message must be over 10 characters</div>
+            <div ng-message="maxlength">Message must not exceed 100 characters</div>
+          </div> -->
+        </form>
+
        <button class="btn btn-primary" ng-click="placeOrder(cart)">
            Place My Order
        </button>
+    </div>
 
-    <script src="/angular-card/src/card.js" type="text/javascript"></script>
 </body>
 </html>
