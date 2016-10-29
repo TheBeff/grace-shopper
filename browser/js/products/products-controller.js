@@ -8,9 +8,6 @@ app.controller('ProductsCtrl', function($scope, $log, Session, ProductsService, 
 
 	$scope.filterProducts = function(input) {
 		$scope.products = ProductsService.filterProducts(input.toLowerCase());
-			// .then(function(products){
-			// 	$scope.products = products;
-			// });
 	}
 
 	$scope.isAdmin = function(){
