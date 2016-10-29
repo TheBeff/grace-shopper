@@ -21,10 +21,8 @@
           <i class="glyphicon glyphicon-search form-control-feedback"></i>
         </div>
       </div>
-      <!-- <button ng-click="filterProducts()">Click</button> -->
       <br clear="all">
 
-      <div class="row">
         <li class="list-group-item col-sm-4" ng-repeat="product in products">
             <h3><a ui-sref='detail({id:product.id})'>{{product.title}}</a></h3>
             <img class="img-responsive" ng-src="{{product.photos}}" />
@@ -43,7 +41,6 @@
             </div>
             <br clear="all">
         </li>
-      </div>
   </ul>
   
 </div>
