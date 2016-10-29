@@ -17,10 +17,11 @@
 
       <div class="row">
         <div class="form-group has-feedback">
-          <input class="form-control" name="search" placeholder="Search for weapons, armor, fruits, and more" style="padding: 10px 20px 9px 18px; text-align: center">
+          <input class="form-control" name="search" placeholder="Search for weapons, armor, fruits, and more" style="padding: 10px 20px 9px 18px; text-align: center" ng-model="filtered" ng-change="filterProducts(filtered)">
           <i class="glyphicon glyphicon-search form-control-feedback"></i>
         </div>
       </div>
+      <!-- <button ng-click="filterProducts()">Click</button> -->
       <br clear="all">
 
       <div class="row">

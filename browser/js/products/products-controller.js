@@ -6,6 +6,13 @@ app.controller('ProductsCtrl', function($scope, $log, Session, ProductsService, 
 		})
 		.catch($log.error);
 
+	$scope.filterProducts = function(input) {
+		$scope.products = ProductsService.filterProducts(input.toLowerCase());
+			// .then(function(products){
+			// 	$scope.products = products;
+			// });
+	}
+
 	$scope.isAdmin = function(){
 		if (Session.user){
 			return Session.user.isAdmin;

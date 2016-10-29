@@ -1,9 +1,21 @@
-app.factory('ProductsService', function(Session, $http){
+app.factory('ProductsService', function(Session, $http, $q){
 
 	var ProductsService = {};
 	var _products = [];
 	var oneProduct = {};
 	let cart = [];
+
+	ProductsService.filterProducts = function(input) {
+		const filteredProducts = _products.filter(function(product) {
+			product = product.title.toLowerCase();
+			return product.indexOf(input) > -1;
+		});
+
+		return filteredProducts;
+		// var dfd = $q.defer();
+		// dfd.resolve(filteredProducts);
+		// return dfd.promise;
+	}
 
 	ProductsService.findAll = function(){
 		return $http.get('/api/products')
