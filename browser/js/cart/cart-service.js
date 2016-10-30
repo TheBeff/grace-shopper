@@ -106,6 +106,9 @@ app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 		let itemUrl = '/api/orders/' + currentCart.id + '/lineItems';
 		let matchedLineItem = _checkForItemInCart(product, currentCart);
 		if (matchedLineItem) {
+		  if (matchedLineItem.quantity + quantity > product.inventory_qty){
+		  	return;
+		  }
 		  info.quantity += matchedLineItem.quantity;
 		  info.price += product.price * matchedLineItem.quantity;
 		  return $http.put(itemUrl + '/' + matchedLineItem.id, info);
@@ -120,9 +123,14 @@ app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 			.then(function(cart){
 				let matchedLineItem = _checkForItemInCart(product, cart);
 				if (matchedLineItem){
-					var idx = cart.lineItems.indexOf(matchedLineItem)
-					cart.lineItems[idx].quantity += quantity;
-					cart.lineItems[idx].price += product.price * quantity;
+					var idx = cart.lineItems.indexOf(matchedLineItem);
+					var thisItem = cart.lineItems[idx];
+					if (thisItem.quantity + quantity > thisItem.product.inventory_qty){
+						console.log('max');
+						return;
+					}
+					thisItem.quantity += quantity;
+					thisItem.price += product.price * quantity;
 				} else {
 					cart.lineItems.push({
 						product: {
