@@ -34,7 +34,7 @@
   width: 60%;
 }
 
-.ship-form div, #error div{
+.ship-form div, #error {
   display:inline-block;
   vertical-align:top;
   color: red;
