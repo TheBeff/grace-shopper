@@ -14,22 +14,46 @@ app.config(function($stateProvider){
 				return ProductsService.findOne($stateParams.id);
 			}
 		},
-		controller: function($scope, detailProduct, $stateParams, $log, CartService, ProductsService){
+		controller: function($scope, detailProduct, $log, Session, CartService, ProductsService){
+			$scope.loggedIn = function(){
+				return Session.user;
+			};
+
+			$scope.isAdmin = function(){
+				if (Session.user){
+					return Session.user.isAdmin;
+				} return false;
+			};
+
+			$scope.submitReview = function(productId, review){
+				return ProductsService.submitReview(productId, review)
+					.then(function(){
+						return ProductsService.findOne($scope.product.id);
+					})
+					.then(function(product){
+						$scope.product = product;
+					});
+			};
+			
 			$scope.product = detailProduct;
+			
 			$scope.inventoryArray = ProductsService.inventoryArray(detailProduct);
+			
 			CartService.getCart()
 				.then(function(cart){
 					$scope.cart = cart;
 				})
 				.catch($log.error);
+			
 			$scope.addToCart = function(product, quantity, cart){
-				if ($scope.cart) {
-					ProductsService.addToCart(product, quantity, cart)
-						.then()
-						.catch($log.error);
-				} else {
-					ProductsService.addToCart(product, quantity, cart);
-				}
+				CartService.createLineItem(product, quantity, cart)
+				.then(function(){
+					return CartService.getCart();
+				})
+				.then(function(cart){
+					$scope.cart = cart;
+				})
+				.catch($log.error);
 			};
 		}
 	});

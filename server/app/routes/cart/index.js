@@ -9,7 +9,6 @@ const User = require('../../../db').models.User;
 module.exports = router;
 
 router.get('/', function(req, res, next) {
-    console.log(req.user);
     if (req.user) {
         Order.getCartForUser(req.user)
             .then(function(cart){

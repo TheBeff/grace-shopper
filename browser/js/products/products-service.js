@@ -11,7 +11,11 @@ app.factory('ProductsService', function(Session, $http, $q){
 			return product.indexOf(input) > -1;
 		});
 		return filteredProducts;
-	}
+	};
+
+	// ProductsService.getReviews = function(product){
+	// 	$http.get('/api/products')
+	// };
 
 	ProductsService.findAll = function(){
 		return $http.get('/api/products')
@@ -56,6 +60,14 @@ app.factory('ProductsService', function(Session, $http, $q){
 			inventoryArray.push(i);
 		}
 		return inventoryArray;
+	};
+
+	ProductsService.submitReview = function(productId, review){
+		var reviewObj = {review: review}
+		return $http.post('/api/products/' + productId + '/reviews', reviewObj)
+			.then(function(){
+				console.log('review submitted');
+			});
 	};
 
 	return ProductsService;

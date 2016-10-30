@@ -2,8 +2,21 @@
 
 const router = require('express').Router();
 const Product = require('../../../db').models.Product;
+const Review = require('../../../db').models.Review;
+const User = require('../../../db').models.User;
 
 module.exports = router;
+
+const ensureAuthenticated = function (req, res, next) {
+    let err;
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        err = new Error('You must be logged in.');
+        err.status = 401;
+        next(err);
+    }
+};
 
 var isAdmin = function(req, res, next){
 	let err;
@@ -17,7 +30,9 @@ var isAdmin = function(req, res, next){
 };
 
 router.get('/', function(req, res, next) {
-	Product.findAll()
+	Product.findAll({
+		include: [Review]
+	})
 	.then(function(products) {
 		res.send(products);
 	})
@@ -25,7 +40,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-	Product.findById(req.params.id)
+	Product.findOne({
+		where: {id: req.params.id},
+		include: [{
+			model: Review, 
+			include: [User]
+		}]
+	})
 	.then(function(product) {
 		res.send(product);
 	})
@@ -74,4 +95,16 @@ router.put('/:id', isAdmin, function(req, res, next) {
 		res.send(product);
 	})
 	.catch(next);
+});
+
+router.post('/:id/reviews', ensureAuthenticated, function(req, res, next){
+	Review.create({
+		content: req.body.review,
+		productId: req.params.id,
+		userId: req.user.id
+	})
+		.then(function(review){
+			res.send(review);
+		})
+		.catch(next);
 });

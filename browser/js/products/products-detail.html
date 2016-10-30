@@ -1,29 +1,39 @@
 <div class='container'>
-    <h1>{{product.title}}</h1>
+    <product>
+        <h1>{{product.title}}</h1>
+        <img class="img-responsive" ng-src="{{product.photos}}" />
+        <p>{{product.description}}</p>
+        <span ng-hide="!product.price"><strong>Price:</strong> ${{product.price}}</span>
+        <p ng-hide="!product.inventory_qty || product.inventory_qty === 0"><strong>In stock:</strong> {{product.inventory_qty}}</p>
+        <p ng-show="!product.inventory_qty || product.inventory_qty === 0" class="text-danger">Sold Out</p>        
+    </product>
 
-    <img class="img-responsive" ng-src="{{product.photos}}" />
+    <buy>
+        <span>Quantity:</span>
+        <select ng-options="value for value in inventoryArray" ng-model="quantity"></select>
+        <notification ng-show="clicked"></notification>
+        <button class="btn btn-primary" ng-disabled="!quantity" ng-click="addToCart(product, quantity, cart); clicked=true">Add to Cart</button>
+        <button class="btn btn-danger" ng-show="isAdmin()" ng-click="destroy(product)">Delete</button>
+        <br clear="all">
+    </buy>
 
-    <p>{{product.description}}</p>
+    <reviewSection>
+        <form name="submitReviewForm" ng-show='loggedIn()' style="margin-bottom: 30px">
+            <h3>Leave a Review:</h3>
+            <input class='form-control' type="text" name="review" ng-model="review" placeholder="Leave a review..." required style="margin-bottom: 10px">
+            <button class="btn btn-primary" ng-disabled="submitReviewForm.$invalid" ng-click="submitReview(product.id, review)">Submit Review</button>
+        </form>
 
-    <span ng-hide="!product.price"><strong>Price:</strong> {{product.price}}</span>
-
-    <p ng-hide="!product.inventory_qty || product.inventory_qty === 0"><strong>In stock:</strong> {{product.inventory_qty}}</p>
-
-    <p ng-show="!product.inventory_qty || product.inventory_qty === 0" class="text-danger">Sold Out</p>
-
-
-    <select class="form-control" ng-options="value for value in inventoryArray" ng-model="quantity"></select>
-
-    <button class="btn btn-primary" ng-disabled="!quantity" ng-click="addToCart(product, quantity, cart)">Add to Cart</button>
-
-    <button class="btn btn-danger" ng-click="destroy(product)">Delete</button>
-    <br clear="all">
-
-    <!-- need an ng-show for authenticated users -->
-    <form>
-        <h3>Leave a Review:</h3>
-        <input type="text" name="review" value="Leave a review...">
-        <!-- add bootstrap 5 start rating plug in here -->
-    </form>
-
+        <reviews ng-show='product.reviews.length'>
+            <h4>Reviews for this Product:</h4>
+            <ul>
+                <li ng-repeat="review in product.reviews">
+                    <p>{{review.user.email}} said:</p>
+                    <p>"{{review.content}}"</p>
+                    <button class="btn btn-dangern" ng-show="isAdmin()" ng-click="deleteReview()">Delete Review</button>
+                </li>
+            </ul>
+        </reviews>
+        <h4 ng-show='!product.reviews.length'>There are currently no reviews for this product.</h4>
+    </reviewSection>
 </div>
