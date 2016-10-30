@@ -27,7 +27,8 @@
             <h3><a ui-sref='detail({id:product.id})'>{{product.title}}</a></h3>
             <img class="img-responsive" ng-src="{{product.photos}}" />
             <p>{{product.description}}</p>
-            <span ng-hide="!product.price"><strong>Price:</strong> {{product.price}}</span>
+            <p><strong>Reviews:</strong> {{product.reviews.length}}</p>
+            <p ng-hide="!product.price"><strong>Price:</strong> {{product.price}}</p>
             <p ng-hide="!product.inventory_qty || product.inventory_qty === 0"><strong>In stock:</strong> {{product.inventory_qty}}</p>
             <p ng-show="!product.inventory_qty || product.inventory_qty === 0" class="text-danger">Sold Out</p>
             <br clear="all">
