@@ -45,22 +45,22 @@ app.controller("AccountCtrl", function($scope, $log, $rootScope, AccountService)
     })
     .catch($log.error);
 
-$scope.getShipping = function(){AccountService.getShipping()
+  $scope.getShipping = function(){AccountService.getShipping()
     .then(function(response){
         $scope.shipping = response;
     })
     .catch($log.error);
-};
+  };
 
-$scope.getBilling = function(){AccountService.getBilling()
+  $scope.getBilling = function(){AccountService.getBilling()
       .then(function(response){
           $scope.billing = response;
       })
       .catch($log.error);
-};
+  };
 
-$scope.getShipping();
-$scope.getBilling();
+  $scope.getShipping();
+  $scope.getBilling();
 
 });
 

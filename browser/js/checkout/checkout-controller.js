@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller('CheckoutCtrl', function ($scope, $log, CartService, CheckoutService) {
+app.controller('CheckoutCtrl', function ($scope, $log, CartService, AccountService, CheckoutService) {
 
     $scope.card = {
         name: 'Mike Brown',
@@ -34,4 +34,6 @@ app.controller('CheckoutCtrl', function ($scope, $log, CartService, CheckoutServ
     .catch($log.error);
 
     $scope.placeOrder = CheckoutService.placeOrder;
+
+    $scope.states = CheckoutService.states;
 });
