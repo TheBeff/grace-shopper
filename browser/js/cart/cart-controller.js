@@ -20,6 +20,6 @@ app.controller('CartCtrl', function($scope, $log, CartService, ProductsService){
 
 	$scope.deleteLineItem = CartService.deleteLineItem;
 
-	//$scope.goToCheckOut = CartService.goToCheckOut;
+	$scope.goToCheckOut = CartService.goToCheckOut;
 
 });
