@@ -55,6 +55,16 @@ app.config(function($stateProvider){
 				})
 				.catch($log.error);
 			};
+
+			$scope.deleteReview = function(productId, reviewId){
+				return ProductsService.deleteReview(productId, reviewId)
+					.then(function(){
+						return ProductsService.findOne($scope.product.id);
+					})
+					.then(function(product){
+						$scope.product = product;
+					});
+			};
 		}
 	});
 });

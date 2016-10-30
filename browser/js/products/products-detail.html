@@ -30,7 +30,7 @@
                 <li ng-repeat="review in product.reviews">
                     <p>{{review.user.email}} said:</p>
                     <p>"{{review.content}}"</p>
-                    <button class="btn btn-dangern" ng-show="isAdmin()" ng-click="deleteReview()">Delete Review</button>
+                    <button class="btn btn-dangern" ng-show="isAdmin() || review.user.id === loggedIn().id" ng-click="deleteReview(product.id, review.id)">Delete Review</button>
                 </li>
             </ul>
         </reviews>

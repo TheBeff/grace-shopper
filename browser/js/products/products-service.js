@@ -70,5 +70,12 @@ app.factory('ProductsService', function(Session, $http, $q){
 			});
 	};
 
+	ProductsService.deleteReview = function(productId, reviewId){
+		return $http.delete('/api/products/' + productId + '/reviews/' + reviewId)
+			.then(function(){
+				console.log('review deleted');
+			});
+	};
+
 	return ProductsService;
 });
