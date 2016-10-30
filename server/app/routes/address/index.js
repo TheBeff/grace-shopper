@@ -30,3 +30,39 @@ router.get('/billing', function(req, res, next){
     })
     .catch(next);
 });
+
+router.post('/shipping', function(req, res, next){
+	Address.create({
+		name: req.body.name,
+		address1: req.body.address1,
+		address2: req.body.address2,
+		city: req.body.city,
+		state: req.body.state,
+		zip: req.body.zip,
+		type: "shipping",
+		userId: req.user.id
+	})
+	  .then(function(){
+	  	console.log("address created");
+	  	res.sendStatus(200);
+	  })
+	  .catch(next);
+});
+
+router.post('/billing', function(req, res, next){
+	Address.create({
+		name: req.body.name,
+		address1: req.body.address1,
+		address2: req.body.address2,
+		city: req.body.city,
+		state: req.body.state,
+		zip: req.body.zip,
+		type: "billing",
+		userId: req.user.id
+	})
+	  .then(function(){
+	  	console.log("address created");
+	  	res.sendStatus(200);
+	  })
+	  .catch(next);
+});
