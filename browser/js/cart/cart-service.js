@@ -178,10 +178,15 @@ app.factory('CartService', function(Session, $http, $window, $q, $state){
 			});
 	};
 
-	// CartService.goToCheckOut = function(cart){
-	// 	return $http.put('/api/orders/' + cart.id)
-	// 	.then($state.go('checkout'));
- //  	};
+	CartService.goToCheckOut = function(cart){
+		if (Session.user) {
+			return $http.get('/api/orders/' + cart.id)
+				.then($state.go('checkout'));
+		}
+		else {
+			$state.go('login');
+		}
+  	};
 
 	return CartService;
 });

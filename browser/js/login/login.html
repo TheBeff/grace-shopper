@@ -4,7 +4,7 @@
         {{ error }}
     </alert>
 
-    <h3 style='margin-bottom: 30px'>Log In</h3>
+    <h3 style='margin-bottom: 20px'>Log In</h3>
     <div class="form-group">
         <label for="email">Email address</label>
         <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
@@ -14,7 +14,11 @@
         <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
     </div>
     <button type="submit" class="btn btn-primary">Log In</button>
-
+    <hr>
+    <h3 style='margin-bottom: 20px'>New to the marketplace?</h3>
+    <a ui-sref="signup">
+        <button class="btn btn-default">Create Your Account</button>
+    </a>
 </form>
 
 <ui-view></ui-view>
