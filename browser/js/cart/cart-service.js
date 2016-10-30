@@ -1,16 +1,17 @@
 "use strict";
 
-app.factory('CartService', function(Session, $http, $window, $q, $state){
+app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 
 	var CartService = {};
 	var _cart = {};
 
 	var _getCartRemotely = function(){
 		return $http.get('/api/cart')
-			.then(function(cart){
-				angular.copy(cart.data, _cart);
+			.then(function(response){
+				angular.copy(response.data, _cart);
 				return _cart;
-			});
+			})
+			.catch($log.error);
 	};
 
 	var _getCartLocally = function(){
@@ -64,13 +65,15 @@ app.factory('CartService', function(Session, $http, $window, $q, $state){
 			return this.deleteLineItem(cart, lineitem);
 		}
 		else if (Session.user) {
-			return $http.put('/api/orders/' + cart.id + '/lineItems/' + lineitem.id, {quantity})
+			return $http.put('/api/orders/' + cart.id + '/lineItems/' + lineitem.id, {quantity, price: quantity*lineitem.product.price})
 				.then(function(){
 					console.log('quantity updated');
+					CartService.getCart();
 				});
 		} else {
 			var idx = _cart.lineItems.indexOf(lineitem);
 			_cart.lineItems[idx].quantity = quantity;
+			_cart.lineItems[idx].price = lineitem.product.price * quantity;
 			$window.sessionStorage.setItem('cart', JSON.stringify(_cart));
 		}
 	};
@@ -94,7 +97,7 @@ app.factory('CartService', function(Session, $http, $window, $q, $state){
 
 	var _createLineItemRemotely = function(product, quantity, currentCart){
 		let info = {
-			price: product.price,
+			price: product.price*quantity,
 			quantity,
 			orderId: currentCart.id,
 			productId: product.id
@@ -104,6 +107,7 @@ app.factory('CartService', function(Session, $http, $window, $q, $state){
 		let matchedLineItem = _checkForItemInCart(product, currentCart);
 		if (matchedLineItem) {
 		  info.quantity += matchedLineItem.quantity;
+		  info.price += product.price * matchedLineItem.quantity;
 		  return $http.put(itemUrl + '/' + matchedLineItem.id, info);
 		} else {
 		    return $http.post(itemUrl, info);
@@ -118,10 +122,15 @@ app.factory('CartService', function(Session, $http, $window, $q, $state){
 				if (matchedLineItem){
 					var idx = cart.lineItems.indexOf(matchedLineItem)
 					cart.lineItems[idx].quantity += quantity;
+					cart.lineItems[idx].price += product.price * quantity;
 				} else {
 					cart.lineItems.push({
-						product: {title: product.title, inventory_qty: product.inventory_qty},
-						price: product.price,
+						product: {
+							title: product.title, 
+							inventory_qty: product.inventory_qty, 
+							price: product.price
+						},
+						price: product.price * quantity,
 						quantity: quantity,
 						productId: product.id
 					});

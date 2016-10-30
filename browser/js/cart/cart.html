@@ -14,7 +14,7 @@
           <th>Price</th>
         </thead>
         <tbody>
-          <tr ng-repeat="item in lineItems">
+          <tr ng-repeat="item in cart.lineItems">
             <td>{{item.product.title}}</td>
             <td>
               <select ng-options="value for value in inventoryArray(item.product) " ng-model="item.quantity"><option value=''>0</option></select>
