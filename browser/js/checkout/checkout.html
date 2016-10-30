@@ -6,9 +6,9 @@
 </head>
 <body>
     <div class="container">
-      <h1>Checkout</h1>
-      <p>You are about to purchase:</p>
-        <div class='container'>
+      <h1 style="margin-bottom: 30px">Checkout</h1>
+      <h4 style="margin-bottom: 20px">You are about to purchase</h4>
+        <div>
             <table class="table">
               <thead>
                 <th>Item</th>
@@ -24,68 +24,102 @@
               </tbody>
             </table>
         </div>
+        <hr>
 
-        <form action="#"
-          name="cardForm"
-          data-card
-          data-width="500"
-          data-card-container="#card-container"
-          data-placeholders="cardPlaceholders"
-          data-options="cardOptions"
-          data-messages="cardMessages">
+        <h4 style="margin-bottom: 20px">Card Information</h4>
+        <div class="container">
+          <form name="cardForm" class="form-horizontal">
+              <div class="form-group">
+                <label>Name on Card</label>
+                  <input type="text" class="form-control" name="cardHolderName" ng-model="cardName" placeholder="Card Holder's Name" required />
+                  <div ng-messages="cardForm.cardHolderName.$error" id="error">
+                    <div ng-message="required">This field is required</div>
+                  </div>
+              </div>
+              <div class="form-group">
+                <label>Card Number</label>
+                  <input type="text" class="form-control" name="cardNumber" ng-model="cardNumber" placeholder="Debit/Credit Card Number" required />
+                  <div ng-messages="cardForm.cardNumber.$error" id="error">
+                    <div ng-message="required">This field is required</div>
+                  </div>
+              </div>
+              <div class="form-group">
+                <label>Expiration Date</label>
+                <div>
+                  <div class="row">
+                    <div class="col-xs-3">
+                      <select class="form-control col-sm-2" name="expiryMonth" ng-model="expiryMonth" required />
+                        <option value="01">Jan (01)</option>
+                        <option value="02">Feb (02)</option>
+                        <option value="03">Mar (03)</option>
+                        <option value="04">Apr (04)</option>
+                        <option value="05">May (05)</option>
+                        <option value="06">Jun (06)</option>
+                        <option value="07">Jul (07)</option>
+                        <option value="08">Aug (08)</option>
+                        <option value="09">Sep (09)</option>
+                        <option value="10">Oct (10)</option>
+                        <option value="11">Nov (11)</option>
+                        <option value="12">Dec (12)</option>
+                      </select>
+                    </div>
+                    <div class="col-xs-3">
+                      <select class="form-control" name="expiryYear" ng-model="expiryYear" required />
+                        <option value="16">2016</option>
+                        <option value="17">2017</option>
+                        <option value="18">2018</option>
+                        <option value="19">2019</option>
+                        <option value="20">2020</option>
+                        <option value="21">2021</option>
+                        <option value="22">2022</option>
+                        <option value="23">2023</option>
+                        <option value="24">2024</option>
+                        <option value="25">2025</option>
+                        <option value="26">2026</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Card CVV</label>
+                  <input type="text" class="form-control" name="cvv" ng-model="cvv" placeholder="Security Code" required />
+                  <div ng-messages="cardForm.cvv.$error" id="error">
+                    <div ng-message="required">This field is required</div>
+                  </div>
+              </div>
+          </form>
+        </div>
+        <hr>
 
-          <div>
-            <input placeholder="Card number" type="text" name="CardNumber" card-number data-ng-model="card.number" />
-
-            <input placeholder="Full name" type="text" name="CardName" card-name data-ng-model="card.name" />
-          </div>
-          <div>
-            <input placeholder="MM / YYYY" type="text" name="CardExpiry" card-expiry data-ng-model="card.expiry" />
-
-            <input placeholder="CVC" type="text" name="CardCvc" card-cvc data-ng-model="card.cvc" />
-
-            <input type="button" value="Change card" data-ng-click="changeCard()" />
-            <input type="button" value="Clear" data-ng-click="clear()" />
-          </div>
-
-        </form>
-
-        <h3>Now, where to send it?</h3>
+        <h4 style="margin-bottom: 20px">Now, where to send it?</h4>
         <form name="shippingForm" class="ship-form">
-          <label>First Name:</label>
-          <input type="text" name="userFirstName" ng-model="firstName" required />
+          <label>First Name</label>
+          <input type="text" name="userFirstName" ng-model="firstName" placeholder="Your First Name" required />
           <div ng-messages="shippingForm.userFirstName.$error">
             <div ng-message="required">This field is required</div>
           </div>
 
-          <label>Last Name:</label>
-          <input type="text" name="userLastName" ng-model="lastName" required />
+          <label>Last Name</label>
+          <input type="text" name="userLastName" ng-model="lastName" placeholder="Your Last Name" required />
           <div ng-messages="shippingForm.userLastName.$error">
             <div ng-message="required">This field is required</div>
           </div>
 
-          <label>Email Address:</label>
-          <input type="email" name="userEmail" ng-model="email" required />
+          <label>Email Address</label>
+          <input type="email" name="userEmail" ng-model="email" placeholder="Your Email Address" required />
           <div ng-messages="shippingForm.userEmail.$error">
             <div ng-message="required">This field is required</div>
             <div ng-message="email">Your email address is invalid</div>
           </div>
 
-          <label>Phone Number:</label>
-          <input type="email" name="userPhoneNumber" ng-model="phoneNumber" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required/>
+          <label>Phone Number</label>
+          <input type="email" name="userPhoneNumber" ng-model="phoneNumber" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" placeholder="Your Phone Number" required/>
           <div ng-messages="shippingForm.userPhoneNumber.$error">
             <div ng-message="required">This field is required</div>
             <div ng-message="pattern">Must be a valid 10 digit phone number</div>
           </div>
           <br>
-          {{ shippingForm.$valid }}
-          <!-- <label>User Message:</label>
-          <textarea type="text" name="userMessage" class="form-control" rows="4" ng-model="message" ng-minlength="10" ng-maxlength="100" required></textarea>
-          <div ng-messages="shippingForm.userMessage.$error">
-            <div ng-message="required">This field is required</div>
-            <div ng-message="minlength">Message must be over 10 characters</div>
-            <div ng-message="maxlength">Message must not exceed 100 characters</div>
-          </div> -->
         </form>
 
        <button class="btn btn-primary" ng-click="placeOrder(cart)">
