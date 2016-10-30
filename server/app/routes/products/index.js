@@ -33,10 +33,10 @@ router.get('/', function(req, res, next) {
 	Product.findAll({
 		include: [Review]
 	})
-	.then(function(products) {
-		res.send(products);
-	})
-	.catch(next);
+		.then(function(products) {
+			res.send(products);
+		})
+		.catch(next);
 });
 
 router.get('/:id', function(req, res, next) {
@@ -47,10 +47,10 @@ router.get('/:id', function(req, res, next) {
 			include: [User]
 		}]
 	})
-	.then(function(product) {
-		res.send(product);
-	})
-	.catch(next);
+		.then(function(product) {
+			res.send(product);
+		})
+		.catch(next);
 });
 
 router.post('/', isAdmin, function(req, res, next) {
@@ -62,20 +62,20 @@ router.post('/', isAdmin, function(req, res, next) {
 		photos: req.body.photos,
 		category: req.body.category
 	})
-	.then(function(product) {
-		res.send(product);
-	})
-	.catch(next);
+		.then(function(product) {
+			res.send(product);
+		})
+		.catch(next);
 });
 
 router.delete('/:id', isAdmin, function(req, res, next) {
 	Product.destroy({ where: {
 		id: req.params.id
 	}})
-	.then(function() {
-		res.sendStatus(200);
-	})
-	.catch(next);
+		.then(function() {
+			res.sendStatus(200);
+		})
+		.catch(next);
 });
 
 router.put('/:id', isAdmin, function(req, res, next) {
@@ -91,10 +91,10 @@ router.put('/:id', isAdmin, function(req, res, next) {
 			id: req.params.id
 		}
 	})
-	.then(function(product) {
-		res.send(product);
-	})
-	.catch(next);
+		.then(function(product) {
+			res.send(product);
+		})
+		.catch(next);
 });
 
 router.post('/:id/reviews', ensureAuthenticated, function(req, res, next){
@@ -105,6 +105,16 @@ router.post('/:id/reviews', ensureAuthenticated, function(req, res, next){
 	})
 		.then(function(review){
 			res.send(review);
+		})
+		.catch(next);
+});
+
+router.delete('/:id/reviews/:reviewId', ensureAuthenticated, function(req, res, next){
+	Review.destroy({
+		where: {id: req.params.reviewId}
+	})
+		.then(function(){
+			res.sendStatus(204);
 		})
 		.catch(next);
 });
