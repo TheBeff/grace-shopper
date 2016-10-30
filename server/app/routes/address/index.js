@@ -66,3 +66,29 @@ router.post('/billing', function(req, res, next){
 	  })
 	  .catch(next);
 });
+
+router.delete('/shipping', function(req, res, next){
+	Address.destroy({
+		where: {
+			userId: req.user.id,
+			type: "shipping"
+		}
+	})
+	  .then(function(){
+		res.sendStatus(204);
+	  })
+	  .catch(next);
+});
+
+router.delete('/billing', function(req, res, next){
+	Address.destroy({
+		where: {
+			userId: req.user.id,
+			type: "billing"
+		}
+	})
+	  .then(function(){
+		res.sendStatus(204);
+	  })
+	  .catch(next);
+});

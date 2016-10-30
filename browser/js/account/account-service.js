@@ -10,7 +10,7 @@ app.factory('AccountService', function($http){
 	        address2: {type: "string", title: "Address Line 2"},
 	        city: {type: "string", title: "City"},
 	        state: {type: "string", title: "State", enum: ['Alabama','Alaska','American Samoa','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Federated States of Micronesia','Florida','Georgia','Guam','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Marshall Islands','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Northern Mariana Islands','Ohio','Oklahoma','Oregon','Palau','Pennsylvania','Puerto Rico','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virgin Island','Virginia','Washington','West Virginia','Wisconsin','Wyoming']},
-	        zip: {type: "integer", minLength: 5, title: "Zip Code"}
+	        zip: {type: "number", minLength: 5, title: "Zip Code"}
 	    },
 	    required: ["name", "address1", "city", "state", "zip"]
     };
@@ -56,11 +56,19 @@ app.factory('AccountService', function($http){
 
 	AccountService.saveShipping = function(address){
 		return $http.post('/api/address/shipping', address)
-	}
+	};
 
 	AccountService.saveBilling = function(address){
 		return $http.post('/api/address/billing', address)
-	}
+	};
+
+	AccountService.clearShipping = function(){
+		return $http.delete('/api/address/shipping')
+	};
+
+	AccountService.clearBilling = function(){
+		return $http.delete('/api/address/billing')
+	};
 
 	return AccountService;
 });
