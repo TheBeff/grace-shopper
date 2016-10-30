@@ -5,7 +5,6 @@ app.controller('CartCtrl', function($scope, $log, CartService, ProductsService){
 	CartService.getCart()
 		.then(function(cart){
 			$scope.cart = cart;
-			$scope.lineItems = cart.lineItems;
 		})
 		.catch($log.error);
 

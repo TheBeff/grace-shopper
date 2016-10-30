@@ -39,7 +39,8 @@ router.delete('/:id', function(req, res, next){
 
 router.put('/:id', function(req, res, next){
 	LineItem.update({
-		quantity: req.body.quantity
+		quantity: req.body.quantity,
+		price: req.body.price
 	}, {
 		where: {id: req.params.id}
 	})
