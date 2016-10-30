@@ -30,7 +30,8 @@
 		  <p>{{shipping.name}}</p>
 		  <p>{{shipping.address1}}</p>
 		  <p>{{shipping.address2}}</p>
-		  <span>{{shipping.city}}, {{shipping.state}} {{shipping.zip}}</span>
+		  <p>{{shipping.city}}, {{shipping.state}} {{shipping.zip}}</p>
+		  <button class="btn btn-danger" ng-click="clearShipping()">Clear & Update</button>
 	  </div>
 	  <form 
 	    ng-show="!shipping"
@@ -47,7 +48,8 @@
 		  <p>{{billing.name}}</p>
 		  <p>{{billing.address1}}</p>
 		  <p>{{billing.address2}}</p>
-		  <span>{{billing.city}}, {{billing.state}} {{billing.zip}}</span>
+		  <p>{{billing.city}}, {{billing.state}} {{billing.zip}}</p>
+		  <button class="btn btn-danger" ng-click="clearBilling()">Clear & Update</button>
 	  </div>
 	  <form 
 	    name="billingForm" 

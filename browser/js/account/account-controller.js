@@ -1,4 +1,4 @@
-app.controller("AccountCtrl", function($scope, $log, AccountService){
+app.controller("AccountCtrl", function($scope, $log, $rootScope, AccountService){
 
   $scope.shippingSchema = AccountService.shippingSchema;
   $scope.billingSchema = AccountService.billingSchema;
@@ -14,21 +14,23 @@ app.controller("AccountCtrl", function($scope, $log, AccountService){
         if (form.$valid) {
             if (form.$name === "shippingForm"){
               AccountService.saveShipping($scope.shippingModel);
-              AccountService.getShipping()
-                .then(function(response){
-                    $scope.shipping = response;
-                })
-                .catch($log.error);
+              $scope.getShipping();
             }
             if (form.$name === "billingForm"){
               AccountService.saveBilling($scope.billingModel);
-              AccountService.getBilling()
-                .then(function(response){
-                    $scope.billing = response;
-                })
-                .catch($log.error);
+              $scope.getBilling();
             }
         }
+  };
+
+  $scope.clearShipping = function(){
+    AccountService.clearShipping();
+    $scope.getShipping();
+  };
+
+  $scope.clearBilling = function(){
+    AccountService.clearBilling();
+    $scope.getBilling();
   };
 
   AccountService.getUser()
@@ -43,17 +45,22 @@ app.controller("AccountCtrl", function($scope, $log, AccountService){
     })
     .catch($log.error);
 
-  AccountService.getShipping()
+$scope.getShipping = function(){AccountService.getShipping()
     .then(function(response){
         $scope.shipping = response;
     })
     .catch($log.error);
+};
 
-  AccountService.getBilling()
+$scope.getBilling = function(){AccountService.getBilling()
       .then(function(response){
           $scope.billing = response;
       })
       .catch($log.error);
-});
+};
 
+$scope.getShipping();
+$scope.getBilling();
+
+});
 

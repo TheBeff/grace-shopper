@@ -21,7 +21,7 @@
         logoutSuccess: 'auth-logout-success',
         sessionTimeout: 'auth-session-timeout',
         notAuthenticated: 'auth-not-authenticated',
-        notAuthorized: 'auth-not-authorized'
+        notAuthorized: 'auth-not-authorized'    
     });
 
     app.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
