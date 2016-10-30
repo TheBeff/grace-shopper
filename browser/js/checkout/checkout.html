@@ -93,35 +93,42 @@
         <hr>
 
         <h4 style="margin-bottom: 20px">Now, where to send it?</h4>
-        <form name="shippingForm" class="ship-form">
-          <label>First Name</label>
-          <input type="text" name="userFirstName" ng-model="firstName" placeholder="Your First Name" required />
-          <div ng-messages="shippingForm.userFirstName.$error">
+        <form name="shippingForm" ng-controller="AccountCtrl" class="ship-form">
+          <label>Recipient Name</label>
+          <input type="text" name="name" ng-model="name" ng-value="shipping.name" placeholder="The Recipient's Full Name" required />
+          <div ng-messages="shipping.name || shippingForm.name.$error">
             <div ng-message="required">This field is required</div>
           </div>
 
-          <label>Last Name</label>
-          <input type="text" name="userLastName" ng-model="lastName" placeholder="Your Last Name" required />
-          <div ng-messages="shippingForm.userLastName.$error">
+          <label>Street Address</label>
+          <input type="text" name="address1" ng-model="address1" ng-value="shipping.address1" placeholder="Address Line 1" required />
+          <div ng-messages="shipping.address1 || shippingForm.address1.$error">
             <div ng-message="required">This field is required</div>
           </div>
 
-          <label>Email Address</label>
-          <input type="email" name="userEmail" ng-model="email" placeholder="Your Email Address" required />
-          <div ng-messages="shippingForm.userEmail.$error">
+          <label>Address Line 2</label>
+          <input type="text" name="address2" ng-model="address2" ng-value="shipping.address2" placeholder="Address Line 2"/>
+
+          <label>City</label>
+          <input type="text" name="city" ng-model="city" ng-value="shipping.city" placeholder="City" required />
+          <div ng-messages="shipping.city || shippingForm.city.$error">
             <div ng-message="required">This field is required</div>
-            <div ng-message="email">Your email address is invalid</div>
           </div>
 
-          <label>Phone Number</label>
-          <input type="email" name="userPhoneNumber" ng-model="phoneNumber" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" placeholder="Your Phone Number" required/>
-          <div ng-messages="shippingForm.userPhoneNumber.$error">
+          <label>State</label>
+          <select class="form-control" style="width: 60%; display: inline"" name="state" ng-model="shipping.state" ng-options="state as state for state in states" required />
+          </select>
+          <div style="margin-left: 5px" ng-messages="shipping.state || shippingForm.state.$error">
             <div ng-message="required">This field is required</div>
-            <div ng-message="pattern">Must be a valid 10 digit phone number</div>
           </div>
-          <br>
+
+          <label style="margin-top: 10px">Zip Code</label>
+          <input type="number" name="zip" ng-model="zip" ng-value="shipping.zip" placeholder="Zip Code" required />
+          <div ng-messages="shipping.zip || shippingForm.zip.$error">
+            <div ng-message="required">This field is required</div>
+          </div>
         </form>
-
+       <br>
        <button class="btn btn-primary" ng-click="placeOrder(cart)">
            Place My Order
        </button>
