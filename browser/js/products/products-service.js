@@ -12,6 +12,7 @@ app.factory('ProductsService', function(Session, $http){
 			}
 			else {
 				product = product[mode];
+				if (filter === '') return true;
 				return product.indexOf(filter) > -1;
 			}
 		});
