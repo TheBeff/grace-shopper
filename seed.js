@@ -117,7 +117,7 @@ const seedUsers = function() {
     const createAddress = Promise.map(addresses, addressesObj => Address.create(addressesObj));
 
     return Promise.all([creatingUsers, createProducts, createOrders, createLineItem, createAddress])
-        .then(([user, product, order, lineItem, address]) => {
+        .then(function([user, product, order, lineItem, address]){
             lineItem[0].setProduct(product[0]);
             lineItem[1].setProduct(product[1]);
             lineItem[2].setProduct(product[1]);
