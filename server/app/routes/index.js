@@ -21,6 +21,7 @@ router.use('/orders', ensureAuthenticated, require('./orders'));
 router.use('/cart', ensureAuthenticated, require('./cart'));
 router.use('/signup', require('./signup'));
 router.use('/address', require('./address'));
+router.use('/users', require('./users'));
 
 // Make sure this is after all of
 // the registered routes!

@@ -1,0 +1,15 @@
+<div class="container">
+	<h3>Users</h3>
+	<ul class="list-group" ng-repeat="user in users">
+		<h5><strong>ID:</strong> {{user.id}}</h5>
+		<li class="list-group-item">
+			Email: {{user.email}}
+		</li>
+		<li class="list-group-item" style="margin-bottom: 10px">
+			Admin: {{user.isAdmin}}
+		</li>
+		<button class="btn btn-primary" ng-disabled="user.id === thisUser.id" ng-click="makeAdmin(user)">Make Admin</button>
+		<button class="btn btn-warning" ng-disabled="user.id === thisUser.id" ng-click="passwordReset(user)">Trigger Password Reset</button>
+		<button class="btn btn-danger" ng-disabled="user.id === thisUser.id" ng-click='delete(user)'>Delete</button>
+	</ul>
+</div>
