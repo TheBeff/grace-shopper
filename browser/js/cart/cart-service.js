@@ -135,7 +135,7 @@ app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 	    }
 	};
 
-	var _createLineItemLocally = function(product, quantity, currentCart){
+	var _createLineItemLocally = function(product, quantity){
 		console.log('in create line local');
 		return _getCartLocally()
 			.then(function(cart){
@@ -168,7 +168,7 @@ app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 
 	CartService.createLineItem = function(product, quantity, currentCart){
 		if (Session.user) {
-			return _createLineItemRemotely(product, quantity, currentCart);
+			return _createLineItemRemotely(product, quantity);
 		} else {
 			return _createLineItemLocally(product, quantity, currentCart);
 		}

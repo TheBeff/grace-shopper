@@ -43,7 +43,7 @@ router.get('/:id', function(req, res, next) {
 	Product.findOne({
 		where: {id: req.params.id},
 		include: [{
-			model: Review, 
+			model: Review,
 			include: [User]
 		}]
 	})
@@ -60,7 +60,7 @@ router.post('/', isAdmin, function(req, res, next) {
 		price: req.body.price,
 		inventory_qty: req.body.inventory_qty,
 		photos: req.body.photos,
-		category: req.body.category
+		categories: req.body.categories
 	})
 		.then(function(product) {
 			res.send(product);
@@ -85,7 +85,7 @@ router.put('/:id', isAdmin, function(req, res, next) {
 		price: req.body.price,
 		inventory_qty: req.body.inventory_qty,
 		photos: req.body.photos,
-		category: req.body.category
+		categories: req.body.categories
 	}, {
 		where: {
 			id: req.params.id

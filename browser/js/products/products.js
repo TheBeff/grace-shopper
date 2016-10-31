@@ -50,8 +50,8 @@ app.config(function($stateProvider){
 				.then(function(){
 					return CartService.getCart();
 				})
-				.then(function(cart){
-					$scope.cart = cart;
+				.then(function(updatedCart){
+					$scope.cart = updatedCart;
 				})
 				.catch($log.error);
 			};
@@ -67,6 +67,7 @@ app.config(function($stateProvider){
 			};
 
 			$scope.update = function(id, updatedProduct){
+				updatedProduct.categories = updatedProduct.categories.split(',');
 				return ProductsService.update(id, updatedProduct)
 					.then(function(){
 						return ProductsService.findOne($scope.product.id);

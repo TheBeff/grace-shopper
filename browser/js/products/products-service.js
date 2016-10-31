@@ -5,9 +5,15 @@ app.factory('ProductsService', function(Session, $http){
 	var oneProduct = {};
 
 	ProductsService.filterProducts = function(filter, mode) {
-		const filteredProducts = _products.filter(function(product) {
-			product = product[mode].toLowerCase();
-			return product.indexOf(filter) > -1;
+		var filteredProducts = _products.filter(function(product) {
+			if (mode === 'title'){
+				product = product[mode].toLowerCase();
+				return product.indexOf(filter) > -1;
+			}
+			else {
+				product = product[mode];
+				return product.indexOf(filter) > -1;
+			}
 		});
 		return filteredProducts;
 	};
@@ -22,7 +28,7 @@ app.factory('ProductsService', function(Session, $http){
 
 	ProductsService.getCategories = function() {
 		console.log(_products);
-	}
+	};
 
 	ProductsService.findOne = function(id){
 		return $http.get('/api/products/' + id)

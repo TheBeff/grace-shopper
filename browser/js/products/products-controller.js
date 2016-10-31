@@ -4,17 +4,22 @@ app.controller('ProductsCtrl', function($scope, $log, Session, ProductsService, 
 		.then(function(products){
 			$scope.products = products;
 			$scope.categories = $scope.products.reduce(function(curr, next) {
-				if (curr.indexOf(next.category) === -1) {
-					curr.push(next.category);
-					return curr;
+				for (var i = 0; i < next.categories.length; i++) {
+					if (curr.indexOf(next.categories[i]) === -1) {
+						curr.push(next.categories[i]);
+					}
 				}
 				return curr;
-			}, []) //gets unique categories
+			}, []); //gets unique categories
 		})
 		.catch($log.error);
 
 	$scope.filterProducts = function(filter, mode) {
-		$scope.products = ProductsService.filterProducts(filter.toLowerCase(), mode);
+		if (mode === 'title') {
+			$scope.products = ProductsService.filterProducts(filter.toLowerCase(), mode);
+		} else {
+			$scope.products = ProductsService.filterProducts(filter, mode);
+		}
 	};
 
 	$scope.isAdmin = function(){
@@ -24,23 +29,18 @@ app.controller('ProductsCtrl', function($scope, $log, Session, ProductsService, 
 	};
 
 	$scope.create = function(){
-		ProductsService.create({
-			title: $scope.title,
-			description: $scope.description,
-			category: $scope.category,
-			price: $scope.price,
-			inventory_qty: $scope.inventory,
-			photos: $scope.photo
-		})
-		.then(function(){
-			$scope.title = '';
-			$scope.description = '';
-			$scope.category = '';
-			$scope.price = '';
-			$scope.inventory = '';
-			$scope.photo = '';
-		})
-		.catch($log.error);
+		var newProduct = $scope.newProduct;
+		newProduct.categories = newProduct.categories.split(',');
+		ProductsService.create(newProduct)
+			.then(function(){
+				$scope.newProduct.title = '';
+				$scope.newProduct.description = '';
+				$scope.newProduct.categories = '';
+				$scope.newProduct.price = '';
+				$scope.newProduct.inventory = '';
+				$scope.newProduct.photo = '';
+			})
+			.catch($log.error);
 	};
 
 	$scope.destroy = function(product){
@@ -64,8 +64,8 @@ app.controller('ProductsCtrl', function($scope, $log, Session, ProductsService, 
 		.then(function(){
 			return CartService.getCart();
 		})
-		.then(function(cart){
-			$scope.cart = cart;
+		.then(function(updatedcart){
+			$scope.cart = updatedcart;
 		})
 		.catch($log.error);
 	};

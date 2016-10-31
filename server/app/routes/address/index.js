@@ -1,5 +1,5 @@
 'use strict';
-const router = require('express').Router(); // eslint-disable-line new-cap
+const router = require('express').Router();
 const Address = require('../../../db').models.Address;
 
 module.exports = router;

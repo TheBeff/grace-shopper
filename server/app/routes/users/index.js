@@ -6,18 +6,8 @@ const User = require('../../../db').models.User;
 
 module.exports = router;
 
-var isAdmin = function(req, res, next){
-	let err;
-	if (req.user.isAdmin){
-		next();
-	} else {
-        err = new Error('You must be an Admin.');
-        err.status = 401;
-        next(err);
-    }
-};
 
-router.get('/', isAdmin, function(req, res, next){
+router.get('/', function(req, res, next){
 	User.findAll()
 		.then(function(users){
 			res.send(users);
@@ -25,7 +15,7 @@ router.get('/', isAdmin, function(req, res, next){
 		.catch(next);
 });
 
-router.put('/:id', isAdmin, function(req, res, next){
+router.put('/:id', function(req, res, next){
 	User.update({
 		isAdmin: req.body.isAdmin
 	}, {
@@ -39,7 +29,7 @@ router.put('/:id', isAdmin, function(req, res, next){
 	.catch(next);
 });
 
-router.delete('/:id', isAdmin, function(req, res, next){
+router.delete('/:id', function(req, res, next){
 	User.destroy({
 		where: {
 			id: req.params.id

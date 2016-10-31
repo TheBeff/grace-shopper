@@ -1,14 +1,17 @@
 <div class='container'>
+
+    <!-- product -->
     <product>
         <h1>{{product.title}}</h1>
         <img class="img-responsive" ng-src="{{product.photos}}" />
         <p>{{product.description}}</p>
-        <p><strong>Category: </strong>{{product.category}}</p>
+        <p><strong>Categories: </strong>{{product.categories}}</p>
         <span ng-hide="!product.price"><strong>Price:</strong> ${{product.price}}</span>
         <p ng-hide="!product.inventory_qty || product.inventory_qty === 0"><strong>In stock:</strong> {{product.inventory_qty}}</p>
         <p ng-show="!product.inventory_qty || product.inventory_qty === 0" class="text-danger">Sold Out</p>        
     </product>
 
+    <!-- purchase -->
     <buy>
         <span>Quantity:</span>
         <select ng-options="value for value in inventoryArray" ng-model="quantity"></select>
@@ -16,10 +19,10 @@
         <button class="btn btn-primary" ng-disabled="!quantity" ng-click="addToCart(product, quantity, cart); clicked=true">Add to Cart</button>
         <button class="btn btn-danger" ng-show="isAdmin()" ng-click="destroy(product)">Delete</button>
         <br clear="all">
+        <hr />
     </buy>
 
-    <hr />
-
+    <!-- reviews -->
     <reviewSection>
         <form name="submitReviewForm" ng-show='loggedIn() && !reviewed()' style="margin-bottom: 30px">
             <h3>Leave a Review:</h3>
@@ -49,7 +52,8 @@
         <h4 ng-show='!product.reviews.length'>There are currently no reviews for this product.</h4>
     </reviewSection>
 
-    <div class="well" ng-show='isAdmin()'>
+    <!-- product update -->
+    <div class="well" ng-show="isAdmin()">
         <h4>Update Product</h4>
         <form name="update-product">
             <div class="form-group">
@@ -57,8 +61,8 @@
                 <input class="form-control" ng-model="updatedProduct.title" type="text" ng-value="product.title" required/>
                 <span><strong>Description: </strong></span>
                 <input class="form-control" ng-model="updatedProduct.description" ng-value="product.description" />
-                <span><strong>Category: </strong></span>
-                <input class="form-control" ng-model="updatedProduct.category" ng-value="product.category" required/>
+                <span><strong>Categories: </strong></span>
+                <input class="form-control" ng-model="updatedProduct.categories" ng-value="product.categories" required/>
                 <span><strong>Price: </strong></span>
                 <input class="form-control" ng-model="updatedProduct.price" ng-value="product.price" />
                 <span><strong>Inventory: </strong></span>
@@ -69,4 +73,5 @@
             <button class="btn btn-primary" ng-click="update(product.id, updatedProduct)" ng-disabled="update-product.$invalid">Update Product</button>
         </form>
     </div>
+
 </div>
