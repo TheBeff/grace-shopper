@@ -41,6 +41,13 @@ app.factory('ProductsService', function(Session, $http, $q){
 			});
 	};
 
+	ProductsService.update = function(id, updatedProduct){
+		return $http.put('/api/products/' + id, updatedProduct)
+			.then(function(response){
+				return ProductsService.findAll();
+			});
+	};
+
 	ProductsService.destroy = function(product){
 		return $http.delete('/api/products/' + product.id)
 			.then(function(){

@@ -3,6 +3,7 @@
         <h1>{{product.title}}</h1>
         <img class="img-responsive" ng-src="{{product.photos}}" />
         <p>{{product.description}}</p>
+        <p><strong>Category: </strong>{{product.category}}</p>
         <span ng-hide="!product.price"><strong>Price:</strong> ${{product.price}}</span>
         <p ng-hide="!product.inventory_qty || product.inventory_qty === 0"><strong>In stock:</strong> {{product.inventory_qty}}</p>
         <p ng-show="!product.inventory_qty || product.inventory_qty === 0" class="text-danger">Sold Out</p>        
@@ -36,4 +37,25 @@
         </reviews>
         <h4 ng-show='!product.reviews.length'>There are currently no reviews for this product.</h4>
     </reviewSection>
+
+    <div class="well" ng-show='isAdmin()'>
+        <h4>Update Product</h4>
+        <form name="update-product">
+            <div class="form-group">
+                <span><strong>Title: </strong></span>
+                <input class="form-control" ng-model="updatedProduct.title" type="text" ng-value="product.title" required/>
+                <span><strong>Description: </strong></span>
+                <input class="form-control" ng-model="updatedProduct.description" ng-value="product.description" />
+                <span><strong>Category: </strong></span>
+                <input class="form-control" ng-model="updatedProduct.category" ng-value="product.category" required/>
+                <span><strong>Price: </strong></span>
+                <input class="form-control" ng-model="updatedProduct.price" ng-value="product.price" />
+                <span><strong>Inventory: </strong></span>
+                <input class="form-control" ng-model="updatedProduct.inventory_qty" ng-value="product.inventory_qty" />
+                <span><strong>Image Url: </strong></span>
+                <input class="form-control" ng-model="updatedProduct.photos" ng-value="product.photos" />
+            </div>
+            <button class="btn btn-primary" ng-click="update(product.id, updatedProduct)" ng-disabled="update-product.$invalid">Update Product</button>
+        </form>
+    </div>
 </div>
