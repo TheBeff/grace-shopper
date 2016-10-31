@@ -1,5 +1,5 @@
 const db = require('../_db');
-const LineItem = require('./lineitem');
+const LineItem = require('./lineItem');
 const Product = require('./product');
 
 const Order = db.define('order', {
