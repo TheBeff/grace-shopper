@@ -18,23 +18,34 @@
         <br clear="all">
     </buy>
 
+    <hr />
+
     <reviewSection>
-        <form name="submitReviewForm" ng-show='loggedIn()' style="margin-bottom: 30px">
+        <form name="submitReviewForm" ng-show='loggedIn() && !reviewed()' style="margin-bottom: 30px">
             <h3>Leave a Review:</h3>
-            <input class='form-control' type="text" name="review" ng-model="review" placeholder="Leave a review..." required style="margin-bottom: 10px">
-            <button class="btn btn-primary" ng-disabled="submitReviewForm.$invalid" ng-click="submitReview(product.id, review)">Submit Review</button>
+            
+            <input name='starrating' uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating" required ></input>
+            <span class="label" ng-class="{'label-warning': percent<2, 'label-info': percent>=2 && percent<4, 'label-success': percent>=4}" ng-show="overStar && !isReadonly">{{percent}}</span>
+
+            <input class='form-control' type="text" name="review" ng-model="review" placeholder="Leave a review..." required style="margin-bottom: 10px; margin-top: 10px">
+            <button class="btn btn-primary" ng-disabled="review.$invalid || rate === 0" ng-click="submitReview(product.id, review, rate)">Submit Review</button>
+
         </form>
 
+        <h3 ng-show='reviewed()'>You've already reviewed this product.</h3>
+        <hr />
         <reviews ng-show='product.reviews.length'>
             <h4>Reviews for this Product:</h4>
-            <ul>
-                <li ng-repeat="review in product.reviews">
+            <ul class='list-group'>
+                <li class="list-group-item" ng-repeat="review in product.reviews">
                     <p>{{review.user.email}} said:</p>
+                    <b class="glyphicon glyphicon-star" ng-repeat='star in review.rate track by $index'></b>
                     <p>"{{review.content}}"</p>
                     <button class="btn btn-dangern" ng-show="isAdmin() || review.user.id === loggedIn().id" ng-click="deleteReview(product.id, review.id)">Delete Review</button>
                 </li>
             </ul>
         </reviews>
+
         <h4 ng-show='!product.reviews.length'>There are currently no reviews for this product.</h4>
     </reviewSection>
 

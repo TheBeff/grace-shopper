@@ -25,8 +25,8 @@ app.config(function($stateProvider){
 				} return false;
 			};
 
-			$scope.submitReview = function(productId, review){
-				return ProductsService.submitReview(productId, review)
+			$scope.submitReview = function(productId, review, rate){
+				return ProductsService.submitReview(productId, review, rate)
 					.then(function(){
 						return ProductsService.findOne($scope.product.id);
 					})
@@ -34,17 +34,17 @@ app.config(function($stateProvider){
 						$scope.product = product;
 					});
 			};
-			
+
 			$scope.product = detailProduct;
-			
+
 			$scope.inventoryArray = ProductsService.inventoryArray(detailProduct);
-			
+
 			CartService.getCart()
 				.then(function(cart){
 					$scope.cart = cart;
 				})
 				.catch($log.error);
-			
+
 			$scope.addToCart = function(product, quantity, cart){
 				CartService.createLineItem(product, quantity, cart)
 				.then(function(){
@@ -74,6 +74,25 @@ app.config(function($stateProvider){
 					.then(function(product){
 						$scope.product = product;
 					});
+			};
+
+			$scope.reviewed = function(){
+				var reviewed;
+				detailProduct.reviews.forEach(function(review){
+					if (review.userId === Session.user.id){
+						reviewed = true;
+					}
+				});
+				return reviewed;
+			};
+
+			$scope.rate = 0;
+			$scope.max = 5;
+			$scope.isReadonly = true;
+
+			$scope.hoveringOver = function(value) {
+				$scope.overStar = value;
+				$scope.percent = value;
 			};
 		}
 	});

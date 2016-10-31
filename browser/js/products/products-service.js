@@ -1,9 +1,8 @@
-app.factory('ProductsService', function(Session, $http, $q){
+app.factory('ProductsService', function(Session, $http){
 
 	var ProductsService = {};
 	var _products = [];
 	var oneProduct = {};
-	let cart = [];
 
 	ProductsService.filterProducts = function(filter, mode) {
 		const filteredProducts = _products.filter(function(product) {
@@ -43,7 +42,7 @@ app.factory('ProductsService', function(Session, $http, $q){
 
 	ProductsService.update = function(id, updatedProduct){
 		return $http.put('/api/products/' + id, updatedProduct)
-			.then(function(response){
+			.then(function(){
 				return ProductsService.findAll();
 			});
 	};
@@ -69,8 +68,13 @@ app.factory('ProductsService', function(Session, $http, $q){
 		return inventoryArray;
 	};
 
-	ProductsService.submitReview = function(productId, review){
-		var reviewObj = {review: review}
+	ProductsService.submitReview = function(productId, review, rate){
+		console.log('submit review array');
+		var rateArray = [];
+		for (var i = 0; i < rate; i++) {
+			rateArray.push('*');
+		}
+		var reviewObj = {review: review, rate: rateArray}
 		return $http.post('/api/products/' + productId + '/reviews', reviewObj)
 			.then(function(){
 				console.log('review submitted');
