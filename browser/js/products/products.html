@@ -2,17 +2,17 @@
 
   <!-- create product -->
   <div class="well" ng-show='isAdmin()'>
-      <form name="new-product">
-          <div class="form-group">
-              <input class="form-control" ng-model="newProduct.title" placeholder="product title" required/>
-              <input class="form-control" ng-model="newProduct.description" type="text" placeholder="product description" />
-              <input class="form-control" ng-model="newProduct.categories" placeholder="product categories" required/>
-              <input class="form-control" ng-model="newProduct.price" placeholder="product price" />
-              <input class="form-control" ng-model="newProduct.inventory" placeholder="product inventory quantity" />
-              <input class="form-control" ng-model="newProduct.photo" placeholder="product photo url" />
-          </div>
-          <button class="btn btn-primary" ng-click="create()" ng-disabled="new-product.$invalid">Create Product</button>
-      </form>
+    <form name="new-product">
+      <div class="form-group">
+        <input class="form-control" ng-model="newProduct.title" placeholder="product title" required/>
+        <input class="form-control" ng-model="newProduct.description" type="text" placeholder="product description" />
+        <input class="form-control" ng-model="newProduct.categories" placeholder="product categories" required/>
+        <input class="form-control" ng-model="newProduct.price" placeholder="product price" />
+        <input class="form-control" ng-model="newProduct.inventory" placeholder="product inventory quantity" />
+        <input class="form-control" ng-model="newProduct.photo" placeholder="product photo url" />
+      </div>
+      <button class="btn btn-primary" ng-click="create()" ng-disabled="new-product.$invalid">Create Product</button>
+    </form>
   </div>
 
   <!-- search bar -->
@@ -29,8 +29,29 @@
   </div>
   <br clear="all">
 
-  <!-- product list -->
-  <ul class="list-group"> 
+  <!-- product list src="http://placehold.it/320x150"-->
+  <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="product in products">
+    <div class="thumbnail">
+      <img ng-src="{{product.photos}}" style="width: 90%; height: 40vh" alt="">
+      <div class="caption">
+        <h4 class="pull-right">${{product.price}}</h4>
+        <h4><a ui-sref='detail({id:product.id})'>{{product.title}}</a></h4>
+        <p>{{product.description}}</p>
+      </div>
+      <div class="ratings">
+        <p class="pull-right">{{product.reviews.length || 0 }} reviews</p>
+        <p>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star-empty"></span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- ^Testing^ -->
+  <!-- <ul class="list-group">
     <li class="list-group-item col-sm-4" ng-repeat="product in products">
       <h3><a ui-sref='detail({id:product.id})'>{{product.title}}</a></h3>
       <img class="img-responsive" ng-src="{{product.photos}}" />
@@ -52,6 +73,6 @@
       </div>
       <br clear="all">
     </li>
-  </ul>
-  
+  </ul> -->
+
 </div>
