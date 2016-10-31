@@ -1,4 +1,4 @@
-app.controller("AccountCtrl", function($scope, $log, $rootScope, AccountService){
+app.controller("AccountCtrl", function($scope, $log, $rootScope, Session, AccountService){
 
   $scope.shippingSchema = AccountService.shippingSchema;
   $scope.billingSchema = AccountService.billingSchema;
@@ -8,6 +8,12 @@ app.controller("AccountCtrl", function($scope, $log, $rootScope, AccountService)
 
   $scope.shippingModel = {};
   $scope.billingModel = {};
+
+  $scope.isAdmin = function(){
+    if (Session.user){
+        return Session.user.isAdmin;
+    } return false;
+  };
 
   $scope.onSubmit = function(form){
         $scope.$broadcast('schemaFormValidate');
@@ -42,6 +48,12 @@ app.controller("AccountCtrl", function($scope, $log, $rootScope, AccountService)
   AccountService.getOrders()
     .then(function(orders){
     	$scope.orders = orders;
+    })
+    .catch($log.error);
+
+  AccountService.getAdminOrders()
+    .then(function(response){
+        $scope.adminOrders = response;
     })
     .catch($log.error);
 

@@ -62,4 +62,11 @@
 	    ng-submit="onSubmit(billingForm)">
 	  </form>
   </div>
+  <br clear="all">
+  <div class="container" ng-show="isAdmin()">
+    <h1>Admin Panel</h1>
+    <ul class="list-group">
+      <li class="list-group list-group-item" ng-repeat="order in adminOrders">Order #{{order.id}}</li>
+    </ul>
+  </div>
 </div>
