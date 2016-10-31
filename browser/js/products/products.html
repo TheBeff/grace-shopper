@@ -39,6 +39,7 @@
                 <notification ng-show="clicked"></notification>
                 <button class="btn btn-primary" ng-disabled="!quantity" ng-click="addToCart(product, quantity, cart); clicked=true; quantity='' ">Add to Cart</button>
                 <button ng-show='isAdmin()' class="btn btn-danger" ng-click="destroy(product)">Delete</button>
+                <button ng-show='isAdmin()' class="btn btn-warning" ui-sref='detail({id:product.id})'>Update</button>
             </div>
             <br clear="all">
         </li>

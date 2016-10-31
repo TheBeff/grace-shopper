@@ -65,6 +65,16 @@ app.config(function($stateProvider){
 						$scope.product = product;
 					});
 			};
+
+			$scope.update = function(id, updatedProduct){
+				return ProductsService.update(id, updatedProduct)
+					.then(function(){
+						return ProductsService.findOne($scope.product.id);
+					})
+					.then(function(product){
+						$scope.product = product;
+					});
+			};
 		}
 	});
 });
