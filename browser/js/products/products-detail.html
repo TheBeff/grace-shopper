@@ -35,7 +35,7 @@
 
         </form>
 
-        <h3 ng-show='reviewed()'>You've already reviewed this product.</h3>
+        <h3 ng-show='loggedIn() && reviewed()'>You've already reviewed this product.</h3>
         <hr />
         <reviews ng-show='product.reviews.length'>
             <h4>Reviews for this Product:</h4>
