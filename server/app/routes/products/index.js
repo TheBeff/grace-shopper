@@ -100,6 +100,7 @@ router.put('/:id', isAdmin, function(req, res, next) {
 router.post('/:id/reviews', ensureAuthenticated, function(req, res, next){
 	Review.create({
 		content: req.body.review,
+		rate: req.body.rate,
 		productId: req.params.id,
 		userId: req.user.id
 	})
