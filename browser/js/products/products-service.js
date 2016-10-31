@@ -13,10 +13,6 @@ app.factory('ProductsService', function(Session, $http, $q){
 		return filteredProducts;
 	};
 
-	// ProductsService.getReviews = function(product){
-	// 	$http.get('/api/products')
-	// };
-
 	ProductsService.findAll = function(){
 		return $http.get('/api/products')
 		  .then(function(products){
