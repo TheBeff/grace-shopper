@@ -6,11 +6,11 @@ app.controller('SignupCtrl', function($state, $scope, SignupFactory, AuthService
         SignupFactory.signUp($scope.credentials)
             .then(function(data) {
                 if (data === 'exists') {
-                    $scope.existsEmail = true
+                    $scope.existsEmail = true;
                     return;
                 }
                 AuthService.login($scope.credentials);
                 $state.go('confirm');
             });
-    }
+    };
 });

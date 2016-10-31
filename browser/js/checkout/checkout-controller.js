@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 app.controller('CheckoutCtrl', function ($scope, $log, CartService, AccountService, CheckoutService) {
 
@@ -25,7 +25,7 @@ app.controller('CheckoutCtrl', function ($scope, $log, CartService, AccountServi
         debug: false,
         formatting: true
     };
-    
+
     CartService.getCart()
     .then(function(cart){
         $scope.cart = cart;

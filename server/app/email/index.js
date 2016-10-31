@@ -24,7 +24,7 @@ module.exports = sendConfirmation;
 function _setEmailTemplate(customerInfo, type) {
   if (type === 'order') {
     mailOptions.subject = `Confirmation For Order #${ customerInfo.orderId }`
-    mailOptions.html = 
+    mailOptions.html =
       `<p>Hello!</p>
       <p>Thank you for shopping with us. We’ll send a confirmation when your item ships.</p>
       <p>Your order number is ${ customerInfo.orderId }.</p>
@@ -33,7 +33,7 @@ function _setEmailTemplate(customerInfo, type) {
 
   if (type === 'signup') {
     mailOptions.subject = `GraceShopper Account Created!`
-    mailOptions.html = 
+    mailOptions.html =
       `<p>Hello!</p>
       <p>Thank you for creating a new account with GraceShopper!</p>
       <p>Your user login is ${ customerInfo.email }.</p>

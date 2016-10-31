@@ -17,7 +17,7 @@ const Order = db.define('order', {
 			return this.findOne({
 				where: { userId: user.id, status: 'cart' },
 				include: [{
-					model: LineItem, 
+					model: LineItem,
 					include: [Product]
 				}]
 			})

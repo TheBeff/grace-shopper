@@ -9,8 +9,8 @@ module.exports = db.define('product', {
     type: db.Sequelize.TEXT,
     defaultValue: 'http://www.fillmurray.com/200/300'
   },
-  category: {
-    type: db.Sequelize.STRING,
+  categories: {
+    type: db.Sequelize.ARRAY(db.Sequelize.STRING),
     allowNull: false
   }
 });

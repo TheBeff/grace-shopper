@@ -6,6 +6,6 @@ module.exports = db.define('review', {
     allowNull: false
   },
   rate: {
-  	type: db.Sequelize.ARRAY(db.Sequelize.STRING)
+	type: db.Sequelize.ARRAY(db.Sequelize.STRING)
   }
 });
