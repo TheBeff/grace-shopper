@@ -5,17 +5,19 @@
     <p>Come back to check out your order history here!</p>
   </div>
   <table class="table" ng-repeat="order in orders">
-	<caption>Order #{{order.id}}</caption>
+	<caption>Order #{{order.id}} - Status: {{order.status}}</caption>
 	<thead>
 		<th>Item</th>
 		<th>Quantity</th>
 		<th>Total</th>
+		<th>Last Updated</th>
 	</thead>
 	<tbody>
 		<tr ng-repeat="item in order.lineItems">
-			<td>{{item.product.title}}</td>
+			<td><a ng-href="/products/{{item.product.id}}">{{item.product.title}}</a></td>
 			<td>{{item.quantity}}</td>
-			<td>{{item.price*item.quantity}}</td>
+			<td>${{item.price*item.quantity}}</td>
+			<td>{{order.updatedAt  | date:'HH:mm MM-dd-yyyy'}}</td>
 		</tr>
 	</tbody>
   </table>
@@ -59,5 +61,12 @@
 	    sf-model="billingModel" 
 	    ng-submit="onSubmit(billingForm)">
 	  </form>
+  </div>
+  <br clear="all">
+  <div class="container" ng-show="isAdmin()">
+    <h1>Admin Panel</h1>
+    <ul class="list-group">
+      <li class="list-group list-group-item" ng-repeat="order in adminOrders">Order #{{order.id}}</li>
+    </ul>
   </div>
 </div>
