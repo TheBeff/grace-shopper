@@ -32,9 +32,9 @@
   <!-- product list src="http://placehold.it/320x150"-->
   <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="product in products">
     <div class="thumbnail">
-      <img ng-src="{{product.photos}}" style="width: 90%; height: 40vh" alt="">
+      <img ng-src="{{product.photos}}" ui-sref='detail({id:product.id})' style="width: 90%; height: 40vh; margin-top:15px" alt="">
       <div class="caption">
-        <h4 class="pull-right">${{product.price}}</h4>
+        <h4 class="pull-right">{{ product.price | currency : symbol : fractionSize}}</h4>
         <h4><a ui-sref='detail({id:product.id})'>{{product.title}}</a></h4>
         <p>{{product.description}}</p>
       </div>
