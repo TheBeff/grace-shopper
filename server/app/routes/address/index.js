@@ -1,34 +1,33 @@
 'use strict';
 const router = require('express').Router(); // eslint-disable-line new-cap
-const User = require('../../../db').models.User;
 const Address = require('../../../db').models.Address;
 
 module.exports = router;
 
 router.get('/shipping', function(req, res, next){
-  Address.findOne({
-  	where: {
-  		userId: req.user.id,
-  		type: "shipping"
-  	}
-  })
-    .then(function(response){
-    	res.send(response);
-    })
-    .catch(next);
+	Address.findOne({
+		where: {
+			userId: req.user.id,
+			type: 'shipping'
+		}
+	})
+		.then(function(response){
+			res.send(response);
+		})
+		.catch(next);
 });
 
 router.get('/billing', function(req, res, next){
-  Address.findOne({
-  	where: {
-  		userId: req.user.id,
-  		type: "billing"
-  	}
-  })
-    .then(function(response){
-    	res.send(response);
-    })
-    .catch(next);
+	Address.findOne({
+		where: {
+			userId: req.user.id,
+			type: 'billing'
+		}
+	})
+		.then(function(response){
+			res.send(response);
+		})
+		.catch(next);
 });
 
 router.post('/shipping', function(req, res, next){
@@ -39,14 +38,14 @@ router.post('/shipping', function(req, res, next){
 		city: req.body.city,
 		state: req.body.state,
 		zip: req.body.zip,
-		type: "shipping",
+		type: 'shipping',
 		userId: req.user.id
 	})
-	  .then(function(){
-	  	console.log("address created");
-	  	res.sendStatus(200);
-	  })
-	  .catch(next);
+		.then(function(){
+			console.log('address created');
+			res.sendStatus(200);
+		})
+		.catch(next);
 });
 
 router.post('/billing', function(req, res, next){
@@ -57,21 +56,21 @@ router.post('/billing', function(req, res, next){
 		city: req.body.city,
 		state: req.body.state,
 		zip: req.body.zip,
-		type: "billing",
+		type: 'billing',
 		userId: req.user.id
 	})
-	  .then(function(){
-	  	console.log("address created");
-	  	res.sendStatus(200);
-	  })
-	  .catch(next);
+		.then(function(){
+			console.log('address created');
+			res.sendStatus(200);
+		})
+		.catch(next);
 });
 
 router.delete('/shipping', function(req, res, next){
 	Address.destroy({
 		where: {
 			userId: req.user.id,
-			type: "shipping"
+			type: 'shipping'
 		}
 	})
 	  .then(function(){
@@ -84,7 +83,7 @@ router.delete('/billing', function(req, res, next){
 	Address.destroy({
 		where: {
 			userId: req.user.id,
-			type: "billing"
+			type: 'billing'
 		}
 	})
 	  .then(function(){
