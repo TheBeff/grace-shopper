@@ -28,6 +28,7 @@
   <ul class="list-group">
         <li class="list-group-item col-sm-4" ng-repeat="product in products">
             <h3><a ui-sref='detail({id:product.id})'>{{product.title}}</a></h3>
+            <p>{{product.category}}</p>
             <img class="img-responsive" ng-src="{{product.photos}}" />
             <p>{{product.description}}</p>
             <p><strong>Reviews:</strong> {{product.reviews.length}}</p>
