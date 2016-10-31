@@ -8,7 +8,7 @@
   color: #666;
 }*/
 
-.ship-form label, .form-horizontal label {
+/*.ship-form label, .form-horizontal label {
   display: block;
   margin: 0px 0px 5px;
 }
@@ -32,9 +32,14 @@
   height:100px;
   padding: 5px 0px 0px 5px;
   width: 60%;
+}*/
+
+.container input {
+  width: 60%;
+  outline: 0;
 }
 
-.ship-form div, #error {
+#error {
   display:inline-block;
   vertical-align:top;
   color: red;
