@@ -8,6 +8,7 @@ app.factory('CheckoutService', function($http, $state) {
             status : "order"
         })
         .then(function(order) {
+            console.log(order);
             if (order.config.data.status == "order") {
                 $state.go("confirmation");
             }

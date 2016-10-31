@@ -2,7 +2,7 @@
 
 const router = require('express').Router();
 const User = require('../../../db').models.User;
-const Promise = require('bluebird');
+const sendConfirmation = require('../../email');
 
 module.exports = router;
 
@@ -14,7 +14,6 @@ router.post('/', (req, res, next) => {
             }
         })
         .then(user => {
-
           if (user) res.send('exists');
 
           return User.create({
@@ -23,6 +22,8 @@ router.post('/', (req, res, next) => {
           })
         })
         .then(createdUser => {
+          let user = createdUser.get();
+          sendConfirmation({ email: user.email }, 'signup')
           res.send(createdUser);
         })
         .catch(next);
