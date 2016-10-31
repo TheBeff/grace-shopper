@@ -2,6 +2,9 @@
 
 const router = require('express').Router();
 const Order = require('../../../db').models.Order;
+const User = require('../../../db').models.User;
+
+const sendConfirmation = require('../../email');
 
 module.exports = router;
 
@@ -45,14 +48,23 @@ router.delete('/:id', function(req, res, next) {
 });
 
 router.put('/:id', function(req, res, next) {
+	let order;
+
 	Order.update({
 		status: req.body.status
 	}, {
 		where: {
 			id: req.params.id
-		}
+		},
+		returning: true
 	})
-	.then(function(order) {
+	.then(function(result) {
+		order = result[1][0].get();
+		const userId = result[1][0].get().userId;
+		return User.findById(userId)
+	})
+	.then(function(user) {
+		sendConfirmation({ email: user.get().email, orderId: order.id}, 'order')
 		res.send(order);
 	})
 	.catch(next);
