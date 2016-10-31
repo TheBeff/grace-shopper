@@ -3,11 +3,18 @@ app.controller('ProductsCtrl', function($scope, $log, Session, ProductsService, 
 	ProductsService.findAll()
 		.then(function(products){
 			$scope.products = products;
+			$scope.categories = $scope.products.reduce(function(curr, next) {
+				if (curr.indexOf(next.category) === -1) {
+					curr.push(next.category);
+					return curr;
+				}
+				return curr;
+			}, []) //gets unique categories
 		})
 		.catch($log.error);
 
-	$scope.filterProducts = function(input) {
-		$scope.products = ProductsService.filterProducts(input.toLowerCase());
+	$scope.filterProducts = function(filter, mode) {
+		$scope.products = ProductsService.filterProducts(filter.toLowerCase(), mode);
 	};
 
 	$scope.isAdmin = function(){

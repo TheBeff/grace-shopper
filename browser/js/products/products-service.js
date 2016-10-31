@@ -5,10 +5,10 @@ app.factory('ProductsService', function(Session, $http, $q){
 	var oneProduct = {};
 	let cart = [];
 
-	ProductsService.filterProducts = function(input) {
+	ProductsService.filterProducts = function(filter, mode) {
 		const filteredProducts = _products.filter(function(product) {
-			product = product.title.toLowerCase();
-			return product.indexOf(input) > -1;
+			product = product[mode].toLowerCase();
+			return product.indexOf(filter) > -1;
 		});
 		return filteredProducts;
 	};
@@ -20,6 +20,10 @@ app.factory('ProductsService', function(Session, $http, $q){
 			return _products;
 		  });
 	};
+
+	ProductsService.getCategories = function() {
+		console.log(_products);
+	}
 
 	ProductsService.findOne = function(id){
 		return $http.get('/api/products/' + id)
