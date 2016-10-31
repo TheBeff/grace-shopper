@@ -2,6 +2,9 @@
 
 const router = require('express').Router();
 const Order = require('../../../db').models.Order;
+const User = require('../../../db').models.User;
+
+const transporter = require('../../support');
 
 module.exports = router;
 
@@ -50,10 +53,16 @@ router.put('/:id', function(req, res, next) {
 	}, {
 		where: {
 			id: req.params.id
-		}
+		},
+		returning: true
 	})
 	.then(function(order) {
-		res.send(order);
+		const userId = order[1][0].get().userId;
+		return User.findById(userId)
+		// res.send(order);
+	})
+	.then(function(user) {
+		console.log(user.get());
 	})
 	.catch(next);
 });
