@@ -58,6 +58,13 @@ const seedUsers = function() {
         inventory_qty: '4',
         photos: 'https://upload.wikimedia.org/wikipedia/commons/1/14/Lightsaber%2C_silver_hilt%2C_blue_blade.png',
         category: 'Weapons'
+    }, {
+        title: 'Pineapple',
+        description: 'Who lives in a...',
+        price: '67000',
+        inventory_qty: '1',
+        photos: "http://vignette1.wikia.nocookie.net/spongebob/images/4/4b/SpongeBob's_pineapple_house_in_Season_6-2.png",
+        category: 'Homes'
     }];
 
     const orders = [{
