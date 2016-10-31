@@ -24,6 +24,7 @@ const Product = require('./server/db').models.Product;
 const Order = require('./server/db').models.Order;
 const LineItem = require('./server/db').models.LineItem;
 const Address = require('./server/db').models.Address;
+const Review = require('./server/db').models.Review;
 const Promise = require('sequelize').Promise;
 
 const seedUsers = function() {
@@ -106,6 +107,20 @@ const seedUsers = function() {
         type: "billing"
     }];
 
+    const reviews = [{
+        content: "Wonderful.",
+        rate: ['*', '*', '*', '*', '*']
+    }, {
+        content: "Love this product, but there's room for improvement",
+        rate: ['*', '*', '*']
+    }, {
+        content: "Doesn't get any beter!",
+        rate: ['*', '*', '*', '*', '*']
+    }, {
+        content: "This is exactly what I ordered.",
+        rate: ['*', '*', '*', '*']
+    }];
+
     const creatingUsers = Promise.map(users, userObj => User.create(userObj));
 
     const createProducts = Promise.map(products, productObj => Product.create(productObj));
@@ -116,8 +131,10 @@ const seedUsers = function() {
 
     const createAddress = Promise.map(addresses, addressesObj => Address.create(addressesObj));
 
-    return Promise.all([creatingUsers, createProducts, createOrders, createLineItem, createAddress])
-        .spread(function(user, product, order, lineItem, address){
+    const createReviews = Promise.map(reviews, reviewsObj => Review.create(reviewsObj));
+
+    return Promise.all([creatingUsers, createProducts, createOrders, createLineItem, createAddress, createReviews])
+        .spread(function(user, product, order, lineItem, address, review){
             lineItem[0].setProduct(product[0]);
             lineItem[1].setProduct(product[1]);
             lineItem[2].setProduct(product[1]);
@@ -130,6 +147,14 @@ const seedUsers = function() {
             address[1].setUser(user[0]);
             user[0].setOrders(order[0]);
             user[0].setOrders(order[1]);
+            review[0].setUser(user[0]);
+            review[0].setProduct(product[0]);
+            review[1].setUser(user[0]);
+            review[1].setProduct(product[1]);
+            review[2].setUser(user[1]);
+            review[2].setProduct(product[1]);
+            review[3].setUser(user[1]);
+            review[3].setProduct(product[2]);
             return user[0].setOrders(order[2]);
         });
 
