@@ -1,5 +1,5 @@
 app.factory('AdminService', function($http){
-	
+
 	var AdminService = {};
 	var _users = [];
 
@@ -27,6 +27,11 @@ app.factory('AdminService', function($http){
 				AdminService.getUsers();
 			});
 	};
+
+	// AdminService.passwordReset = function(user){
+	// 	console.log('password reset');
+	// 	// code goes here
+	// };
 
 	return AdminService;
 });

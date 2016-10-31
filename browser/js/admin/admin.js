@@ -1,5 +1,5 @@
 app.config(function($stateProvider){
-	
+
 	$stateProvider
 	.state('users', {
 		url: '/users',
@@ -14,6 +14,7 @@ app.config(function($stateProvider){
 			$scope.makeAdmin = AdminService.makeAdmin;
 			$scope.delete = AdminService.delete;
 			$scope.thisUser = Session.user;
+			$scope.passwordReset = AdminService.passwordReset;
 		}
 	});
 

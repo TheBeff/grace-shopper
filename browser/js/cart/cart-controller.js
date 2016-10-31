@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 app.controller('CartCtrl', function($scope, $log, CartService, ProductsService){
 
@@ -15,7 +15,7 @@ app.controller('CartCtrl', function($scope, $log, CartService, ProductsService){
 
 	$scope.inventoryArray = ProductsService.inventoryArray;
 
-	$scope.changeQuantity=  CartService.changeQuantity;
+	$scope.changeQuantity = CartService.changeQuantity;
 
 	$scope.deleteLineItem = CartService.deleteLineItem;
 

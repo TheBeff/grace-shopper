@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 
@@ -43,7 +43,7 @@ app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 		_cart.lineItems = [];
 	};
 
-	var _clearCartLocally = function(cart){
+	var _clearCartLocally = function(){
 		return _getCartLocally()
 			.then(function(cart){
 				cart.lineItems = [];
@@ -65,7 +65,7 @@ app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 			return this.deleteLineItem(cart, lineitem);
 		}
 		else if (Session.user) {
-			return $http.put('/api/orders/' + cart.id + '/lineItems/' + lineitem.id, {quantity, price: quantity*lineitem.product.price})
+			return $http.put('/api/orders/' + cart.id + '/lineItems/' + lineitem.id, {quantity, price: quantity * lineitem.product.price})
 				.then(function(){
 					console.log('quantity updated');
 					CartService.getCart();
@@ -95,9 +95,27 @@ app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 		}
 	};
 
+	var _checkForItemInCart = function(product, currentCart){
+		if (currentCart.lineItems) {
+			let idArray = currentCart.lineItems.map(function(lineItem){
+				return lineItem.productId;
+			});
+
+			let index = idArray.indexOf(product.id);
+
+			if (index >= 0) {
+				return currentCart.lineItems[index];
+			} else {
+				return false;
+			}
+		} else {
+			return false
+		}
+	};
+
 	var _createLineItemRemotely = function(product, quantity, currentCart){
 		let info = {
-			price: product.price*quantity,
+			price: product.price * quantity,
 			quantity,
 			orderId: currentCart.id,
 			productId: product.id
@@ -107,14 +125,14 @@ app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 		let matchedLineItem = _checkForItemInCart(product, currentCart);
 		if (matchedLineItem) {
 		  if (matchedLineItem.quantity + quantity > product.inventory_qty){
-		  	return;
+			return;
 		  }
 		  info.quantity += matchedLineItem.quantity;
 		  info.price += product.price * matchedLineItem.quantity;
 		  return $http.put(itemUrl + '/' + matchedLineItem.id, info);
 		} else {
 		    return $http.post(itemUrl, info);
-	    } 
+	    }
 	};
 
 	var _createLineItemLocally = function(product, quantity, currentCart){
@@ -134,8 +152,8 @@ app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 				} else {
 					cart.lineItems.push({
 						product: {
-							title: product.title, 
-							inventory_qty: product.inventory_qty, 
+							title: product.title,
+							inventory_qty: product.inventory_qty,
 							price: product.price
 						},
 						price: product.price * quantity,
@@ -154,23 +172,6 @@ app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 		} else {
 			return _createLineItemLocally(product, quantity, currentCart);
 		}
-	};	
-
-	var _checkForItemInCart = function(product, currentCart){
-		if(currentCart.lineItems){
-			let idArray = currentCart.lineItems.map(function(lineItem){
-				return lineItem.productId;
-			});
-
-			let index = idArray.indexOf(product.id);
-
-			if (index >= 0) {
-				return currentCart.lineItems[index];
-			} else {
-				return false;
-			}
-		}
-		else return false;
 	};
 
 	CartService.syncCart = function(){
@@ -203,7 +204,7 @@ app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 		else {
 			$state.go('login');
 		}
-  	};
+	};
 
 	return CartService;
 });

@@ -1,4 +1,4 @@
-app.controller("AccountCtrl", function($scope, $log, $rootScope, Session, AccountService){
+app.controller('AccountCtrl', function($scope, $log, $rootScope, Session, AccountService){
 
   $scope.shippingSchema = AccountService.shippingSchema;
   $scope.billingSchema = AccountService.billingSchema;
@@ -18,11 +18,11 @@ app.controller("AccountCtrl", function($scope, $log, $rootScope, Session, Accoun
   $scope.onSubmit = function(form){
         $scope.$broadcast('schemaFormValidate');
         if (form.$valid) {
-            if (form.$name === "shippingForm"){
+            if (form.$name === 'shippingForm'){
               AccountService.saveShipping($scope.shippingModel);
               $scope.getShipping();
             }
-            if (form.$name === "billingForm"){
+            if (form.$name === 'billingForm'){
               AccountService.saveBilling($scope.billingModel);
               $scope.getBilling();
             }
@@ -41,13 +41,13 @@ app.controller("AccountCtrl", function($scope, $log, $rootScope, Session, Accoun
 
   AccountService.getUser()
     .then(function(response){
-    	$scope.user = response.user;
+      $scope.user = response.user;
     })
     .catch($log.error);
-	 
+
   AccountService.getOrders()
     .then(function(orders){
-    	$scope.orders = orders;
+      $scope.orders = orders;
     })
     .catch($log.error);
 
