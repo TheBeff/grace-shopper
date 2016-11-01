@@ -1,12 +1,10 @@
 <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)" style="margin-bottom: 30px">
-
     <alert type="danger" ng-show="error">
         {{ error }}
     </alert>
-
     <h3 style='margin-bottom: 20px'>Log In</h3>
     <div class="form-group">
-        <label for="email">Email address</label>
+        <label for="email">Email Address</label>
         <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
     </div>
     <div class="form-group">
@@ -15,10 +13,10 @@
     </div>
     <button type="submit" class="btn btn-primary">Log In</button>
     <hr>
-    <h3 style='margin-bottom: 20px'>New to the marketplace?</h3>
+    <h3 style='margin-bottom: 20px'>New to the Marketplace?</h3>
     <a ui-sref="signup">
         <button class="btn btn-default">Create Your Account</button>
     </a>
+    <a href="/auth/facebook" class="btn btn-primary">Login with Facebook</a>
 </form>
-
 <ui-view></ui-view>

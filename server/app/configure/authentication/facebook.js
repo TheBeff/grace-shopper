@@ -1,4 +1,5 @@
 'use strict';
+
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
@@ -11,14 +12,18 @@ module.exports = function (app, db) {
     var facebookCredentials = {
         clientID: facebookConfig.clientID,
         clientSecret: facebookConfig.clientSecret,
-        callbackURL: facebookConfig.callbackURL
+        callbackURL: facebookConfig.callbackURL,
+        enableProof: true,
+        profileFields: ['id', 'emails'],
+        passReqToCallback: true
     };
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
 
         User.findOne({
                 where: {
-                    facebook_id: profile.id
+                    facebook_id: profile.id,
+                    email: profile.emails[0].value
                 }
             })
             .then(function (user) {
@@ -26,7 +31,8 @@ module.exports = function (app, db) {
                     return user;
                 } else {
                     return User.create({
-                        facebook_id: profile.id
+                        facebook_id: profile.id,
+                        email: profile.emails[0].value
                     });
                 }
             })
@@ -36,18 +42,19 @@ module.exports = function (app, db) {
             .catch(function (err) {
                 console.error('Error creating user from Facebook authentication', err);
                 done(err);
-            })
+            });
 
     };
 
     passport.use(new FacebookStrategy(facebookCredentials, verifyCallback));
 
-    app.get('/auth/facebook', passport.authenticate('facebook'));
+    app.get('/auth/facebook', passport.authenticate('facebook'), {scope: ["email"]});
 
     app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {failureRedirect: '/login'}),
+        passport.authenticate('facebook', {
+            failureRedirect: '/login'}),
         function (req, res) {
-            res.redirect('/');
+            res.redirect('/account');
         });
 
 };
