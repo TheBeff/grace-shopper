@@ -27,7 +27,58 @@
             </table>
         </div>
         <hr>
-        <h4 style="margin-bottom: 20px">Card Information</h4>
+        <h4 style="margin-bottom: 20px">Where should we send it?</h4>
+        <div ng-controller="AccountCtrl">
+        <div class="container">
+            <form name="shippingForm" class="form-horizontal">
+                <div class="form-group">
+                    <label>Recipient Name</label>
+                    <input class="form-control" type="text" name="name" ng-model="name" ng-value="shipping.name" placeholder="The Recipient's Full Name" required />
+                    <div ng-messages="shipping.name || shippingForm.name.$error" id="error">
+                        <div ng-message="required">This field is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Street Address</label>
+                    <input class="form-control" type="text" name="address1" ng-model="address1" ng-value="shipping.address1" placeholder="Address Line 1" required />
+                    <div ng-messages="shipping.address1 || shippingForm.address1.$error" id="error">
+                        <div ng-message="required">This field is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Address Line 2</label>
+                    <input class="form-control" type="text" name="address2" ng-model="address2" ng-value="shipping.address2" placeholder="Address Line 2" />
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input class="form-control" type="text" name="city" ng-model="city" ng-value="shipping.city" placeholder="City" required />
+                    <div ng-messages="shipping.city || shippingForm.city.$error" id="error">
+                        <div ng-message="required">This field is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>State</label>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <select class="form-control" style="width: 60%" name="state" ng-model="shipping.state" ng-options="state as state for state in states" required />
+                            </select>
+                        </div>
+                    </div>
+                    <div style="margin-left: 5px" ng-messages="shipping.state || shippingForm.state.$error" id="error">
+                        <div ng-message="required">This field is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label style="margin-top: 10px">Zip Code</label>
+                    <input class="form-control" type="text" name="zip" ng-model="zip" ng-value="shipping.zip" placeholder="Zip Code" required />
+                    <div ng-messages="shipping.zip || shippingForm.zip.$error" id="error">
+                        <div ng-message="required">This field is required</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <hr>
+        <h4 style="margin-bottom: 20px">Your card of choice</h4>
         <div class="container">
             <form name="cardForm" class="form-horizontal">
                 <div class="form-group">
@@ -92,57 +143,6 @@
                     <label>Card CVV</label>
                     <input type="text" class="form-control" name="cvv" ng-model="cvv" placeholder="Security Code" required />
                     <div ng-messages="cardForm.cvv.$error" id="error">
-                        <div ng-message="required">This field is required</div>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <hr>
-        <h4 style="margin-bottom: 20px">Now, where to send it?</h4>
-        <div ng-controller="AccountCtrl">
-        <div class="container">
-            <form name="shippingForm" class="form-horizontal">
-                <div class="form-group">
-                    <label>Recipient Name</label>
-                    <input class="form-control" type="text" name="name" ng-model="name" ng-value="shipping.name" placeholder="The Recipient's Full Name" required />
-                    <div ng-messages="shipping.name || shippingForm.name.$error" id="error">
-                        <div ng-message="required">This field is required</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Street Address</label>
-                    <input class="form-control" type="text" name="address1" ng-model="address1" ng-value="shipping.address1" placeholder="Address Line 1" required />
-                    <div ng-messages="shipping.address1 || shippingForm.address1.$error" id="error">
-                        <div ng-message="required">This field is required</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Address Line 2</label>
-                    <input class="form-control" type="text" name="address2" ng-model="address2" ng-value="shipping.address2" placeholder="Address Line 2" />
-                </div>
-                <div class="form-group">
-                    <label>City</label>
-                    <input class="form-control" type="text" name="city" ng-model="city" ng-value="shipping.city" placeholder="City" required />
-                    <div ng-messages="shipping.city || shippingForm.city.$error" id="error">
-                        <div ng-message="required">This field is required</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>State</label>
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <select class="form-control" style="width: 60%" name="state" ng-model="shipping.state" ng-options="state as state for state in states" required />
-                            </select>
-                        </div>
-                    </div>
-                    <div style="margin-left: 5px" ng-messages="shipping.state || shippingForm.state.$error" id="error">
-                        <div ng-message="required">This field is required</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label style="margin-top: 10px">Zip Code</label>
-                    <input class="form-control" type="text" name="zip" ng-model="zip" ng-value="shipping.zip" placeholder="Zip Code" required />
-                    <div ng-messages="shipping.zip || shippingForm.zip.$error" id="error">
                         <div ng-message="required">This field is required</div>
                     </div>
                 </div>
