@@ -1,9 +1,10 @@
 app.config(function($stateProvider){
 
 	$stateProvider
-	.state('orderDetail', {
-		url: '/orders/:id',
-		templateUrl: 'js/order/order.html'
+	.state('orders', {
+		url: '/orders/',
+		templateUrl: 'js/order/order.html',
+		controller: "OrderCtrl"
 	});
 
 });

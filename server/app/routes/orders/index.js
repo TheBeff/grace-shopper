@@ -3,6 +3,8 @@
 const router = require('express').Router();
 const Order = require('../../../db').models.Order;
 const User = require('../../../db').models.User;
+const Product = require('../../../db').models.Product;
+const LineItem = require('../../../db').models.LineItem;
 
 const sendConfirmation = require('../../email');
 
@@ -11,7 +13,9 @@ module.exports = router;
 router.use('/:id/lineItems', require('./lineitems'));
 
 router.get('/', function(req, res, next) {
-	Order.findAll()
+	Order.findAll({
+		include: { model: LineItem, include: [Product] }
+	})
 	.then(function(orders) {
 		res.send(orders);
 	})
