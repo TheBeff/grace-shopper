@@ -29,129 +29,129 @@
         <hr>
         <h4 style="margin-bottom: 20px">Where should we send it?</h4>
         <div ng-controller="AccountCtrl">
-        <div class="container">
-            <form name="shippingForm" class="form-horizontal">
-                <div class="form-group">
-                    <label>Recipient Name</label>
-                    <input class="form-control" type="text" name="name" ng-model="name" ng-value="shipping.name" placeholder="The Recipient's Full Name" required />
-                    <div ng-messages="shipping.name || shippingForm.name.$error" id="error">
-                        <div ng-message="required">This field is required</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Street Address</label>
-                    <input class="form-control" type="text" name="address1" ng-model="address1" ng-value="shipping.address1" placeholder="Address Line 1" required />
-                    <div ng-messages="shipping.address1 || shippingForm.address1.$error" id="error">
-                        <div ng-message="required">This field is required</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Address Line 2</label>
-                    <input class="form-control" type="text" name="address2" ng-model="address2" ng-value="shipping.address2" placeholder="Address Line 2" />
-                </div>
-                <div class="form-group">
-                    <label>City</label>
-                    <input class="form-control" type="text" name="city" ng-model="city" ng-value="shipping.city" placeholder="City" required />
-                    <div ng-messages="shipping.city || shippingForm.city.$error" id="error">
-                        <div ng-message="required">This field is required</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>State</label>
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <select class="form-control" style="width: 60%" name="state" ng-model="shipping.state" ng-options="state as state for state in states" required />
-                            </select>
+            <div class="container">
+                <form name="shippingForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label>Recipient Name</label>
+                        <input class="form-control" type="text" name="name" ng-model="name" ng-value="shipping.name" placeholder="The Recipient's Full Name" required />
+                        <div ng-messages="shipping.name || shippingForm.name.$error" id="error">
+                            <div ng-message="required">This field is required</div>
                         </div>
                     </div>
-                    <div style="margin-left: 5px" ng-messages="shipping.state || shippingForm.state.$error" id="error">
-                        <div ng-message="required">This field is required</div>
+                    <div class="form-group">
+                        <label>Street Address</label>
+                        <input class="form-control" type="text" name="address1" ng-model="address1" ng-value="shipping.address1" placeholder="Address Line 1" required />
+                        <div ng-messages="shipping.address1 || shippingForm.address1.$error" id="error">
+                            <div ng-message="required">This field is required</div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label style="margin-top: 10px">Zip Code</label>
-                    <input class="form-control" type="text" name="zip" ng-model="zip" ng-value="shipping.zip" placeholder="Zip Code" required />
-                    <div ng-messages="shipping.zip || shippingForm.zip.$error" id="error">
-                        <div ng-message="required">This field is required</div>
+                    <div class="form-group">
+                        <label>Address Line 2</label>
+                        <input class="form-control" type="text" name="address2" ng-model="address2" ng-value="shipping.address2" placeholder="Address Line 2" />
                     </div>
-                </div>
-            </form>
-        </div>
-        <hr>
-        <h4 style="margin-bottom: 20px">Your card of choice</h4>
-        <div class="container">
-            <form name="cardForm" class="form-horizontal">
-                <div class="form-group">
-                    <label>Name on Card</label>
-                    <input type="text" class="form-control" name="cardHolderName" ng-model="cardName" placeholder="Card Holder's Name" required />
-                    <div ng-messages="cardForm.cardHolderName.$error" id="error">
-                        <div ng-message="required">This field is required</div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <input class="form-control" type="text" name="city" ng-model="city" ng-value="shipping.city" placeholder="City" required />
+                        <div ng-messages="shipping.city || shippingForm.city.$error" id="error">
+                            <div ng-message="required">This field is required</div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>Card Number</label>
-                    <input type="text" class="form-control" name="cardNumber" ng-model="cardNumber" placeholder="Debit/Credit Card Number" required />
-                    <div ng-messages="cardForm.cardNumber.$error" id="error">
-                        <div ng-message="required">This field is required</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Expiration Date</label>
-                    <div>
+                    <div class="form-group">
+                        <label>State</label>
                         <div class="row">
                             <div class="col-xs-3">
-                                <select class="form-control col-sm-2" name="expiryMonth" ng-model="expiryMonth" required>
-                                <option value="01">Jan (01)</option>
-                                <option value="02">Feb (02)</option>
-                                <option value="03">Mar (03)</option>
-                                <option value="04">Apr (04)</option>
-                                <option value="05">May (05)</option>
-                                <option value="06">Jun (06)</option>
-                                <option value="07">Jul (07)</option>
-                                <option value="08">Aug (08)</option>
-                                <option value="09">Sep (09)</option>
-                                <option value="10">Oct (10)</option>
-                                <option value="11">Nov (11)</option>
-                                <option value="12">Dec (12)</option>
+                                <select class="form-control" style="width: 60%" name="state" ng-model="shipping.state" ng-options="state as state for state in states" required />
                                 </select>
-                                <div ng-messages="cardForm.expiryMonth.$error" id="error">
-                                    <div ng-message="required">This field is required</div>
-                                </div>
                             </div>
-                            <div class="col-xs-3">
-                                <select class="form-control" name="expiryYear" ng-model="expiryYear" required>
-                                <option value="16">2016</option>
-                                <option value="17">2017</option>
-                                <option value="18">2018</option>
-                                <option value="19">2019</option>
-                                <option value="20">2020</option>
-                                <option value="21">2021</option>
-                                <option value="22">2022</option>
-                                <option value="23">2023</option>
-                                <option value="24">2024</option>
-                                <option value="25">2025</option>
-                                <option value="26">2026</option>
-                                </select>
-                                <div ng-messages="cardForm.expiryYear.$error" id="error">
-                                    <div ng-message="required">This field is required</div>
+                        </div>
+                        <div style="margin-left: 5px" ng-messages="shipping.state || shippingForm.state.$error" id="error">
+                            <div ng-message="required">This field is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label style="margin-top: 10px">Zip Code</label>
+                        <input class="form-control" type="text" name="zip" ng-model="zip" ng-value="shipping.zip" placeholder="Zip Code" required />
+                        <div ng-messages="shipping.zip || shippingForm.zip.$error" id="error">
+                            <div ng-message="required">This field is required</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr>
+            <h4 style="margin-bottom: 20px">Your card of choice</h4>
+            <div class="container">
+                <form name="cardForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label>Name on Card</label>
+                        <input type="text" class="form-control" name="cardHolderName" ng-model="cardName" placeholder="Card Holder's Name" required />
+                        <div ng-messages="cardForm.cardHolderName.$error" id="error">
+                            <div ng-message="required">This field is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <input type="text" class="form-control" name="cardNumber" ng-model="card.number" cc-number cc-format placeholder="Debit/Credit Card Number" ng-required="true" />
+                        <p ng-show="cardForm.cardNumber.$invalid" id="error">
+                            Please enter a valid credit card number
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label>Expiration Date</label>
+                        <div>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <select class="form-control col-sm-2" name="expiryMonth" ng-model="expiryMonth" required>
+                                        <option value="01">Jan (01)</option>
+                                        <option value="02">Feb (02)</option>
+                                        <option value="03">Mar (03)</option>
+                                        <option value="04">Apr (04)</option>
+                                        <option value="05">May (05)</option>
+                                        <option value="06">Jun (06)</option>
+                                        <option value="07">Jul (07)</option>
+                                        <option value="08">Aug (08)</option>
+                                        <option value="09">Sep (09)</option>
+                                        <option value="10">Oct (10)</option>
+                                        <option value="11">Nov (11)</option>
+                                        <option value="12">Dec (12)</option>
+                                    </select>
+                                    <div ng-messages="cardForm.expiryMonth.$error" id="error">
+                                        <div ng-message="required">This field is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <select class="form-control" name="expiryYear" ng-model="expiryYear" required>
+                                        <option value="16">2016</option>
+                                        <option value="17">2017</option>
+                                        <option value="18">2018</option>
+                                        <option value="19">2019</option>
+                                        <option value="20">2020</option>
+                                        <option value="21">2021</option>
+                                        <option value="22">2022</option>
+                                        <option value="23">2023</option>
+                                        <option value="24">2024</option>
+                                        <option value="25">2025</option>
+                                        <option value="26">2026</option>
+                                    </select>
+                                    <div ng-messages="cardForm.expiryYear.$error" id="error">
+                                        <div ng-message="required">This field is required</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>Card CVV</label>
-                    <input type="text" class="form-control" name="cvv" ng-model="cvv" placeholder="Security Code" required />
-                    <div ng-messages="cardForm.cvv.$error" id="error">
-                        <div ng-message="required">This field is required</div>
+                    <div class="form-group">
+                        <label>Card CVV</label>
+                        <input type="text" class="form-control" name="cvv" ng-model="cvv" placeholder="Security Code" maxlength="4" required />
+                        <div ng-messages="cardForm.cvv.$error" id="error">
+                            <div ng-message="required">This field is required</div>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
-        <br>
-        <button class="btn btn-primary" ng-click="placeOrder(cart)" ng-disabled="cardForm.$invalid">
-            Place My Order
-        </button>
+                </form>
+            </div>
+            <br>
+            <button class="btn btn-primary" ng-click="placeOrder(cart)" ng-disabled="cardForm.$invalid">
+                Place My Order
+            </button>
         </div>
     </div>
 </body>
