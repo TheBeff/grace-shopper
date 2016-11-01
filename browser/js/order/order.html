@@ -1,7 +1,7 @@
 <div class="container">
   <h3 style="display: inline">Orders</h3>
   <span class="pull-right">Filter view:
-    <select ng-model="statusFilter">
+    <select style="color: black" ng-model="statusFilter">
     	<option selected="selected" value="">All</option>
     	<option value="cart">Cart</option>
     	<option value="order">Order</option>
@@ -16,7 +16,7 @@
         <span ng-hide="statusChange">{{order.status}}</span>
         <form name="statusForm" style="display: inline">
           <span ng-show="statusChange">
-	        <select required ng-model="newStatus">
+	        <select style="color: black" required ng-model="newStatus">
 	          <option value="cart">Cart</option>
 	          <option value="order">Order</option>
 	          <option value="cancelled">Cancelled</option>
