@@ -40,11 +40,17 @@ function _setEmailTemplate(customerInfo, type) {
       `
   }
 
+  var siteUrl;
+  if (process.env.NODE_ENV === 'production')
+    siteUrl = 'www.localhost:1337/';
+  else 
+    siteUrl = 'www.https://grace-shopper-stars.herokuapp.com/';
+
   if (type === 'reset') {
     mailOptions.subject = `GraceShopper Password Reset Link`
     mailOptions.html =
       `<p>Hello!</p>
-      <p>Please visit this link: www.localhost:1337/reset/${ customerInfo.resetPasswordToken }</p>
+      <p>Please visit this link: ${ siteUrl }reset/${ customerInfo.resetPasswordToken }</p>
       <p>To reset your password. If you did not trigger this reset do not follow that link!</p>
       `
   }
