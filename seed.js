@@ -60,6 +60,27 @@ const seedUsers = function() {
         photos: 'https://upload.wikimedia.org/wikipedia/commons/1/14/Lightsaber%2C_silver_hilt%2C_blue_blade.png',
         categories: ['Weapons', 'Lights']
     }, {
+        title: 'Bowcaster',
+        description: 'For saving Han Solo...almost',
+        price: '2500',
+        inventory_qty: '9',
+        photos: 'http://vignette2.wikia.nocookie.net/starwars/images/a/a8/Chewbacca_bowcaster.png/revision/latest?cb=20160122034359',
+        categories: ['Weapons']
+    }, {
+        title: 'Millenium Falcon',
+        description: 'a piece of junk',
+        price: '5',
+        inventory_qty: '1',
+        photos: 'http://www.gunjap.net/site/wp-content/uploads/2015/11/DSC_0626_zps6x61oybs.jpgoriginal.jpg',
+        categories: ['Weapons', 'Homes']
+    },{
+        title: 'The Remains of Coruscant',
+        description: 'RIP the city planet',
+        price: '300',
+        inventory_qty: '1000',
+        photos: 'http://media.moddb.com/images/mods/1/19/18461/c1a.jpg',
+        categories: ['Planets']
+    },{
         title: 'Pineapple',
         description: 'Who lives in a...',
         price: '67000',
