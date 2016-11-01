@@ -1,0 +1,37 @@
+<!-- Modal -->
+<div id="myModal_{{product.id}}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{product.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <product>
+          <img class="img-responsive" ng-src="{{product.photos}}" />
+          <p>{{product.description}}</p>
+          <p><strong>Categories: </strong>{{product.categories.join(', ')}}</p>
+          <span ng-hide="!product.price"><strong>Price:</strong> ${{product.price}}</span>
+          <p ng-hide="!product.inventory_qty || product.inventory_qty === 0"><strong>In stock:</strong> {{product.inventory_qty}}</p>
+          <p ng-show="!product.inventory_qty || product.inventory_qty === 0" class="text-danger">Sold Out</p>
+        </product>
+        <!-- purchase -->
+        <buy>
+          <span>Quantity:</span>
+          <select ng-options="value for value in inventoryArray(product)" ng-model="quantity"></select>
+          <notification ng-show="clicked"></notification>
+          <button class="btn btn-primary" ng-disabled="!quantity" ng-click="addToCart(product, quantity, cart); clicked=true">Add to Cart</button>
+          <button class="btn btn-danger" ng-show="isAdmin()" ng-click="destroy(product)">Delete</button>
+          <br clear="all">
+          <hr />
+        </buy>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -24,3 +24,20 @@ body {
 @import 'about/main';
 @import 'tutorial/main';
 @import 'login/main';
+
+.get-quickshop {
+    position: relative;
+    display: block;
+    width: 110px;
+    margin: 15px auto 12px auto;
+    margin-top: -4px\9;
+    padding: 0;
+    text-align: center;
+    border: 1px solid #aaa;
+    font: 10px/16px Arial,sans-serif;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #000;
+    background-color: #fff;
+    cursor: pointer;
+}

@@ -32,12 +32,17 @@
   <!-- product list src="http://placehold.it/320x150"-->
   <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="product in products">
     <div class="thumbnail">
-      <img ng-src="{{product.photos}}" ui-sref='detail({id:product.id})' style="width: 90%; height: 40vh; margin-top:15px" alt="">
+      <img ng-src="{{product.photos}}" style="width: 90%; height: 40vh; margin-top:15px" alt="">
+      <button type="button" class="get-quickshop" data-toggle="modal" data-target="#myModal_{{product.id}}"><span>QUICK SHOP</span></button>
       <div class="caption">
         <h4 class="pull-right">{{ product.price | currency : symbol : fractionSize}}</h4>
         <h4><a ui-sref='detail({id:product.id})'>{{product.title}}</a></h4>
         <p>{{product.description}}</p>
       </div>
+      <!-- Trigger the modal with a button -->
+      <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal_{{product.id}}">Open Modal</button> -->
+      <product-modal product="product"></product-modal>
+
       <div class="ratings">
         <p class="pull-right">{{product.reviews.length || 0 }} reviews</p>
         <p>
