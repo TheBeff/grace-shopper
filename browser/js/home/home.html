@@ -1,4 +1,41 @@
-<section id="home">
-    <!-- <fullstack-logo></fullstack-logo>
-    <rando-greeting></rando-greeting> -->
-</section>
+<!DOCTYPE html>
+<html>
+<title>Welcome!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<style>
+.mySlides {display:none;}
+</style>
+<body>
+
+<h1 class="w3-center">Welcome to Mos Eisley Marketplace</h1>
+<br>
+<br>
+<h3 class="w3-center">This Month's Featured Products</h3>
+
+<div class="w3-content w3-section" style="max-width:500px">
+  <a href="https://grace-shopper-stars.herokuapp.com/products/1"><img class="mySlides w3-animate-fading" src="http://vignette3.wikia.nocookie.net/starwars/images/7/72/DeathStar1-SWE.png/revision/latest?cb=20150121020639" style="width:100%"></a>
+  <a href="https://grace-shopper-stars.herokuapp.com/products/2"><img class="mySlides w3-animate-fading" src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Military_laser_experiment.jpg" style="width:100%"></a>
+  <a href="https://grace-shopper-stars.herokuapp.com/products/3"><img class="mySlides w3-animate-fading" src="https://upload.wikimedia.org/wikipedia/commons/1/14/Lightsaber%2C_silver_hilt%2C_blue_blade.png" style="width:100%"></a>
+  <a href="https://grace-shopper-stars.herokuapp.com/products/7"><img class="mySlides w3-animate-fading" src="http://vignette1.wikia.nocookie.net/spongebob/images/4/4b/SpongeBob's_pineapple_house_in_Season_6-2.png" style="width:100%"></a>
+</div>
+
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}
+    x[myIndex-1].style.display = "block";
+    setTimeout(carousel, 5000); // Change image every 5 seconds
+}
+</script>
+
+</body>
+</html>
