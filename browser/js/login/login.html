@@ -1,3 +1,4 @@
+<div class="well">
 <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)" style="margin-bottom: 30px">
 
     <alert type="danger" ng-show="error">
@@ -17,8 +18,8 @@
     <hr>
     <h3 style='margin-bottom: 20px'>New to the marketplace?</h3>
     <a ui-sref="signup">
-        <button class="btn btn-default">Create Your Account</button>
+        <button class="btn btn-success">Create Your Account</button>
     </a>
 </form>
-
+</div>
 <ui-view></ui-view>
