@@ -39,4 +39,13 @@ function _setEmailTemplate(customerInfo, type) {
       <p>Your user login is ${ customerInfo.email }.</p>
       `
   }
+
+  if (type === 'reset') {
+    mailOptions.subject = `GraceShopper Password Reset Link`
+    mailOptions.html =
+      `<p>Hello!</p>
+      <p>Please visit this link: www.localhost:1337/reset/${ customerInfo.resetPasswordToken }</p>
+      <p>To reset your password. If you did not trigger this reset do not follow that link!</p>
+      `
+  }
 }

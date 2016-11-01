@@ -1,0 +1,20 @@
+<form id="reset-form" name="resetForm" ng-submit="resetForm.$valid && resetPassword()">
+    
+    <h3 style='margin-bottom: 30px'>Reset Password</h3>
+    
+    <div class="form-group">
+        <label for="reset-password">Password</label>
+        <input name="password" type="password" ng-model="credentials.password" class="form-control" id="reset-password" placeholder="Choose a Password" required>
+
+        <label for="reset-password">Confirm Password</label>
+        <input name="confirmPassword" type="password" ng-model="credentials.confirm" class="form-control" id="reset-password-2" placeholder="Re-Enter Password" required match-password="password">
+        
+        <div ng-messages="resetForm.confirmPassword.$error" ng-if="resetForm.confirmPassword.$error.passwordMatch" ng-messages-multiple="ng-messages-multiple" class="error-messages slide-right">
+        <div ng-message="passwordMatch" class="message slide-left" style="color: red">Your passwords did not match</div>
+      </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary" ng-click="clicked=true">Reset Password</button>
+    <alert type="warning" ng-show="clicked">Your password has been reset!</alert>
+
+</form>
