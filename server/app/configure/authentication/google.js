@@ -17,10 +17,14 @@ module.exports = function (app, db) {
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
 
+        if (!profile.emails.length) {
+            return done('no emails found', null);
+        }
+
         User.findOne({
                 where: {
                     google_id: profile.id,
-                    email: profile.email
+                    email: profile.emails[0].value
                 }
             })
             .then(function (user) {
@@ -29,7 +33,7 @@ module.exports = function (app, db) {
                 } else {
                     return User.create({
                         google_id: profile.id,
-                        email: profile.email
+                        email: profile.emails[0].value
                     });
                 }
             })
@@ -48,7 +52,8 @@ module.exports = function (app, db) {
     app.get('/auth/google', passport.authenticate('google', {
         scope: [
             'https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email'
+            'https://www.googleapis.com/auth/userinfo.email',
+            'email'
         ]
     }));
 
