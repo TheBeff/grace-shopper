@@ -10,10 +10,6 @@ app.controller('OrderCtrl', function($scope, $log, OrderService){
 
 	$scope.getLineItems = OrderService.getLineItems;
 
-	$scope.updateStatus = function(){
-		$scope.statusChange = true;
-	};
-
 	$scope.saveStatus = function(status, orderId){
 		OrderService.saveStatus(status, orderId);
 		$scope.getOrders();
