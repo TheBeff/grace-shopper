@@ -13,7 +13,7 @@ module.exports = {
   },
   GOOGLE: {
     clientID: '310960242224-pjjqjk1ostqmg7gbc1kmsfnovm053cl6.apps.googleusercontent.com',
-    clientSecret: '8zEwxYqb0tQX0OFblVdYr7va',
+    clientSecret: '0geBR7Ju7XG7F8ZNDXOIJ7WM',
     callbackURL: 'http://localhost:1337/auth/google/callback'
   },
   LOGGING: true,
