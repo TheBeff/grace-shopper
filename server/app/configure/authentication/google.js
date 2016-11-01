@@ -19,7 +19,8 @@ module.exports = function (app, db) {
 
         User.findOne({
                 where: {
-                    google_id: profile.id
+                    google_id: profile.id,
+                    email: profile.email
                 }
             })
             .then(function (user) {
@@ -27,7 +28,8 @@ module.exports = function (app, db) {
                     return user;
                 } else {
                     return User.create({
-                        google_id: profile.id
+                        google_id: profile.id,
+                        email: profile.email
                     });
                 }
             })
@@ -51,9 +53,10 @@ module.exports = function (app, db) {
     }));
 
     app.get('/auth/google/callback',
-        passport.authenticate('google', {failureRedirect: '/login'}),
+        passport.authenticate('google', {
+            failureRedirect: '/login'}),
         function (req, res) {
-            res.redirect('/');
+            res.redirect('/account');
         });
 
 };
