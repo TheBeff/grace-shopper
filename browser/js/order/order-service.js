@@ -13,5 +13,12 @@ app.factory('OrderService', function($http){
   	return order.lineItems;
   };
 
+  OrderService.saveStatus = function(status, orderId){
+  	return $http.put('/api/orders/' + orderId + '/adminUpdate', {status})
+  	  .then(function(){
+  	  	console.log("status updating");
+  	  }) 
+  };
+
   return OrderService;
 });

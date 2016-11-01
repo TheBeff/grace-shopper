@@ -51,6 +51,21 @@ router.delete('/:id', function(req, res, next) {
 	.catch(next);
 });
 
+router.put('/:id/adminUpdate', function(req, res, next){
+		
+	Order.update({
+		status: req.body.status
+	}, {
+		where: {
+			id: req.params.id
+		}
+	})
+	  .then(function(){
+	  	res.sendStatus(200);
+	  })
+	  .catch(next);
+});
+
 router.put('/:id', function(req, res, next) {
 	let order;
 
@@ -73,3 +88,5 @@ router.put('/:id', function(req, res, next) {
 	})
 	.catch(next);
 });
+
+
