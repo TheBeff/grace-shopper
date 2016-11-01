@@ -33,6 +33,7 @@ router.use('/cart', ensureAuthenticated, require('./cart'));
 router.use('/signup', require('./signup'));
 router.use('/address', require('./address'));
 router.use('/users', isAdmin, require('./users'));
+router.use('/forgot', require('./passwordReset'));
 
 // Make sure this is after all of
 // the registered routes!

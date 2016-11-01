@@ -1,0 +1,16 @@
+<form class="container" id="forgot-form" name="forgotForm" ng-submit="forgotForm.$valid && sendForgot()" style="margin-bottom: 30px">
+
+	<alert type="danger" ng-show="error">
+        {{ error }}
+    </alert>
+
+	<h3 style='margin-bottom: 20px'>Trigger Password Reset</h3>
+    
+    <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="text" ng-model="forgot.email" class="form-control" id="forgot.email" placeholder="Enter email">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enter Email</button>
+
+</form>

@@ -19,7 +19,7 @@ router.post('/', (req, res, next) => {
           return User.create({
             email: req.body.email,
             password: req.body.password
-          })
+          });
         })
         .then(createdUser => {
           let user = createdUser.get();
