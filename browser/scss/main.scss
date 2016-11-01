@@ -3,7 +3,7 @@
 }
 
 body {
-  background: #fdfdfd;
+  background: #2b3e50;
 }
 
 @mixin clearfix {
@@ -25,6 +25,12 @@ body {
 @import 'tutorial/main';
 @import 'login/main';
 
+
+.quantity {
+  width: 20%;
+  display: inline;
+}
+
 .get-quickshop {
     position: relative;
     display: block;
@@ -40,4 +46,16 @@ body {
     color: #000;
     background-color: #fff;
     cursor: pointer;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.navbar .login-button {
+  margin-top: 0;
+}
+
+.navbar .signup-button {
+  margin-top: 0;
 }
