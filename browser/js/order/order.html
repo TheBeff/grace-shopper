@@ -1,1 +1,48 @@
-<h1>Order Details</h1>
+<div class="container">
+  <h3 style="display: inline">Orders</h3>
+  <span class="pull-right">Filter view:
+    <select ng-model="statusFilter">
+    	<option selected="selected" value="">All</option>
+    	<option value="cart">Cart</option>
+    	<option value="order">Order</option>
+    	<option value="cancelled">Cancelled</option>
+    </select>
+  </span>
+  <ul class="list-group well" ng-repeat="order in orders | filter: {status: statusFilter}" style="margin-top: 10px">
+    <h5>
+      <span><strong>ID:</strong> {{order.id}}</span>
+      <span class="pull-right">
+        <strong>Status: </strong>
+        <span ng-hide="statusChange">{{order.status}}</span>
+        <form name="statusForm" style="display: inline">
+          <span ng-show="statusChange">
+	        <select required ng-model="newStatus">
+	          <option value="cart">Cart</option>
+	          <option value="order">Order</option>
+	          <option value="cancelled">Cancelled</option>
+	        </select>
+          </span>
+        </form>
+      </span>
+    </h5>
+    <li class="list-group-item">  
+      <table class="table">
+        <thead>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </thead>
+        <tbody style="background-color: #71777a">
+          <tr ng-repeat="item in order.lineItems">
+            <td>{{item.product.title}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.price}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+    <button class="btn btn-danger pull-right" ng-hide="statusChange" ng-click="updateStatus()" style="margin-top: 5px">Update Status</button>
+    <button class="btn btn-success pull-right" ng-disabled="statusForm.$invalid" ng-show="statusChange" ng-click="saveStatus(newStatus, order.id)" style="margin-top: 5px">Save Status</button>
+    <br clear="all">
+  </ul>
+</div>

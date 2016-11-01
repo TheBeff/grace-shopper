@@ -40,13 +40,6 @@ app.factory('AccountService', function($http){
 			});
 	};
 
-	AccountService.getAdminOrders = function(){
-		return $http.get('/api/orders')
-			.then(function(response){
-				return response.data;
-			});
-	};
-
 	AccountService.getShipping = function(){
 		return $http.get('/api/address/shipping')
 			.then(function(response){
