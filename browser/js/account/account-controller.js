@@ -51,11 +51,6 @@ app.controller('AccountCtrl', function($scope, $log, $rootScope, Session, Accoun
     })
     .catch($log.error);
 
-  AccountService.getAdminOrders()
-    .then(function(response){
-        $scope.adminOrders = response;
-    })
-    .catch($log.error);
 
   $scope.getShipping = function(){AccountService.getShipping()
     .then(function(response){
