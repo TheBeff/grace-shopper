@@ -15,6 +15,13 @@ app.directive('productModal', function(ProductsService, CartService, $log) {
       product: '=',
     },
     link: function(scope) {
+
+      CartService.getCart()
+        .then(function(cart) {
+          scope.cart = cart;
+        })
+        .catch($log.error);
+
       scope.inventoryArray = ProductsService.inventoryArray;
 
       scope.addToCart = function(product, quantity, cart) {

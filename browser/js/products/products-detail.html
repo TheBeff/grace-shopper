@@ -14,7 +14,7 @@
     <!-- purchase -->
     <buy>
         <span>Quantity:</span>
-        <select ng-options="value for value in inventoryArray" ng-model="quantity"></select>
+        <select class="form-control quantity" ng-options="value for value in inventoryArray" ng-model="quantity"></select>
         <notification ng-show="clicked"></notification>
         <button class="btn btn-primary" ng-disabled="!quantity" ng-click="addToCart(product, quantity, cart); clicked=true">Add to Cart</button>
         <button class="btn btn-danger" ng-show="isAdmin()" ng-click="destroy(product)">Delete</button>
