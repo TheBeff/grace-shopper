@@ -1,6 +1,14 @@
 <div class="container">
-  <h3>Orders</h3>
-  <ul class="list-group well" ng-repeat="order in orders">
+  <h3 style="display: inline">Orders</h3>
+  <span class="pull-right">Filter view:
+    <select ng-model="statusFilter">
+    	<option selected="selected" value="">All</option>
+    	<option value="cart">Cart</option>
+    	<option value="order">Order</option>
+    	<option value="cancelled">Cancelled</option>
+    </select>
+  </span>
+  <ul class="list-group well" ng-repeat="order in orders | filter: {status: statusFilter}" style="margin-top: 10px">
     <h5>
       <span><strong>ID:</strong> {{order.id}}</span>
       <span class="pull-right">
