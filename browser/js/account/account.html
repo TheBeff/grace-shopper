@@ -4,7 +4,7 @@
   <div class="well" ng-hide="orders.length > 0">
     <p>Come back to check out your order history here!</p>
   </div>
-  <table class="table" ng-repeat="order in orders">
+  <table class="table table-hover" ng-repeat="order in orders">
 	<caption>Order #{{order.id}} - Status: {{order.status}}</caption>
 	<thead>
 		<th>Item</th>
@@ -22,9 +22,9 @@
 	</tbody>
   </table>
   <h2>Your Profile</h2>
-  <div>
-	  <h3>Your Email Address</h3>
-	  <p>{{user.email}}</p>
+  <div style="margin-bottom: 10px">
+	<h4 style="display: inline; padding-right: 10px">Your Email Address:</h4>
+	<span>{{user.email}}</span>
   </div>
   <div class="col-md-5 well">
 	  <h3>Your Shipping Address</h3>
@@ -62,12 +62,5 @@
 	    sf-model="billingModel" 
 	    ng-submit="onSubmit(billingForm)">
 	  </form>
-  </div>
-  <br clear="all">
-  <div class="container" ng-show="isAdmin()">
-    <h1>Admin Panel</h1>
-    <ul class="list-group">
-      <li class="list-group list-group-item" ng-repeat="order in adminOrders">Order #{{order.id}}</li>
-    </ul>
   </div>
 </div>
