@@ -13,7 +13,7 @@ module.exports = function (app, db) {
         clientID: facebookConfig.clientID,
         clientSecret: facebookConfig.clientSecret,
         callbackURL: facebookConfig.callbackURL,
-        enableProof: true,
+        // enableProof: true,
         profileFields: ['id', 'emails'],
         passReqToCallback: true
     };
