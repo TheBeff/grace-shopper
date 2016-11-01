@@ -168,9 +168,9 @@ app.factory('CartService', function(Session, $http, $window, $q, $state, $log){
 
 	CartService.createLineItem = function(product, quantity, currentCart){
 		if (Session.user) {
-			return _createLineItemRemotely(product, quantity);
+			return _createLineItemRemotely(product, quantity, currentCart);
 		} else {
-			return _createLineItemLocally(product, quantity, currentCart);
+			return _createLineItemLocally(product, quantity);
 		}
 	};
 

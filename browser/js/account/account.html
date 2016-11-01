@@ -26,7 +26,7 @@
 	  <h3>Your Email Address</h3>
 	  <p>{{user.email}}</p>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-5 well">
 	  <h3>Your Shipping Address</h3>
 	  <div ng-hide="!shipping">
 		  <p>{{shipping.name}}</p>
@@ -44,7 +44,8 @@
 	    ng-submit="onSubmit(shippingForm)"> 	
 	  </form>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-1"></div>
+  <div class="col-md-5 well">
 	  <h3>Your Billing Address</h3>
 	  <div ng-hide="!billing">
 		  <p>{{billing.name}}</p>

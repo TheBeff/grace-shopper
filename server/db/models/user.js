@@ -13,6 +13,12 @@ module.exports = db.define('user', {
     password: {
         type: Sequelize.STRING
     },
+    resetPasswordToken: {
+        type: Sequelize.STRING
+    },
+    resetPasswordExpires: {
+        type: Sequelize.DATE
+    },
     isAdmin: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
