@@ -3,7 +3,10 @@
 app.directive('notification', ['$timeout', function() {
   return {
     restrict: 'E',
-    template: '<div class="alert alert-success"> Item added to cart </div>'
+    template: `
+    <br></br>
+    <div class="alert alert-success"> Item added to cart </div>
+    `
   };
 }]);
 

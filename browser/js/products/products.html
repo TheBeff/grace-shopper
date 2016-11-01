@@ -1,19 +1,5 @@
 <div class="container">
 
-  <!-- create product -->
-  <div class="well" ng-show='isAdmin()'>
-    <form name="new-product">
-      <div class="form-group">
-        <input class="form-control" ng-model="newProduct.title" placeholder="product title" required/>
-        <input class="form-control" ng-model="newProduct.description" type="text" placeholder="product description" />
-        <input class="form-control" ng-model="newProduct.categories" placeholder="product categories" required/>
-        <input class="form-control" ng-model="newProduct.price" placeholder="product price" />
-        <input class="form-control" ng-model="newProduct.inventory" placeholder="product inventory quantity" />
-        <input class="form-control" ng-model="newProduct.photo" placeholder="product photo url" />
-      </div>
-      <button class="btn btn-primary" ng-click="create()" ng-disabled="new-product.$invalid">Create Product</button>
-    </form>
-  </div>
 
   <!-- search bar -->
   <div class="row">
@@ -25,8 +11,8 @@
     </div>
     <!-- categories filter -->
     <div class="pull-right">
-      Filter: <button ng-click="filterProducts(category, 'categories')" class="btn btn-default" ng-repeat="category in categories" style="margin-right: 5px">{{ category }}</button>
-      <button ng-click="filterProducts('', 'categories')" class="btn btn-success">All</button>
+      Filter: <button ng-click="filterProducts(category, 'categories')" class="btn btn-default" id="filter-btn" ng-repeat="category in categories" style="margin-right: 5px">{{ category }}</button>
+      <button ng-click="filterProducts('', 'categories')" class="btn btn-success" id="filter-btn">All</button>
     </div>
   </div>
   <br clear="all">
@@ -80,5 +66,21 @@
       <br clear="all">
     </li>
   </ul> -->
+  <!-- create product -->
 
 </div>
+
+  <div class="container well" ng-show='isAdmin()'>
+    <h1>Add a New Product</h1>
+    <form name="new-product">
+      <div class="form-group">
+        <input class="form-control" ng-model="newProduct.title" placeholder="product title" required/>
+        <input class="form-control" ng-model="newProduct.description" type="text" placeholder="product description" />
+        <input class="form-control" ng-model="newProduct.categories" placeholder="product categories" required/>
+        <input class="form-control" ng-model="newProduct.price" placeholder="product price" />
+        <input class="form-control" ng-model="newProduct.inventory" placeholder="product inventory quantity" />
+        <input class="form-control" ng-model="newProduct.photo" placeholder="product photo url" />
+      </div>
+      <button class="btn btn-primary" ng-click="create()" ng-disabled="new-product.$invalid">Create Product</button>
+    </form>
+  </div>

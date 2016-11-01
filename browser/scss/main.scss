@@ -1,22 +1,22 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  background: #2b3e50;
+    background: #2b3e50;
 }
 
 @mixin clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 #main {
-  padding-top: 60px;
-  margin: 0 auto;
+    padding-top: 60px;
+    margin: 0 auto;
 }
 
 @import 'directives/main';
@@ -25,12 +25,15 @@ body {
 @import 'tutorial/main';
 @import 'login/main';
 
+#filter-btn {
+    padding: 4px 10px;
+}
 
 .quantity {
-  width: 50px;
-  display: inline;
-  margin-left: 10px;
-  margin-right: 10px;
+    width: 50px;
+    display: inline;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .get-quickshop {
@@ -42,7 +45,7 @@ body {
     padding: 0;
     text-align: center;
     border: 1px solid #aaa;
-    font: 10px/16px Arial,sans-serif;
+    font: 10px/16px Arial, sans-serif;
     letter-spacing: 1px;
     text-decoration: none;
     color: #000;
@@ -51,13 +54,17 @@ body {
 }
 
 .navbar {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .navbar .login-button {
-  margin-top: 0;
+    margin-top: 0;
 }
 
 .navbar .signup-button {
-  margin-top: 0;
+    margin-top: 0;
 }
+
+// .thumbnail:hover {
+//   background-color: darken(#4e5d6c, 5%);
+// }

@@ -6,28 +6,32 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title text-center">{{product.title}}</h4>
+        <div class="text-center">
+          <h3 class="modal-title"><strong>{{product.title}}</strong></h3>
+          <p style="margin:0 0 10.5px -10px;">{{product.categories.join(', ')}}</p>
+        </div>
       </div>
       <div class="modal-body">
         <product>
           <img class="img-responsive" ng-src="{{product.photos}}" />
-          <p>{{product.description}}</p>
-          <p><strong>Categories: </strong>{{product.categories.join(', ')}}</p>
-          <span ng-hide="!product.price"><strong>Price:</strong> ${{product.price}}</span>
+          <br>
+          <p><strong>Product Description: </strong>{{product.description}}</p>
+          <p ng-hide="!product.price"><strong>Price:</strong> ${{product.price}}</p>
           <p ng-hide="!product.inventory_qty || product.inventory_qty === 0"><strong>In stock:</strong> {{product.inventory_qty}}</p>
           <p ng-show="!product.inventory_qty || product.inventory_qty === 0" class="text-danger">Sold Out</p>
         </product>
       </div>
       <div class="modal-footer">
         <!-- purchase -->
-        <buy>
-          <span>Quantity:</span>
-          <select class="form-control quantity" ng-options="value for value in inventoryArray(product)" ng-model="quantity"></select>
-          <notification ng-show="clicked"></notification>
-          <button class="btn btn-primary" ng-disabled="!quantity" ng-click="addToCart(product, quantity, cart); clicked=true">Add to Cart</button>
-          <button class="btn btn-danger" ng-show="isAdmin()" ng-click="destroy(product)">Delete</button>
-          <br clear="all">
-        </buy>
+        <div class="text-center">
+          <buy>
+            <span>Quantity:</span>
+            <select class="form-control quantity" ng-options="value for value in inventoryArray(product)" ng-model="quantity"></select>
+            <button class="btn btn-primary" ng-disabled="!quantity" ng-click="addToCart(product, quantity, cart); clicked=true">Add to Cart</button>
+            <notification ng-show="clicked"></notification>
+            <br clear="all">
+          </buy>
+        </div>
       </div>
     </div>
 
