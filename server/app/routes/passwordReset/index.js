@@ -21,15 +21,17 @@ router.post('/', function(req, res, next) {
 		.then(function(){
 			console.log('user password token created');
 			return User.findOne({
-				where: {email: req.body.email}
+				where: {
+					email: req.body.email
+				}
 			});
 		})
-		.then(function(updatedUser){
-			let user = updatedUser.get();
-			sendConfirmation({ email: user.email, resetPasswordToken: token }, 'reset');
-			res.send(user);
-		})
-		.catch(next);
+			.then(function(updatedUser){
+				let user = updatedUser.get();
+				sendConfirmation({ email: user.email, resetPasswordToken: token }, 'reset');
+				res.send(user);
+			})
+				.catch(next);
 });
 
 router.post('/reset/:tokenId', function(req, res, next){
